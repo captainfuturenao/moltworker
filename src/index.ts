@@ -156,6 +156,33 @@ app.get('/api/status', async (c) => {
   }
 });
 
+// DEBUG: Validate Google Model Availability directly (Bypassing OpenClaw)
+app.get('/debug/validate-model', async (c) => {
+  const apiKey = c.env.GOOGLE_API_KEY;
+  if (!apiKey) return c.json({ error: 'No API Key' });
+  const model = c.req.query('model') || 'gemini-2.5-flash';
+
+  try {
+    // Try to generate a single token to test model availability
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+    const resp = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ contents: [{ parts: [{ text: 'Test' }] }] })
+    });
+
+    const data = await resp.json();
+    return c.json({
+      status: resp.status,
+      ok: resp.ok,
+      model,
+      data
+    });
+  } catch (e: any) {
+    return c.json({ error: e.message });
+  }
+});
+
 // =============================================================================
 // MIDDLEWARE: Applied to ALL routes
 // =============================================================================
