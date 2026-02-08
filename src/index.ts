@@ -134,15 +134,24 @@ app.get('/api/status', async (c) => {
     // Process exists, check if it's actually responding
     try {
       await process.waitForPort(MOLTBOT_PORT, { mode: 'tcp', timeout: 5000 });
-      return c.json({ ok: true, status: 'running', processId: process.id });
+      return c.text(JSON.stringify({ ok: true, status: 'running', processId: process.id }), 200, {
+        'Content-Type': 'application/json',
+        'X-Debug': 'explicit-status-route'
+      });
     } catch {
-      return c.json({ ok: false, status: 'not_responding', processId: process.id });
+      return c.text(JSON.stringify({ ok: false, status: 'not_responding', processId: process.id }), 200, {
+        'Content-Type': 'application/json',
+        'X-Debug': 'explicit-status-route'
+      });
     }
   } catch (err) {
-    return c.json({
+    return c.text(JSON.stringify({
       ok: false,
       status: 'error',
       error: err instanceof Error ? err.message : 'Unknown error',
+    }), 500, {
+      'Content-Type': 'application/json',
+      'X-Debug': 'explicit-status-route'
     });
   }
 });
