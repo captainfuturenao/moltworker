@@ -119,6 +119,34 @@ function buildSandboxOptions(env: MoltbotEnv): SandboxOptions {
 // Main app
 const app = new Hono<AppEnv>();
 
+// Explicit status check - MOUNTED FIRST to bypass all middleware/routing issues
+app.get('/api/status', async (c) => {
+  console.log('[STATUS] TOP-LEVEL route hit');
+  // Manual sandbox init since middleware hasn't run yet
+  const options = buildSandboxOptions(c.env);
+  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
+
+  try {
+    const process = await findExistingMoltbotProcess(sandbox);
+    if (!process) {
+      return c.json({ ok: false, status: 'not_running' });
+    }
+    // Process exists, check if it's actually responding
+    try {
+      await process.waitForPort(MOLTBOT_PORT, { mode: 'tcp', timeout: 5000 });
+      return c.json({ ok: true, status: 'running', processId: process.id });
+    } catch {
+      return c.json({ ok: false, status: 'not_responding', processId: process.id });
+    }
+  } catch (err) {
+    return c.json({
+      ok: false,
+      status: 'error',
+      error: err instanceof Error ? err.message : 'Unknown error',
+    });
+  }
+});
+
 // =============================================================================
 // MIDDLEWARE: Applied to ALL routes
 // =============================================================================
@@ -148,31 +176,6 @@ app.use('*', async (c, next) => {
 
 // Mount public routes first (before auth middleware)
 // Includes: /sandbox-health, /logo.png, /logo-small.png, /api/status, /_admin/assets/*
-// Explicitly mount status route to ensure it works
-app.get('/api/status', async (c) => {
-  console.log('[STATUS] Explicit route hit');
-  const sandbox = c.get('sandbox');
-  try {
-    const process = await findExistingMoltbotProcess(sandbox);
-    if (!process) {
-      return c.json({ ok: false, status: 'not_running' });
-    }
-    // Process exists, check if it's actually responding
-    try {
-      await process.waitForPort(MOLTBOT_PORT, { mode: 'tcp', timeout: 5000 });
-      return c.json({ ok: true, status: 'running', processId: process.id });
-    } catch {
-      return c.json({ ok: false, status: 'not_responding', processId: process.id });
-    }
-  } catch (err) {
-    return c.json({
-      ok: false,
-      status: 'error',
-      error: err instanceof Error ? err.message : 'Unknown error',
-    });
-  }
-});
-
 // Mount public routes first (before auth middleware)
 // Includes: /sandbox-health, /logo.png, /logo-small.png, /_admin/assets/*
 app.route('/', publicRoutes);
