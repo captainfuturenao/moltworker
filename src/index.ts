@@ -150,6 +150,7 @@ app.use('*', async (c, next) => {
 // Includes: /sandbox-health, /logo.png, /logo-small.png, /api/status, /_admin/assets/*
 // Explicitly mount status route to ensure it works
 app.get('/api/status', async (c) => {
+  console.log('[STATUS] Explicit route hit');
   const sandbox = c.get('sandbox');
   try {
     const process = await findExistingMoltbotProcess(sandbox);
