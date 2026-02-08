@@ -30,18 +30,10 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           secrets: |
-            MOLTBOT_GATEWAY_TOKEN
-            CF_ACCESS_TEAM_DOMAIN
-            CF_ACCESS_AUD
             OPENAI_API_KEY
             OPENAI_BASE_URL
-            OPENAI_MODEL
             FORCE_ONBOARD
         env:
-          MOLTBOT_GATEWAY_TOKEN: ${{ secrets.MOLTBOT_GATEWAY_TOKEN }}
-          CF_ACCESS_TEAM_DOMAIN: ${{ secrets.CF_ACCESS_TEAM_DOMAIN }}
-          CF_ACCESS_AUD: ${{ secrets.CF_ACCESS_AUD }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
           FORCE_ONBOARD: ${{ secrets.FORCE_ONBOARD }}
