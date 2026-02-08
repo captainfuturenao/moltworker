@@ -67,4 +67,30 @@ publicRoutes.get('/_admin/assets/*', async (c) => {
   return c.env.ASSETS.fetch(new Request(assetUrl.toString(), c.req.raw));
 });
 
+// Temporary diagnostic endpoint for API Key
+publicRoutes.get('/api/debug-google-key', async (c) => {
+  const key = c.env.GOOGLE_API_KEY;
+  if (!key) return c.json({ error: 'No GOOGLE_API_KEY configured' }, 500);
+
+  try {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: 'Hello' }] }]
+      })
+    });
+
+    const data = await response.json();
+    return c.json({
+      status: response.status,
+      ok: response.ok,
+      data: data
+    });
+  } catch (e: any) {
+    return c.json({ error: e.message, stack: e.stack }, 500);
+  }
+});
+
 export { publicRoutes };
