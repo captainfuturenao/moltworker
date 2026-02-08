@@ -148,6 +148,32 @@ app.use('*', async (c, next) => {
 
 // Mount public routes first (before auth middleware)
 // Includes: /sandbox-health, /logo.png, /logo-small.png, /api/status, /_admin/assets/*
+// Explicitly mount status route to ensure it works
+app.get('/api/status', async (c) => {
+  const sandbox = c.get('sandbox');
+  try {
+    const process = await findExistingMoltbotProcess(sandbox);
+    if (!process) {
+      return c.json({ ok: false, status: 'not_running' });
+    }
+    // Process exists, check if it's actually responding
+    try {
+      await process.waitForPort(MOLTBOT_PORT, { mode: 'tcp', timeout: 5000 });
+      return c.json({ ok: true, status: 'running', processId: process.id });
+    } catch {
+      return c.json({ ok: false, status: 'not_responding', processId: process.id });
+    }
+  } catch (err) {
+    return c.json({
+      ok: false,
+      status: 'error',
+      error: err instanceof Error ? err.message : 'Unknown error',
+    });
+  }
+});
+
+// Mount public routes first (before auth middleware)
+// Includes: /sandbox-health, /logo.png, /logo-small.png, /_admin/assets/*
 app.route('/', publicRoutes);
 
 // Mount CDP routes (uses shared secret auth via query param, not CF Access)
