@@ -135,7 +135,7 @@ app.use('*', async (c, next) => {
 // Middleware: Initialize sandbox for all requests
 app.use('*', async (c, next) => {
   const options = buildSandboxOptions(c.env);
-  const sandbox = getSandbox(c.env.Sandbox, 'moltbot-gemini', options);
+  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
   c.set('sandbox', sandbox);
   await next();
 });
@@ -454,23 +454,24 @@ async function scheduled(
   env: MoltbotEnv,
   _ctx: ExecutionContext,
 ): Promise<void> {
-  const options = buildSandboxOptions(env);
-  const sandbox = getSandbox(env.Sandbox, 'moltbot', options);
+  // const options = buildSandboxOptions(env);
+  // const sandbox = getSandbox(env.Sandbox, 'moltbot', options);
 
-  const gatewayProcess = await findExistingMoltbotProcess(sandbox);
-  if (!gatewayProcess) {
-    console.log('[cron] Gateway not running yet, skipping sync');
-    return;
-  }
+  // const gatewayProcess = await findExistingMoltbotProcess(sandbox);
+  // if (!gatewayProcess) {
+  //   console.log('[cron] Gateway not running yet, skipping sync');
+  //   return;
+  // }
 
-  console.log('[cron] Starting backup sync to R2...');
-  const result = await syncToR2(sandbox, env);
+  // console.log('[cron] Starting backup sync to R2...');
+  // const result = await syncToR2(sandbox, env);
 
-  if (result.success) {
-    console.log('[cron] Backup sync completed successfully at', result.lastSync);
-  } else {
-    console.error('[cron] Backup sync failed:', result.error, result.details || '');
-  }
+  // if (result.success) {
+  //   console.log('[cron] Backup sync completed successfully at', result.lastSync);
+  // } else {
+  //   console.error('[cron] Backup sync failed:', result.error, result.details || '');
+  // }
+  console.log('[cron] Sync temporarily disabled for stability.');
 }
 
 export default {
