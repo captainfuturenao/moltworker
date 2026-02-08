@@ -52,7 +52,10 @@
         "CF_AI_GATEWAY_GATEWAY_ID",
         "CF_AI_GATEWAY_MODEL",
         "CF_ACCESS_TEAM_DOMAIN",
-        "CF_ACCESS_AUD"
+        "CF_ACCESS_AUD",
+        "OPENAI_API_KEY",
+        "OPENAI_BASE_URL",
+        "OPENAI_MODEL"
       ],
     },
   ],
