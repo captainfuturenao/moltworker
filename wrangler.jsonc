@@ -1,13 +1,13 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "moltbot-sandbox",
+  "name": "moltbot-gemini",
   "main": "src/index.ts",
   "compatibility_date": "2025-05-06",
   "compatibility_flags": [
     "nodejs_compat"
   ],
   "observability": {
-    "enabled": true,
+    "enabled": true
   },
   // Static assets for admin UI (built by vite)
   "assets": {
