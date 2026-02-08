@@ -1,37 +1,4 @@
 {
-  "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "moltbot-sandbox",
-  "main": "src/index.ts",
-  "compatibility_date": "2025-05-06",
-  "compatibility_flags": [
-    "nodejs_compat"
-  ],
-  "observability": {
-    "enabled": true,
-  },
-  // Static assets for admin UI (built by vite)
-  "assets": {
-    "directory": "./dist/client",
-    "not_found_handling": "single-page-application",
-    "html_handling": "auto-trailing-slash",
-    "binding": "ASSETS",
-    "run_worker_first": true,
-  },
-  // Allow importing HTML files as text modules and PNG files as binary
-  "rules": [
-    {
-      "type": "Text",
-      "globs": [
-        "**/*.html"
-      ],
-      "fallthrough": false,
-    },
-    {
-      "type": "Data",
-      "globs": [
-        "**/*.png"
-      ],
-      "fallthrough": false,
     },
   ],
   // Build command for vite
@@ -45,6 +12,15 @@
       "image": "./Dockerfile",
       "instance_type": "standard-1",
       "max_instances": 1,
+        "env": [
+          "MOLTBOT_GATEWAY_TOKEN",
+          "CLOUDFLARE_AI_GATEWAY_API_KEY",
+          "CF_AI_GATEWAY_ACCOUNT_ID",
+          "CF_AI_GATEWAY_GATEWAY_ID",
+          "CF_AI_GATEWAY_MODEL",
+          "CF_ACCESS_TEAM_DOMAIN",
+          "CF_ACCESS_AUD"
+        ],
     },
   ],
   "durable_objects": {
