@@ -2,6 +2,7 @@
  * Moltbot + Cloudflare Sandbox
  *
  * This Worker runs Moltbot personal AI assistant in a Cloudflare Sandbox container.
+ * [restart-trigger] Applying new token secret
  * It proxies all requests to the Moltbot Gateway's web UI and WebSocket endpoint.
  *
  * Features:
