@@ -2,7 +2,7 @@
     "gateways": [
         {
             "id": "main",
-            "model": "gemini-2.5-pro",
+            "model": "gemini-2.5-flash",
             "provider": "google",
             "params": {
                 "temperature": 0.7
