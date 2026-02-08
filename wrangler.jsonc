@@ -6,6 +6,9 @@
   "compatibility_flags": [
     "nodejs_compat"
   ],
+  "vars": {
+    "DEV_MODE": "true"
+  },
   "observability": {
     "enabled": true
   },
