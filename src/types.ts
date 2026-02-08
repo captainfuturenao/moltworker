@@ -22,6 +22,8 @@ export interface MoltbotEnv {
   OPENAI_API_KEY?: string;
   OPENAI_BASE_URL?: string;
   OPENAI_MODEL?: string;
+  GOOGLE_API_KEY?: string;
+  GEMINI_API_KEY?: string; // Alias for Google API Key
   MOLTBOT_GATEWAY_TOKEN?: string; // Gateway token (mapped to OPENCLAW_GATEWAY_TOKEN for container)
   DEV_MODE?: string; // Set to 'true' for local dev (skips CF Access auth + openclaw device pairing)
   FORCE_ONBOARD?: string; // Set to 'true' to delete existing config and force fresh onboard
