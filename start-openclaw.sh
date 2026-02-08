@@ -22,6 +22,13 @@ echo "Backup directory: $BACKUP_DIR"
 
 mkdir -p "$CONFIG_DIR"
 
+# FORCE_ONBOARD: Delete existing config to force fresh onboarding with new API keys
+if [ "$FORCE_ONBOARD" = "true" ] && [ -f "$CONFIG_FILE" ]; then
+    echo "FORCE_ONBOARD is set, deleting existing config..."
+    rm -f "$CONFIG_FILE"
+    echo "Config deleted, will run fresh onboard"
+fi
+
 # ============================================================
 # RESTORE FROM R2 BACKUP
 # ============================================================
