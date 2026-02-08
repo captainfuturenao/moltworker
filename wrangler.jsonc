@@ -38,7 +38,15 @@
   "build": {
     "command": "npm run build",
   },
-  // Container configuration removed - using Gemini API via proxy instead
+  // Container configuration for OpenClaw sandbox
+  "containers": [
+    {
+      "class_name": "Sandbox",
+      "image": "./Dockerfile",
+      "instance_type": "standard-1",
+      "max_instances": 1,
+    },
+  ],
   "durable_objects": {
     "bindings": [
       {
