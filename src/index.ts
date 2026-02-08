@@ -197,9 +197,6 @@ app.use('*', async (c, next) => {
 
 // Middleware: Cloudflare Access authentication for protected routes
 app.use('*', async (c, next) => {
-  if (c.env.DEV_MODE === 'true') {
-    return next();
-  }
 
   // Determine response type based on Accept header
   const acceptsHtml = c.req.header('Accept')?.includes('text/html');
