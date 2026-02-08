@@ -29,11 +29,3 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          secrets: |
-            OPENAI_API_KEY
-            OPENAI_BASE_URL
-            FORCE_ONBOARD
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          OPENAI_BASE_URL: ${{ secrets.OPENAI_BASE_URL }}
-          FORCE_ONBOARD: ${{ secrets.FORCE_ONBOARD }}
