@@ -147,7 +147,7 @@ app.use('*', async (c, next) => {
 // =============================================================================
 
 // Mount public routes first (before auth middleware)
-// Includes: /sandbox-health, /logo.png, /logo-small.png, /api/status, /_admin/assets/*
+// Includes: /sandbox-health, /logo.png, /logo-small.png, /api/status, /_admin/assets/*, /api/debug-google-key
 app.route('/', publicRoutes);
 
 // Mount CDP routes (uses shared secret auth via query param, not CF Access)
@@ -162,7 +162,7 @@ app.use('*', async (c, next) => {
   const url = new URL(c.req.url);
 
   // Skip validation for debug routes (they have their own enable check)
-  if (url.pathname.startsWith('/debug')) {
+  if (url.pathname.startsWith('/debug') || url.pathname === '/api/debug-google-key') {
     return next();
   }
 
