@@ -323,7 +323,7 @@ app.all('*', async (c) => {
 
   // Proxy to Moltbot with WebSocket message interception
   if (isWebSocketRequest) {
-    const debugLogs = c.env.DEBUG_ROUTES === 'true';
+    const debugLogs = true; // Force debug logs globally to catch the error
     const redactedSearch = redactSensitiveParams(url);
 
     console.log('[WS] Proxying WebSocket connection to Moltbot');
