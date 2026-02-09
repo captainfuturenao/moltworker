@@ -36,18 +36,18 @@ try {
             baseUrl: 'https://generativelanguage.googleapis.com',
             models: [
                 {
-                    id: 'gemini-1.5-flash',
-                    name: 'gemini-1.5-flash',
-                    contextWindow: 16384,
-                    maxTokens: 4096
+                    id: 'gemini-2.0-flash-001',
+                    name: 'gemini-2.0-flash-001',
+                    contextWindow: 65536,
+                    maxTokens: 8192
                 }
             ]
         };
 
         // Set default model
-        console.log('[CONFIG PATCH] Setting default model to Gemini 1.5 Flash...');
+        console.log('[CONFIG PATCH] Setting default model to Gemini 2.0 Flash...');
         conf.agents.defaults.model = {
-            primary: 'google/gemini-1.5-flash'
+            primary: 'google/gemini-2.0-flash-001'
         };
 
         // Force Japanese System Prompt - REMOVED due to "Unrecognized key" crash
