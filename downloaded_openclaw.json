@@ -6,8 +6,8 @@
             "provider": "google",
             "params": {
                 "temperature": 0.7,
-                "contextWindow": 8192,
-                "maxTokens": 4096
+                "contextWindow": 2048,
+                "maxTokens": 2048
             }
         }
     ],
