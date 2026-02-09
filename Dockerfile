@@ -39,9 +39,11 @@ RUN chmod +x /usr/local/bin/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Copy configured openclaw.json
-# This ensures the container has the correct model (Gemini 2.5 Flash) and memory settings
-# COPY downloaded_openclaw.json /root/.openclaw/openclaw.json
+# Copy config patch script
+COPY patch_config.js /root/clawd/patch_config.js
+
+# Build cache bust: 2026-02-09-v31
+# This ensures a fresh build and container restart
 
 # Set working directory
 WORKDIR /root/clawd
