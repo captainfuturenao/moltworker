@@ -28,25 +28,26 @@ try {
     // Check for GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY (from user manual)
     const apiKey = process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY;
 
-    // REMOVED manual provider injection to fallback to OpenClaw defaults.
-    // This avoids the "api: undefined" or "api: invalid" crash.
-    // OpenClaw automatically uses GOOGLE_API_KEY.
+    if (apiKey) {
+        // REMOVED manual provider injection to fallback to OpenClaw defaults.
+        // This avoids the "api: undefined" or "api: invalid" crash.
+        // OpenClaw automatically uses GOOGLE_API_KEY.
 
-    // Set default model
-    console.log('[CONFIG PATCH] Setting default model to Gemini 2.0 Flash...');
-    conf.agents.defaults.model = {
-        primary: 'google/gemini-2.0-flash-001'
-    };
+        // Set default model
+        console.log('[CONFIG PATCH] Setting default model to Gemini 2.0 Flash...');
+        conf.agents.defaults.model = {
+            primary: 'google/gemini-2.0-flash-001'
+        };
 
-    // Force Japanese System Prompt - REMOVED due to "Unrecognized key" crash
-    // conf.agents.defaults.instructions = ...
-} else {
-    console.warn('[CONFIG PATCH] SKIPPED: No API Key found (GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY).');
-}
+        // Force Japanese System Prompt - REMOVED due to "Unrecognized key" crash
+        // conf.agents.defaults.instructions = ...
+    } else {
+        console.warn('[CONFIG PATCH] SKIPPED: No API Key found (GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY).');
+    }
 
-// Write back
-fs.writeFileSync(path, JSON.stringify(conf, null, 2));
-console.log('[CONFIG PATCH] Configuration patched successfully.');
+    // Write back
+    fs.writeFileSync(path, JSON.stringify(conf, null, 2));
+    console.log('[CONFIG PATCH] Configuration patched successfully.');
 
 } catch (e) {
     console.error('[CONFIG PATCH] Fatal error:', e);

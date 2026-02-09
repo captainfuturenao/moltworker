@@ -39,9 +39,9 @@ RUN chmod +x /usr/local/bin/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-09-v45-fix-syntax-error
+# Build cache bust: 2026-02-09-v46-fix-syntax-retry
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v45"
+RUN echo "Cache bust v46"
 
 # Copy config patch script
 COPY patch_config.js /root/clawd/patch_config.js
