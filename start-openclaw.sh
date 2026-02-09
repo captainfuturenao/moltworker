@@ -291,33 +291,7 @@ if (process.env.SLACK_BOT_TOKEN && process.env.SLACK_APP_TOKEN) {
     };
 }
 
-// FORCE INJECT GEMINI 2.5 CONFIGURATION (Fix for deployment issue)
-// This ensures the container always uses the correct model and strict memory limits.
-if (process.env.GOOGLE_API_KEY) {
-    console.log('Force-injecting Gemini 2.5 Flash configuration...');
-    config.models = config.models || {};
-    config.models.providers = config.models.providers || {};
-    
-    // Define the provider
-    config.models.providers.google = {
-        provider: 'google',
-        apiKey: process.env.GOOGLE_API_KEY
-    };
 
-    // Define the agent to use this model with strict limits
-    config.agents = config.agents || {};
-    config.agents.defaults = config.agents.defaults || {};
-    config.agents.defaults.model = {
-        primary: 'gemini-2.5-flash',
-        provider: 'google',
-        params: {
-            temperature: 0.7,
-            contextWindow: 2048, // Strict limit for 128MB container
-            maxTokens: 2048
-        }
-    };
-    console.log('Injected Gemini 2.5 Flash with 2048 context window limit.');
-}
 
 fs.writeFileSync(configPath, JSON.stringify(config, null, 2));
 console.log('Configuration patched successfully');
