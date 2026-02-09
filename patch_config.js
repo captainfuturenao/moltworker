@@ -33,28 +33,27 @@ try {
         conf.models.providers.google = {
             apiKey: apiKey,
             baseUrl: 'https://generativelanguage.googleapis.com',
-            models: [
                 {
-                    id: 'gemini-2.5-flash',
-                    name: 'gemini-2.5-flash',
-                    contextWindow: 2048,
-                    maxTokens: 2048
-                }
+            id: 'gemini-2.5-flash',
+                name: 'gemini-2.5-flash',
+                    contextWindow: 16384, // Increased to meet OpenClaw minimum (was 2048)
+                        maxTokens: 4096
+        }
             ]
-        };
+    };
 
-        // Set default model
-        console.log('[CONFIG PATCH] Setting default model to Gemini 2.5 Flash...');
-        conf.agents.defaults.model = {
-            primary: 'google/gemini-2.5-flash'
-        };
-    } else {
-        console.warn('[CONFIG PATCH] SKIPPED: No API Key found (GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY).');
-    }
+    // Set default model
+    console.log('[CONFIG PATCH] Setting default model to Gemini 2.5 Flash...');
+    conf.agents.defaults.model = {
+        primary: 'google/gemini-2.5-flash'
+    };
+} else {
+    console.warn('[CONFIG PATCH] SKIPPED: No API Key found (GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY).');
+}
 
-    // Write back
-    fs.writeFileSync(path, JSON.stringify(conf, null, 2));
-    console.log('[CONFIG PATCH] Configuration patched successfully.');
+// Write back
+fs.writeFileSync(path, JSON.stringify(conf, null, 2));
+console.log('[CONFIG PATCH] Configuration patched successfully.');
 
 } catch (e) {
     console.error('[CONFIG PATCH] Fatal error:', e);
