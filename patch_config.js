@@ -30,8 +30,10 @@ try {
 
     if (apiKey) {
         console.log('[CONFIG PATCH] Injecting Google provider...');
-        // Google provider schema (no 'api' field - auto-detected)
+        // Google provider schema
         conf.models.providers.google = {
+            id: 'google',
+            api: 'google', // REQUIRED: Fixes "No API provider registered for api: undefined"
             apiKey: apiKey,
             baseUrl: 'https://generativelanguage.googleapis.com',
             models: [
@@ -42,6 +44,12 @@ try {
                     maxTokens: 8192
                 }
             ]
+        };
+
+        // Ensure embedding is set (to avoid another crash)
+        conf.models.embedding = {
+            provider: 'google',
+            model: 'text-embedding-004'
         };
 
         // Set default model
