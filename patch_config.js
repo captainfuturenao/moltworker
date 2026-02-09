@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
 console.log('[CONFIG PATCH] Starting configuration patch...');
-console.log('[CONFIG PATCH] Version: v47 (Timestamp: ' + new Date().toISOString() + ')');
+console.log('[CONFIG PATCH] Version: v48 (Timestamp: ' + new Date().toISOString() + ')');
 
 try {
     let conf = {};
@@ -35,9 +35,9 @@ try {
         // OpenClaw automatically uses GOOGLE_API_KEY.
 
         // Set default model
-        console.log('[CONFIG PATCH] Setting default model to Gemini 2.0 Flash...');
+        console.log('[CONFIG PATCH] Setting default model to Gemini 2.0 Flash (Generic ID)...');
         conf.agents.defaults.model = {
-            primary: 'google/gemini-2.0-flash-001'
+            primary: 'google/gemini-2.0-flash'
         };
 
         // Force Japanese System Prompt - REMOVED due to "Unrecognized key" crash
