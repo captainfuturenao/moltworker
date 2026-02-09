@@ -39,9 +39,9 @@ RUN chmod +x /usr/local/bin/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-09-v40-remove-instructions
+# Build cache bust: 2026-02-09-v41-restore-1.5
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v40"
+RUN echo "Cache bust v41"
 
 # Copy config patch script
 COPY patch_config.js /root/clawd/patch_config.js
