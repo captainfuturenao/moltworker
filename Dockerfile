@@ -41,7 +41,7 @@ COPY skills/ /root/clawd/skills/
 
 # Copy configured openclaw.json
 # This ensures the container has the correct model (Gemini 2.5 Flash) and memory settings
-COPY downloaded_openclaw.json /root/.openclaw/openclaw.json
+# COPY downloaded_openclaw.json /root/.openclaw/openclaw.json
 
 # Set working directory
 WORKDIR /root/clawd
