@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
 console.log('[CONFIG PATCH] Starting configuration patch...');
+console.log('[CONFIG PATCH] Version: v47 (Timestamp: ' + new Date().toISOString() + ')');
 
 try {
     let conf = {};
