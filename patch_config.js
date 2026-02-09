@@ -19,7 +19,8 @@ try {
 
     // Ensure structure exists
     conf.models = conf.models || {};
-    conf.models.providers = conf.models.providers || {};
+    // Aggressively clear other providers to prevent "ANTHROPIC_API_KEY missing" errors
+    conf.models.providers = {};
     conf.agents = conf.agents || {};
     conf.agents.defaults = conf.agents.defaults || {};
 
