@@ -42,7 +42,7 @@ COPY skills/ /root/clawd/skills/
 # Copy config patch script
 COPY patch_config.js /root/clawd/patch_config.js
 
-# Build cache bust: 2026-02-09-v34-fix-context
+# Build cache bust: 2026-02-09-v35-fix-syntax
 # This ensures a fresh build and container restart
 
 # Set working directory
