@@ -39,9 +39,9 @@ RUN chmod +x /usr/local/bin/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-09-v44-remove-provider-injection
+# Build cache bust: 2026-02-09-v45-fix-syntax-error
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v44"
+RUN echo "Cache bust v45"
 
 # Copy config patch script
 COPY patch_config.js /root/clawd/patch_config.js
