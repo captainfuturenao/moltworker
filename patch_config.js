@@ -29,27 +29,22 @@ try {
 
     if (apiKey) {
         console.log('[CONFIG PATCH] Injecting Google provider...');
-        // Refined schema based on debug logs:
-        // - removed 'provider' key (invalid)
-        // - added 'models' array (required)
-        // - added 'baseUrl' (required)
-        // - moved 'contextWindow' to model definition
+        // Google provider schema (no 'api' field - auto-detected)
         conf.models.providers.google = {
             apiKey: apiKey,
             baseUrl: 'https://generativelanguage.googleapis.com',
-            api: 'google', // explicit api type
             models: [
                 {
                     id: 'gemini-2.5-flash',
                     name: 'gemini-2.5-flash',
-                    contextWindow: 2048, // Strict limit for 128MB container
+                    contextWindow: 2048,
                     maxTokens: 2048
                 }
             ]
         };
 
-        // 2. Force Gemini 2.5 Flash Model with Limits
-        console.log('[CONFIG PATCH] Setting default model to Gemini 2.5 Flash (2048 context)...');
+        // Set default model
+        console.log('[CONFIG PATCH] Setting default model to Gemini 2.5 Flash...');
         conf.agents.defaults.model = {
             primary: 'google/gemini-2.5-flash'
         };
