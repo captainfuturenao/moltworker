@@ -39,11 +39,12 @@ RUN chmod +x /usr/local/bin/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
+# Build cache bust: 2026-02-09-v36-force-layer
+# This ensures a fresh build and container restart
+RUN echo "Cache bust v36"
+
 # Copy config patch script
 COPY patch_config.js /root/clawd/patch_config.js
-
-# Build cache bust: 2026-02-09-v35-fix-syntax
-# This ensures a fresh build and container restart
 
 # Set working directory
 WORKDIR /root/clawd
