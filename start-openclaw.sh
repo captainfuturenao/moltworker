@@ -1,4 +1,5 @@
 #!/bin/bash
+# FORCE LF LINE ENDINGS
 # Startup script for OpenClaw in Cloudflare Sandbox
 # This script:
 # 1. Restores config from R2 backup if available
