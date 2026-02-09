@@ -10,7 +10,7 @@ set -e
 
 # OPTIMIZATION: Limit Node.js memory to 80MB to prevent OOM in 128MB container
 # This leaves ~48MB for system overhead/kernel/buffers.
-export NODE_OPTIONS="--max-old-space-size=80"
+export NODE_OPTIONS="--max-old-space-size=100"
 
 if pgrep -f "openclaw gateway" > /dev/null 2>&1; then
     echo "OpenClaw gateway is already running, exiting."
