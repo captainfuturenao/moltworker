@@ -24,11 +24,14 @@ try {
     conf.agents.defaults = conf.agents.defaults || {};
 
     // 1. Force Google Provider (if API Key exists)
-    if (process.env.GOOGLE_API_KEY) {
+    // Check for GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY (from user manual)
+    const apiKey = process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY;
+
+    if (apiKey) {
         console.log('[CONFIG PATCH] Injecting Google provider...');
         conf.models.providers.google = {
             provider: 'google',
-            apiKey: process.env.GOOGLE_API_KEY
+            apiKey: apiKey
         };
 
         // 2. Force Gemini 2.5 Flash Model with Limits
@@ -43,7 +46,7 @@ try {
             }
         };
     } else {
-        console.warn('[CONFIG PATCH] GOOGLE_API_KEY not found in environment.');
+        console.warn('[CONFIG PATCH] SKIPPED: No API Key found (GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY).');
     }
 
     // Write back
