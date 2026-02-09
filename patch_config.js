@@ -35,19 +35,24 @@ try {
             baseUrl: 'https://generativelanguage.googleapis.com',
             models: [
                 {
-                    id: 'gemini-2.5-flash',
-                    name: 'gemini-2.5-flash',
-                    contextWindow: 16384, // Increased to meet OpenClaw minimum (was 2048)
+                    id: 'gemini-1.5-flash',
+                    name: 'gemini-1.5-flash',
+                    contextWindow: 16384,
                     maxTokens: 4096
                 }
             ]
         };
 
         // Set default model
-        console.log('[CONFIG PATCH] Setting default model to Gemini 2.5 Flash...');
+        console.log('[CONFIG PATCH] Setting default model to Gemini 1.5 Flash...');
         conf.agents.defaults.model = {
-            primary: 'google/gemini-2.5-flash'
+            primary: 'google/gemini-1.5-flash'
         };
+
+        // Force Japanese System Prompt
+        conf.agents.defaults.instructions = `あなたはOpenClawのAIエージェントです。
+常に日本語で回答してください。
+ユーザーの指示に丁寧に従ってください。`;
     } else {
         console.warn('[CONFIG PATCH] SKIPPED: No API Key found (GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY).');
     }
