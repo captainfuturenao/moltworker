@@ -301,44 +301,12 @@ EOFPATCH
 # START GATEWAY
 # ============================================================
 
-# FORCE CONFIG PATCH (Gemini 2.5 Flash + 2048 Context)
-# This ensures the correct model is used even if config sync fails.
-node -e '
-const fs = require("fs");
-const path = "/root/.openclaw/openclaw.json";
-try {
-  let conf = {};
-  try { conf = JSON.parse(fs.readFileSync(path, "utf8")); } catch(e) {}
-  
-  // Ensure structure exists
-  conf.models = conf.models || {};
-  conf.models.providers = conf.models.providers || {};
-  conf.agents = conf.agents || {};
-  conf.agents.defaults = conf.agents.defaults || {};
-
-  // 1. Force Google Provider
-  if (process.env.GOOGLE_API_KEY) {
-    conf.models.providers.google = { 
-      provider: "google", 
-      apiKey: process.env.GOOGLE_API_KEY 
-    };
-    
-    // 2. Force Gemini 2.5 Flash Model with Limits
-    conf.agents.defaults.model = {
-      primary: "gemini-2.5-flash",
-      provider: "google",
-      params: {
-        temperature: 0.7,
-        contextWindow: 2048,
-        maxTokens: 2048
-      }
-    };
-    console.log("[PATCH] Forced Gemini 2.5 Flash config with 2048 context limit.");
-  }
-  
-  fs.writeFileSync(path, JSON.stringify(conf, null, 2));
-} catch(e) { console.error("[PATCH ERROR]", e); }
-'
+echo "Applying runtime configuration patch..."
+if [ -f "/root/clawd/patch_config.js" ]; then
+    node /root/clawd/patch_config.js || echo "WARNING: Config patch failed"
+else
+    echo "WARNING: patch_config.js not found"
+fi
 
 echo "Starting OpenClaw Gateway..."
 echo "Gateway will be available on port 18789"
