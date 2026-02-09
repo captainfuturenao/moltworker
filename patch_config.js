@@ -29,21 +29,29 @@ try {
 
     if (apiKey) {
         console.log('[CONFIG PATCH] Injecting Google provider...');
+        // Refined schema based on debug logs:
+        // - removed 'provider' key (invalid)
+        // - added 'models' array (required)
+        // - added 'baseUrl' (required)
+        // - moved 'contextWindow' to model definition
         conf.models.providers.google = {
-            provider: 'google',
-            apiKey: apiKey
+            apiKey: apiKey,
+            baseUrl: 'https://generativelanguage.googleapis.com',
+            api: 'google', // explicit api type
+            models: [
+                {
+                    id: 'gemini-2.5-flash',
+                    name: 'gemini-2.5-flash',
+                    contextWindow: 2048, // Strict limit for 128MB container
+                    maxTokens: 2048
+                }
+            ]
         };
 
         // 2. Force Gemini 2.5 Flash Model with Limits
         console.log('[CONFIG PATCH] Setting default model to Gemini 2.5 Flash (2048 context)...');
         conf.agents.defaults.model = {
-            primary: 'gemini-2.5-flash',
-            provider: 'google',
-            params: {
-                temperature: 0.7,
-                contextWindow: 2048, // Strict limit for 128MB container
-                maxTokens: 2048
-            }
+            primary: 'google/gemini-2.5-flash'
         };
     } else {
         console.warn('[CONFIG PATCH] SKIPPED: No API Key found (GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY).');
