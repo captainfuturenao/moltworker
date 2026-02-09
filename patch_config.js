@@ -50,10 +50,8 @@ try {
             primary: 'google/gemini-2.5-flash'
         };
 
-        // Force Japanese System Prompt
-        conf.agents.defaults.instructions = `【重要】あなたはOpenClawのAIエージェントです。
-ユーザーからの入力が何語であっても、必ず【日本語】で回答してください。
-回答は自然な日本語で行い、ユーザーの意図を汲み取ってください。`;
+        // Force Japanese System Prompt - REMOVED due to "Unrecognized key" crash
+        // conf.agents.defaults.instructions = ...
     } else {
         console.warn('[CONFIG PATCH] SKIPPED: No API Key found (GOOGLE_API_KEY or CLOUDFLARE_AI_GATEWAY_API_KEY).');
     }
