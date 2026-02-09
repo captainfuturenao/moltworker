@@ -27,14 +27,7 @@ echo "Backup directory: $BACKUP_DIR"
 
 mkdir -p "$CONFIG_DIR"
 
-# FORCE CONFIG PATCH FIRST
-# This creates/updates openclaw.json BEFORE onboarding check, skipping 'openclaw onboard'
-echo "Applying runtime configuration patch..."
-if [ -f "/root/clawd/patch_config.js" ]; then
-    node /root/clawd/patch_config.js || echo "WARNING: Config patch failed"
-else
-    echo "WARNING: patch_config.js not found"
-fi
+
 
 # FORCE_ONBOARD: Delete existing config to force fresh onboarding with new API keys
 if [ "$FORCE_ONBOARD" = "true" ] && [ -f "$CONFIG_FILE" ]; then
@@ -311,7 +304,14 @@ EOFPATCH
 # START GATEWAY
 # ============================================================
 
-
+# RUNTIME CONFIG PATCH (Final Authority)
+# Runs after R2 restore to ensure we enforce Gemini 2.5 + Limits
+echo "Applying runtime configuration patch (post-restore)..."
+if [ -f "/root/clawd/patch_config.js" ]; then
+    node /root/clawd/patch_config.js || echo "WARNING: Config patch failed"
+else
+    echo "WARNING: patch_config.js not found"
+fi
 
 echo "Starting OpenClaw Gateway..."
 echo "Gateway will be available on port 18789"
