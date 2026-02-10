@@ -19,6 +19,11 @@ const config = {
             model: {
                 primary: 'google/gemini-2.0-flash' // Force Gemini 2.0 Flash
             }
+        },
+        main: {
+            name: "Moltbot",
+            role: "You are a helpful AI assistant.",
+            model: "google/gemini-2.0-flash"
         }
     }
 };
