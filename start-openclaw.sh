@@ -35,11 +35,18 @@ fi
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-echo "Running holistic configuration generator (v62)..."
-if [ -f "/root/clawd/configure_v9.js" ]; then
-    node /root/clawd/configure_v9.js
+# ============================================================
+# 1. GENERATE CONFIGURATION
+# ============================================================
+echo "Running holistic configuration generator (v63 - Canonical)..."
+
+# FORCE CLEAN: Remove any existing config to prevent R2 persistence issues
+rm -f /root/.openclaw/openclaw.json
+
+if [ -f "/root/clawd/configure.js" ]; then
+    node /root/clawd/configure.js
 else
-    echo "CRITICAL: configure_v9.js not found! Startup aborted."
+    echo "CRITICAL: configure.js not found! Startup aborted."
     exit 1
 fi
 

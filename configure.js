@@ -1,13 +1,13 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v62 - Array Schema / OpenClaw@Latest / Gemini 2.5)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v63 - Canonical / Array Schema / Gemini 2.5)...');
 console.log('[CONFIGURE] Env Check: GOOGLE_API_KEY=' + (process.env.GOOGLE_API_KEY ? 'YES' : 'NO') +
     ', CF_AI_GATEWAY_API_KEY=' + (process.env.CLOUDFLARE_AI_GATEWAY_API_KEY ? 'YES' : 'NO'));
 
 // Base Configuration Structure
 const config = {
-    // Array Schema (Targeting OpenClaw@Latest)
+    // Array Schema (Required by OpenClaw@Latest)
     gateways: [
         {
             id: "main",
@@ -19,25 +19,18 @@ const config = {
                 temperature: 0.7,
                 contextWindow: 16384,
                 maxTokens: 8192
-            },
-            // Network settings must be inside the gateway object in Array Schema? 
-            // Or 'gateway' global config is separate?
-            // "downloaded_openclaw.json" had 'gateways' and 'agents' at root.
-            // But where do 'port' and 'trustedProxies' go? 
-            // In v2 schema, individual gateways bind to ports?
-            // Let's assume global 'gateway' object is still valid for server settings, 
-            // OR we need to put socket params here.
-            // For safety, we include a global 'gateway' block AND the 'gateways' array.
+            }
         }
     ],
 
-    // Global settings (Legacy/Hybrid compat)
+    // Global settings for Server
     gateway: {
-        port: 18789,
+        port: 18789, // Must match exposed port
         mode: 'local',
-        trustedProxies: ['10.1.0.0'], // Required for Cloudflare Sandbox
+        trustedProxies: ['10.1.0.0'], // Required for Cloudflare Sandbox networking
         auth: {}
     },
+
     channels: {},
 
     agents: [
@@ -74,12 +67,9 @@ if (process.env.TELEGRAM_BOT_TOKEN) {
     }
 }
 
-// 4. Discord/Slack (simplified for v62 to focus on core stability)
-// ...
-
 // Write Configuration to Disk
 try {
-    // Ensure directory exists
+    // Ensure directory exists (force clean slate logic handled in shell script)
     const dir = path.substring(0, path.lastIndexOf('/'));
     if (!fs.existsSync(dir)) {
         fs.mkdirSync(dir, { recursive: true });
