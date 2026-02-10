@@ -39,12 +39,12 @@ RUN chmod +x /usr/local/bin/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-09-v48-tune-gemini-2
+# Build cache bust: 2026-02-10-v50-holistic-reset
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v48"
+RUN echo "Cache bust v50"
 
-# Copy config patch script
-COPY patch_config.js /root/clawd/patch_config.js
+# Copy configuration generator script
+COPY configure.js /root/clawd/configure.js
 
 # Set working directory
 WORKDIR /root/clawd
