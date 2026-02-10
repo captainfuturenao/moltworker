@@ -7,7 +7,7 @@ if [ "$OPENCLAW_DEV_MODE" = "true" ]; then
 fi
 
 echo "Starting OpenClaw (Moltbot Edition)..."
-echo "Version: Latest (v73 - OpenAI Compatible)"
+echo "Version: Latest (v76 - User Compliant / Google Direct)"
 
 # ============================================================
 # 0. DEBUGGING INFO
@@ -22,7 +22,7 @@ echo "  CF Key Present: $(if [ -n "$CLOUDFLARE_AI_GATEWAY_API_KEY" ]; then echo 
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-echo "Running holistic configuration generator (v74 - Stable Google Direct)..."
+echo "Running holistic configuration generator (v76 - User Compliant / Google Direct)..."
 
 # FORCE CLEAN: Remove any existing config to prevent R2 persistence issues
 rm -f /root/.openclaw/openclaw.json

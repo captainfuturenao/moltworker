@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v74 - Stable Google Direct)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v76 - User Compliant / Google Direct)...');
 
 const config = {
     // Server Settings
@@ -19,15 +19,20 @@ const config = {
                 api: "google-generative-ai",
                 baseUrl: "https://generativelanguage.googleapis.com",
 
-                // CRITICAL FIX: Only use the GOOGLE_API_KEY. 
-                // Do NOT use CLOUDFLARE key here, as it causes auth errors with Google.
-                // If GOOGLE_API_KEY is missing, user must set it in Admin UI.
+                // Direct Google Connection.
+                // Requires GOOGLE_API_KEY in environment variables.
                 apiKey: process.env.GOOGLE_API_KEY || "",
 
                 models: [
+                    // USER REQUESTED MODELS ONLY
                     {
                         id: "gemini-2.5-flash",
                         name: "gemini-2.5-flash"
+                    },
+                    // Technical fallback/preview (Gemini 2.0) if 2.5 is a typo/unavailable
+                    {
+                        id: "gemini-2.0-flash-exp",
+                        name: "gemini-2.0-flash-exp"
                     }
                 ]
             }
@@ -35,7 +40,6 @@ const config = {
     },
 
     // Agents Configuration
-    // Start empty to ensure safe boot. User pairs device and configures agent in UI.
     agents: {},
 
     channels: {}
@@ -70,7 +74,6 @@ try {
     }
     fs.writeFileSync(path, JSON.stringify(config, null, 2));
     console.log('[CONFIGURE] Configuration generated successfully at ' + path);
-    console.log('[CONFIGURE] Note: If chat fails, please verify GOOGLE_API_KEY in Admin UI.');
 } catch (e) {
     console.error('[CONFIGURE] CRITICAL ERROR writing config:', e);
     process.exit(1);

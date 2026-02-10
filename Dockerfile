@@ -8,7 +8,7 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Install OpenClaw globally (ensure latest version for Gemini 2.5 support)
+# Install OpenClaw globally
 RUN npm install -g openclaw@latest
 
 # Set working directory
@@ -21,9 +21,9 @@ RUN chmod +x /root/clawd/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-10-v74-stable-google
+# Build cache bust: 2026-02-10-v76-final-compliance
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v74"
+RUN echo "Cache bust v76"
 
 # Copy configuration generator script
 COPY configure.js /root/clawd/configure.js
