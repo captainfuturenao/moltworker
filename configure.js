@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v67 - Models Array + Agents Default)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v68 - Diagnostic Empty Agents)...');
 
 const config = {
     // Server Settings
@@ -12,17 +12,16 @@ const config = {
         auth: {}
     },
 
-    // Models Configuration (Fixed: Added 'models' array)
+    // Models Configuration (Verified Correct in v67)
     models: {
         providers: {
             google: {
                 baseUrl: "https://generativelanguage.googleapis.com",
                 apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY,
-                // Fix: 'models' array is required by schema (v66 error)
                 models: [
                     {
-                        id: "gemini-2.5-flash", // Internal ID
-                        name: "gemini-2.5-flash" // Model Name? Or map to explicit string?
+                        id: "gemini-2.5-flash",
+                        name: "gemini-2.5-flash"
                     }
                 ]
             }
@@ -30,15 +29,9 @@ const config = {
     },
 
     // Agents Configuration
-    // Hypothesis: 'agents' object requires specific keys. 'main' (v64) and 'name/role' (v66) failed.
-    // Trying 'default' key.
-    agents: {
-        default: {
-            name: "Moltbot",
-            role: "You are a helpful AI assistant. You must respond in Japanese. 日本語で応答してください。",
-            model: "gemini-2.5-flash"
-        }
-    },
+    // Diagnostic: Provide EMPTY object to provoke "Missing required key" error
+    // or allow empty startup.
+    agents: {},
 
     channels: {}
 };

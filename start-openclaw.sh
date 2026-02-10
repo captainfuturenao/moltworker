@@ -38,7 +38,7 @@ fi
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-echo "Running holistic configuration generator (v67 - Models Array + Agents Default)..."
+echo "Running holistic configuration generator (v68 - Diagnostic Empty Agents)..."
 
 # FORCE CLEAN: Remove any existing config to prevent R2 persistence issues
 rm -f /root/.openclaw/openclaw.json
