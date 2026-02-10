@@ -1,5 +1,7 @@
-const fs = require('fs');
-const path = '/root/.openclaw/openclaw.json';
+import fs from 'node:fs';
+// const path = '/root/.openclaw/openclaw.json';
+// Use process.env.OPENCLAW_CONFIG_PATH or default
+const path = process.env.OPENCLAW_CONFIG_PATH || '/root/.openclaw/openclaw.json';
 
 console.log('[CONFIGURE] Generating deterministic configuration (v76 - User Compliant / Google Direct)...');
 
@@ -40,8 +42,9 @@ const config = {
     },
 
     // Agents Configuration
-    agents: {
-        "main": {
+    agents: [
+        {
+            "id": "main",
             "name": "Moltbot",
             "model": {
                 "provider": "google",
@@ -49,7 +52,7 @@ const config = {
             },
             "system": "You are a helpful AI assistant."
         }
-    },
+    ],
 
     channels: {}
 };
