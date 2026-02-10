@@ -1,21 +1,7 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v73 - Standard OpenAI Compatible)...');
-
-// Account Configuration
-const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID || process.env.CF_AI_GATEWAY_ACCOUNT_ID;
-const CF_GATEWAY_ID = process.env.CF_AI_GATEWAY_ID || process.env.CF_AI_GATEWAY_GATEWAY_ID;
-
-// Construct Base URL for Cloudflare AI Gateway (OpenAI Compatible)
-// Standard format: https://gateway.ai.cloudflare.com/v1/{account_id}/{gateway_id}/openai
-let openaiBaseUrl = "https://api.openai.com/v1";
-if (CF_ACCOUNT_ID && CF_GATEWAY_ID) {
-    openaiBaseUrl = `https://gateway.ai.cloudflare.com/v1/${CF_ACCOUNT_ID}/${CF_GATEWAY_ID}/openai`;
-    console.log(`[CONFIGURE] Using Cloudflare AI Gateway (OpenAI Compatible): ${openaiBaseUrl}`);
-} else {
-    console.warn('[CONFIGURE] WARNING: Cloudflare Account/Gateway ID missing. Falling back to OpenAI (will fail without key).');
-}
+console.log('[CONFIGURE] Generating deterministic configuration (v74 - Stable Google Direct)...');
 
 const config = {
     // Server Settings
@@ -29,11 +15,15 @@ const config = {
     // Models Configuration
     models: {
         providers: {
-            openai: {
-                api: "openai", // Explicitly state OpenAI provider
-                baseUrl: openaiBaseUrl,
-                // Cloudflare Gateway authenticates via Bearer token (the CF API Key/Token)
-                apiKey: process.env.CLOUDFLARE_AI_GATEWAY_API_KEY || "dummy-key",
+            google: {
+                api: "google-generative-ai",
+                baseUrl: "https://generativelanguage.googleapis.com",
+
+                // CRITICAL FIX: Only use the GOOGLE_API_KEY. 
+                // Do NOT use CLOUDFLARE key here, as it causes auth errors with Google.
+                // If GOOGLE_API_KEY is missing, user must set it in Admin UI.
+                apiKey: process.env.GOOGLE_API_KEY || "",
+
                 models: [
                     {
                         id: "gemini-2.5-flash",
@@ -45,7 +35,7 @@ const config = {
     },
 
     // Agents Configuration
-    // Keep empty to avoid schema crashes. Pair and configure via Admin UI.
+    // Start empty to ensure safe boot. User pairs device and configures agent in UI.
     agents: {},
 
     channels: {}
@@ -80,6 +70,7 @@ try {
     }
     fs.writeFileSync(path, JSON.stringify(config, null, 2));
     console.log('[CONFIGURE] Configuration generated successfully at ' + path);
+    console.log('[CONFIGURE] Note: If chat fails, please verify GOOGLE_API_KEY in Admin UI.');
 } catch (e) {
     console.error('[CONFIGURE] CRITICAL ERROR writing config:', e);
     process.exit(1);

@@ -22,7 +22,7 @@ echo "  CF Key Present: $(if [ -n "$CLOUDFLARE_AI_GATEWAY_API_KEY" ]; then echo 
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-echo "Running holistic configuration generator (v73 - OpenAI Compatible Standard)..."
+echo "Running holistic configuration generator (v74 - Stable Google Direct)..."
 
 # FORCE CLEAN: Remove any existing config to prevent R2 persistence issues
 rm -f /root/.openclaw/openclaw.json

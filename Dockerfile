@@ -21,9 +21,9 @@ RUN chmod +x /root/clawd/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-10-v73-openai_reset
+# Build cache bust: 2026-02-10-v74-stable-google
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v73"
+RUN echo "Cache bust v74"
 
 # Copy configuration generator script
 COPY configure.js /root/clawd/configure.js
