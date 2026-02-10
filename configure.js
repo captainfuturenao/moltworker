@@ -1,7 +1,21 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v68 - Diagnostic Empty Agents)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v70 - CF Gateway Fix & Gemini 2.5 Only)...');
+
+// Account Configuration
+const CF_ACCOUNT_ID = process.env.CF_ACCOUNT_ID || process.env.CF_AI_GATEWAY_ACCOUNT_ID;
+const CF_GATEWAY_ID = process.env.CF_AI_GATEWAY_ID || process.env.CF_AI_GATEWAY_GATEWAY_ID;
+
+// Construct Base URL for Cloudflare AI Gateway
+// If IDs are missing, fallback to Google (but this will fail with CF Key, so we log a warning)
+let googleBaseUrl = "https://generativelanguage.googleapis.com";
+if (CF_ACCOUNT_ID && CF_GATEWAY_ID) {
+    googleBaseUrl = `https://gateway.ai.cloudflare.com/v1/${CF_ACCOUNT_ID}/${CF_GATEWAY_ID}/google`;
+    console.log(`[CONFIGURE] Using Cloudflare AI Gateway: ${googleBaseUrl}`);
+} else {
+    console.warn('[CONFIGURE] WARNING: Cloudflare Account/Gateway ID missing. Using direct Google URL (Auth may fail with CF Key).');
+}
 
 const config = {
     // Server Settings
@@ -12,14 +26,15 @@ const config = {
         auth: {}
     },
 
-    // Models Configuration (Verified Correct in v67)
+    // Models Configuration
     models: {
         providers: {
             google: {
-                baseUrl: "https://generativelanguage.googleapis.com",
+                baseUrl: googleBaseUrl,
                 apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY,
                 models: [
                     {
+                        // STRICTLY Gemini 2.5 Flash ONLY
                         id: "gemini-2.5-flash",
                         name: "gemini-2.5-flash"
                     }
@@ -29,8 +44,7 @@ const config = {
     },
 
     // Agents Configuration
-    // Diagnostic: Provide EMPTY object to provoke "Missing required key" error
-    // or allow empty startup.
+    // Keep empty to avoid schema crashes. Pair and configure via Admin UI.
     agents: {},
 
     channels: {}
@@ -65,7 +79,7 @@ try {
     }
     fs.writeFileSync(path, JSON.stringify(config, null, 2));
     console.log('[CONFIGURE] Configuration generated successfully at ' + path);
-    console.log(JSON.stringify(config, null, 2));
+    // console.log(JSON.stringify(config, null, 2)); // Reduce log noise
 } catch (e) {
     console.error('[CONFIGURE] CRITICAL ERROR writing config:', e);
     process.exit(1);
