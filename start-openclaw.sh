@@ -38,7 +38,7 @@ fi
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-echo "Running holistic configuration generator (v65 - Pure Array Schema)..."
+echo "Running holistic configuration generator (v66 - Single Agent Object Schema)..."
 
 # FORCE CLEAN: Remove any existing config to prevent R2 persistence issues
 rm -f /root/.openclaw/openclaw.json
