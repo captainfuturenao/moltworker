@@ -35,11 +35,11 @@ fi
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-echo "Running holistic configuration generator (v60)..."
-if [ -f "/root/clawd/configure_v7.js" ]; then
-    node /root/clawd/configure_v7.js
+echo "Running holistic configuration generator (v61)..."
+if [ -f "/root/clawd/configure_v8.js" ]; then
+    node /root/clawd/configure_v8.js
 else
-    echo "CRITICAL: configure_v7.js not found! Startup aborted."
+    echo "CRITICAL: configure_v8.js not found! Startup aborted."
     exit 1
 fi
 

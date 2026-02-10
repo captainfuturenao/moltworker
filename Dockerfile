@@ -21,8 +21,8 @@ RUN ARCH="$(dpkg --print-architecture)" \
 RUN npm install -g pnpm
 
 # Install OpenClaw (formerly clawdbot/moltbot)
-# Pin to specific version for reproducible builds
-RUN npm install -g openclaw@2026.2.3 \
+# Use @latest to ensure support for newer models like Gemini 2.5
+RUN npm install -g openclaw@latest \
     && openclaw --version
 
 # Create OpenClaw directories
@@ -39,12 +39,12 @@ RUN chmod +x /usr/local/bin/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-10-v60-object-gemini-1.5-debug
+# Build cache bust: 2026-02-10-v61-latest-gemini-2.5
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v60"
+RUN echo "Cache bust v61"
 
 # Copy configuration generator script
-COPY configure_v7.js /root/clawd/configure_v7.js
+COPY configure_v8.js /root/clawd/configure_v8.js
 
 # Set working directory
 WORKDIR /root/clawd

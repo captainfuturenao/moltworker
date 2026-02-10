@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v60 - Object Schema / Gemini 1.5)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v61 - Object Schema / Gemini 2.5 / Binary Upgrade)...');
 console.log('[CONFIGURE] Env Check: GOOGLE_API_KEY=' + (process.env.GOOGLE_API_KEY ? 'YES' : 'NO') +
     ', CF_AI_GATEWAY_API_KEY=' + (process.env.CLOUDFLARE_AI_GATEWAY_API_KEY ? 'YES' : 'NO'));
 
@@ -15,21 +15,22 @@ const config = {
     },
     channels: {},
 
-    // v60 Strategy:
-    // 1. Structure: Object-based (v53 style).
-    // 2. Model: 'google/gemini-1.5-flash' (Safest fallback).
+    // v61 Strategy:
+    // 1. Structure: Object-based (v53/v59/v60 style).
+    // 2. Model: 'google/gemini-2.5-flash' (User demand).
+    //    - We are upgrading the binary to @latest in Dockerfile to ensure support.
     // 3. Auth: Implicit.
 
     agents: {
         defaults: {
             model: {
-                primary: 'google/gemini-1.5-flash' // Fallback to 1.5
+                primary: 'google/gemini-2.5-flash' // 2.5 Flash
             }
         },
         main: {
             name: "Moltbot",
             role: "You are a helpful AI assistant. You must respond in Japanese. 日本語で応答してください。",
-            model: "google/gemini-1.5-flash"
+            model: "google/gemini-2.5-flash"
         }
     }
 };
