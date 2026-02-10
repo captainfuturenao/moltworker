@@ -35,11 +35,11 @@ fi
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-echo "Running holistic configuration generator (v59)..."
-if [ -f "/root/clawd/configure_v6.js" ]; then
-    node /root/clawd/configure_v6.js
+echo "Running holistic configuration generator (v60)..."
+if [ -f "/root/clawd/configure_v7.js" ]; then
+    node /root/clawd/configure_v7.js
 else
-    echo "CRITICAL: configure_v6.js not found! Startup aborted."
+    echo "CRITICAL: configure_v7.js not found! Startup aborted."
     exit 1
 fi
 
@@ -48,14 +48,19 @@ fi
 # ============================================================
 echo "Starting OpenClaw Gateway..."
 echo "Gateway will be available on port 18789"
+echo "Binary Version Check:"
+openclaw --version || echo "Failed to get version"
+echo "Debug: Checking Env Vars (Masked):"
+env | grep _KEY | sed 's/KEY=.*/KEY=[REDACTED]/'
 
 # Clear locks
 rm -f /tmp/openclaw-gateway.lock 2>/dev/null || true
 rm -f "$CONFIG_DIR/gateway.lock" 2>/dev/null || true
 
 # Start Process
-# We use --allow-unconfigured because we are confident in our config file,
-# but we want it to start even if some optional integrations are missing.
+# We use --allow-unconfigured and --verbose.
+# Note: "Process exited with code 0" usually means it finished help or version, 
+# or found nothing to do. We force it to stay alive if possible? No, gateway should block.
 if [ -n "$OPENCLAW_GATEWAY_TOKEN" ]; then
     echo "Starting gateway with token auth..."
     openclaw gateway --port 18789 --verbose --allow-unconfigured --bind lan --token "$OPENCLAW_GATEWAY_TOKEN" || {
