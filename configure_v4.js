@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v56 - Object Schema / Stable Model)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v57 - Implicit Provider / Stable Model)...');
 console.log('[CONFIGURE] Env Check: GOOGLE_API_KEY=' + (process.env.GOOGLE_API_KEY ? 'YES' : 'NO') +
     ', CF_AI_GATEWAY_API_KEY=' + (process.env.CLOUDFLARE_AI_GATEWAY_API_KEY ? 'YES' : 'NO'));
 
@@ -14,19 +14,13 @@ const config = {
         auth: {}
     },
     channels: {},
-    // Object Schema (v53 style) - Known to start successfully
-    models: {
-        providers: {
-            google: {
-                // Explicitly inject key
-                apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY
-            }
-        }
-    },
+    // Implicit Provider Discovery (Remove explicit models block)
+    // This allows OpenClaw to auto-configure Google provider with correct defaults.
+
     agents: {
         defaults: {
             model: {
-                primary: 'google/gemini-1.5-flash' // Fallback to 1.5 Flash for stability checks
+                primary: 'google/gemini-1.5-flash' // Fallback to 1.5 Flash for stability
             }
         },
         main: {
