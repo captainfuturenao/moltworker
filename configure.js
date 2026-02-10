@@ -14,12 +14,6 @@ const config = {
         auth: {}
     },
     channels: {},
-    models: {
-        providers: {}
-        // We intentionally leave providers empty.
-        // OpenClaw auto-registers 'google' provider if GOOGLE_API_KEY is present in env.
-        // Explicitly defining it with wrong schema caused crashes in v42-v44.
-    },
     agents: {
         defaults: {
             model: {
