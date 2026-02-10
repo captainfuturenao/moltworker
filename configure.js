@@ -29,14 +29,30 @@ const config = {
     // Models Configuration
     models: {
         providers: {
+            // Option 1: Google Provider (Previous attempt, might fail auth/path)
             google: {
                 baseUrl: googleBaseUrl,
                 apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY,
                 models: [
                     {
-                        // STRICTLY Gemini 2.5 Flash ONLY
                         id: "gemini-2.5-flash",
-                        name: "gemini-2.5-flash"
+                        name: "gemini-2.5-flash (Google)"
+                    }
+                ]
+            },
+
+            // Option 2: OpenAI Compatible (v71 - Recommended for Cloudflare Gateway)
+            // Uses the OpenAI-compatible endpoint of Cloudflare Gateway.
+            // This often bypasses strict provider-specific key validation.
+            openai: {
+                baseUrl: (CF_ACCOUNT_ID && CF_GATEWAY_ID)
+                    ? `https://gateway.ai.cloudflare.com/v1/${CF_ACCOUNT_ID}/${CF_GATEWAY_ID}/openai`
+                    : "https://api.openai.com/v1",
+                apiKey: process.env.CLOUDFLARE_AI_GATEWAY_API_KEY || "dummy-key",
+                models: [
+                    {
+                        id: "gemini-2.5-flash",
+                        name: "gemini-2.5-flash (via OpenAI/CF)"
                     }
                 ]
             }

@@ -38,7 +38,7 @@ fi
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-echo "Running holistic configuration generator (v70 - CF Gateway Fix & Gemini 2.5 Only)..."
+echo "Running holistic configuration generator (v71 - OpenAI Compatible Fallback)..."
 
 # FORCE CLEAN: Remove any existing config to prevent R2 persistence issues
 rm -f /root/.openclaw/openclaw.json
