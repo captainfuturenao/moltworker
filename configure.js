@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
 console.log('[CONFIGURE] Generating deterministic configuration...');
+console.log('[CONFIGURE] Env Check: GOOGLE_API_KEY=' + (process.env.GOOGLE_API_KEY ? 'YES' : 'NO') +
+    ', CF_AI_GATEWAY_API_KEY=' + (process.env.CLOUDFLARE_AI_GATEWAY_API_KEY ? 'YES' : 'NO'));
 
 // Base Configuration Structure
 const config = {
