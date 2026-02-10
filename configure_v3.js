@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v55 - Array Schema)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v56 - Object Schema / Stable Model)...');
 console.log('[CONFIGURE] Env Check: GOOGLE_API_KEY=' + (process.env.GOOGLE_API_KEY ? 'YES' : 'NO') +
     ', CF_AI_GATEWAY_API_KEY=' + (process.env.CLOUDFLARE_AI_GATEWAY_API_KEY ? 'YES' : 'NO'));
 
@@ -14,27 +14,27 @@ const config = {
         auth: {}
     },
     channels: {},
-    // Use Arrays for Gateways and Agents (Schema v2)
-    gateways: [
-        {
-            id: "main",
-            provider: "google",
-            model: "gemini-2.0-flash",
-            // Explicitly inject available key (Polyfill ensures GOOGLE_API_KEY is present)
-            apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY,
-            params: {
-                temperature: 0.7
+    // Object Schema (v53 style) - Known to start successfully
+    models: {
+        providers: {
+            google: {
+                // Explicitly inject key
+                apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY
             }
         }
-    ],
-    agents: [
-        {
-            id: "main",
+    },
+    agents: {
+        defaults: {
+            model: {
+                primary: 'google/gemini-1.5-flash' // Fallback to 1.5 Flash for stability checks
+            }
+        },
+        main: {
             name: "Moltbot",
-            role: "You are a helpful AI assistant. You must respond in Japanese.",
-            gateway: "main"
+            role: "You are a helpful AI assistant. You must respond in Japanese. 日本語で応答してください。",
+            model: "google/gemini-1.5-flash"
         }
-    ]
+    }
 };
 
 // 1. Gateway Authentication

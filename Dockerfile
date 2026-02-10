@@ -39,12 +39,12 @@ RUN chmod +x /usr/local/bin/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-10-v55-force-new-file
+# Build cache bust: 2026-02-10-v56-stable-model
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v55"
+RUN echo "Cache bust v56"
 
 # Copy configuration generator script
-COPY configure_v2.js /root/clawd/configure_v2.js
+COPY configure_v3.js /root/clawd/configure_v3.js
 
 # Set working directory
 WORKDIR /root/clawd
