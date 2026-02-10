@@ -1,44 +1,28 @@
-#!/bin/bash
-# FORCE LF LINE ENDINGS
-# Startup script for OpenClaw in Cloudflare Sandbox (Reset v50)
-#
-# Strategy: "Holistic Configuration Reset"
-# 1. Generate clean config from ENV vars (configure.js)
-# 2. Start Gateway
-#
-# NO R2 restore. NO partial patching. NO onboarding wizard.
-
+#!/bin/sh
 set -e
 
-# OPTIMIZATION: Limit Node.js memory to prevent OOM
-# export NODE_OPTIONS="--max-old-space-size=100"
-
-if pgrep -f "openclaw gateway" > /dev/null 2>&1; then
-    echo "OpenClaw gateway is already running, exiting."
-    exit 0
+# Turn on debug mode if requested
+if [ "$OPENCLAW_DEV_MODE" = "true" ]; then
+  set -x
 fi
 
-CONFIG_DIR="/root/.openclaw"
-CONFIG_FILE="$CONFIG_DIR/openclaw.json"
-
-echo "Config directory: $CONFIG_DIR"
+echo "Starting OpenClaw (Moltbot Edition)..."
+echo "Version: Latest (v73 - OpenAI Compatible)"
 
 # ============================================================
-# 0. ENV VAR NORMALIZATION
+# 0. DEBUGGING INFO
 # ============================================================
-# Ensure GOOGLE_API_KEY is available if CF AI Gateway Key is present
-if [ -z "$GOOGLE_API_KEY" ] && [ -n "$CLOUDFLARE_AI_GATEWAY_API_KEY" ]; then
-    echo "Polyfill: Mapping CLOUDFLARE_AI_GATEWAY_API_KEY to GOOGLE_API_KEY"
-    export GOOGLE_API_KEY="$CLOUDFLARE_AI_GATEWAY_API_KEY"
-fi
+echo "Environment Check:"
+echo "  NODE_ENV: $NODE_ENV"
+echo "  CF_ACCOUNT_ID: ${CF_ACCOUNT_ID:-(not set)}"
+echo "  CF_AI_GATEWAY_ID: ${CF_AI_GATEWAY_ID:-(not set)}"
+echo "  Google Key Present: $(if [ -n "$GOOGLE_API_KEY" ]; then echo "Yes"; else echo "No"; fi)"
+echo "  CF Key Present: $(if [ -n "$CLOUDFLARE_AI_GATEWAY_API_KEY" ]; then echo "Yes"; else echo "No"; fi)"
 
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-# ============================================================
-# 1. GENERATE CONFIGURATION
-# ============================================================
-echo "Running holistic configuration generator (v71 - OpenAI Compatible Fallback)..."
+echo "Running holistic configuration generator (v73 - OpenAI Compatible Standard)..."
 
 # FORCE CLEAN: Remove any existing config to prevent R2 persistence issues
 rm -f /root/.openclaw/openclaw.json
@@ -54,33 +38,9 @@ fi
 export ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-sk-ant-dummy}"
 
 # ============================================================
-# 2. START GATEWAY
+# 2. START OPENCLAW
 # ============================================================
-echo "Starting OpenClaw Gateway..."
-echo "Gateway will be available on port 18789"
-echo "Binary Version Check:"
-openclaw --version || echo "Failed to get version"
-echo "Debug: Checking Env Vars (Masked):"
-env | grep _KEY | sed 's/KEY=.*/KEY=[REDACTED]/'
+echo "Initialization complete. Launching binary..."
 
-# Clear locks
-rm -f /tmp/openclaw-gateway.lock 2>/dev/null || true
-rm -f "$CONFIG_DIR/gateway.lock" 2>/dev/null || true
-
-# Start Process
-# We use --allow-unconfigured and --verbose.
-# Note: "Process exited with code 0" usually means it finished help or version, 
-# or found nothing to do. We force it to stay alive if possible? No, gateway should block.
-if [ -n "$OPENCLAW_GATEWAY_TOKEN" ]; then
-    echo "Starting gateway with token auth..."
-    openclaw gateway --port 18789 --verbose --allow-unconfigured --bind lan --token "$OPENCLAW_GATEWAY_TOKEN" || {
-        echo "CRITICAL: OpenClaw Gateway crashed!"
-        sleep infinity
-    }
-else
-    echo "Starting gateway with device pairing (no token)..."
-    openclaw gateway --port 18789 --verbose --allow-unconfigured --bind lan || {
-        echo "CRITICAL: OpenClaw Gateway crashed!"
-        sleep infinity
-    }
-fi
+# Use exec to replace shell with openclaw process (better signal handling)
+exec openclaw
