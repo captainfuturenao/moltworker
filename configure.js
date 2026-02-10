@@ -14,18 +14,27 @@ const config = {
         auth: {}
     },
     channels: {},
-    agents: {
-        defaults: {
-            model: {
-                primary: 'google/gemini-2.0-flash' // Force Gemini 2.0 Flash
+    // Use Arrays for Gateways and Agents (Schema v2)
+    gateways: [
+        {
+            id: "main",
+            provider: "google",
+            model: "gemini-2.0-flash",
+            // Explicitly inject available key (Polyfill ensures GOOGLE_API_KEY is present)
+            apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY,
+            params: {
+                temperature: 0.7
             }
-        },
-        main: {
-            name: "Moltbot",
-            role: "You are a helpful AI assistant.",
-            model: "google/gemini-2.0-flash"
         }
-    }
+    ],
+    agents: [
+        {
+            id: "main",
+            name: "Moltbot",
+            role: "You are a helpful AI assistant. You must respond in Japanese.",
+            gateway: "main"
+        }
+    ]
 };
 
 // 1. Gateway Authentication
