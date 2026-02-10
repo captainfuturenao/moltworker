@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v57 - Implicit Provider / Stable Model)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v58 - Array Schema / Gemini 2.5)...');
 console.log('[CONFIGURE] Env Check: GOOGLE_API_KEY=' + (process.env.GOOGLE_API_KEY ? 'YES' : 'NO') +
     ', CF_AI_GATEWAY_API_KEY=' + (process.env.CLOUDFLARE_AI_GATEWAY_API_KEY ? 'YES' : 'NO'));
 
@@ -14,21 +14,29 @@ const config = {
         auth: {}
     },
     channels: {},
-    // Implicit Provider Discovery (Remove explicit models block)
-    // This allows OpenClaw to auto-configure Google provider with correct defaults.
 
-    agents: {
-        defaults: {
-            model: {
-                primary: 'google/gemini-1.5-flash' // Fallback to 1.5 Flash for stability
+    // Array Schema (Required by Binary v2026.2.3+)
+    gateways: [
+        {
+            id: "main",
+            provider: "google",
+            model: "gemini-2.5-flash", // Confirmed supported
+            apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY,
+            params: {
+                temperature: 0.7,
+                contextWindow: 16384 // Explicit context window
             }
-        },
-        main: {
+        }
+    ],
+
+    agents: [
+        {
+            id: "main",
             name: "Moltbot",
             role: "You are a helpful AI assistant. You must respond in Japanese. 日本語で応答してください。",
-            model: "google/gemini-1.5-flash"
+            gateway: "main"
         }
-    }
+    ]
 };
 
 // 1. Gateway Authentication
