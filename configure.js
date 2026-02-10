@@ -40,7 +40,16 @@ const config = {
     },
 
     // Agents Configuration
-    agents: {},
+    agents: {
+        "main": {
+            "name": "Moltbot",
+            "model": {
+                "provider": "google",
+                "model": "gemini-2.5-flash"
+            },
+            "system": "You are a helpful AI assistant."
+        }
+    },
 
     channels: {}
 };

@@ -21,9 +21,9 @@ RUN chmod +x /root/clawd/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-10-v76-final-compliance
+# Build cache bust: 2026-02-10-v77-fix-agent-crash
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v76"
+RUN echo "Cache bust v77"
 
 # Copy configuration generator script
 COPY configure.js /root/clawd/configure.js
