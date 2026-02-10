@@ -45,7 +45,7 @@ const config = {
             "name": "Moltbot",
             "model": {
                 "provider": "google",
-                "model": "gemini-2.5-flash"
+                "model": "gemini-2.0-flash-exp"
             },
             "system": "You are a helpful AI assistant."
         }
