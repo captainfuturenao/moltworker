@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v58 - Array Schema / Gemini 2.5)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v59 - Object Schema / Gemini 2.5)...');
 console.log('[CONFIGURE] Env Check: GOOGLE_API_KEY=' + (process.env.GOOGLE_API_KEY ? 'YES' : 'NO') +
     ', CF_AI_GATEWAY_API_KEY=' + (process.env.CLOUDFLARE_AI_GATEWAY_API_KEY ? 'YES' : 'NO'));
 
@@ -15,28 +15,24 @@ const config = {
     },
     channels: {},
 
-    // Array Schema (Required by Binary v2026.2.3+)
-    gateways: [
-        {
-            id: "main",
-            provider: "google",
-            model: "gemini-2.5-flash", // Confirmed supported
-            apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY,
-            params: {
-                temperature: 0.7,
-                contextWindow: 16384 // Explicit context window
-            }
-        }
-    ],
+    // v59 Strategy:
+    // 1. Structure: Object-based (v53 style) which is known to boot.
+    // 2. Model: 'google/gemini-2.5-flash' (Requested by user, supported by CF).
+    // 3. Auth: Implicit (Env vars injected in start-openclaw.sh).
 
-    agents: [
-        {
-            id: "main",
+    agents: {
+        defaults: {
+            model: {
+                primary: 'google/gemini-2.5-flash' // Explicitly use 2.5
+            }
+        },
+        main: {
             name: "Moltbot",
             role: "You are a helpful AI assistant. You must respond in Japanese. 日本語で応答してください。",
-            gateway: "main"
+            // Explicitly set model for main agent
+            model: "google/gemini-2.5-flash"
         }
-    ]
+    }
 };
 
 // 1. Gateway Authentication
