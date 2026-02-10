@@ -39,9 +39,9 @@ RUN chmod +x /usr/local/bin/start-openclaw.sh
 # Copy custom skills
 COPY skills/ /root/clawd/skills/
 
-# Build cache bust: 2026-02-10-v51-api-key-polyfill
+# Build cache bust: 2026-02-10-v52-implicit-providers
 # This ensures a fresh build and container restart
-RUN echo "Cache bust v51"
+RUN echo "Cache bust v52"
 
 # Copy configuration generator script
 COPY configure.js /root/clawd/configure.js
