@@ -35,13 +35,16 @@ fi
 # ============================================================
 # 1. GENERATE CONFIGURATION
 # ============================================================
-echo "Running holistic configuration generator (v61)..."
-if [ -f "/root/clawd/configure_v8.js" ]; then
-    node /root/clawd/configure_v8.js
+echo "Running holistic configuration generator (v62)..."
+if [ -f "/root/clawd/configure_v9.js" ]; then
+    node /root/clawd/configure_v9.js
 else
-    echo "CRITICAL: configure_v8.js not found! Startup aborted."
+    echo "CRITICAL: configure_v9.js not found! Startup aborted."
     exit 1
 fi
+
+# Dummy key to prevent startup complaints if binary checks it by default
+export ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-sk-ant-dummy}"
 
 # ============================================================
 # 2. START GATEWAY
