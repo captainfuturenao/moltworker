@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v66 - Single Agent Object Schema)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v67 - Models Array + Agents Default)...');
 
 const config = {
-    // Server / Network Settings
+    // Server Settings
     gateway: {
         port: 18789,
         mode: 'local',
@@ -12,29 +12,32 @@ const config = {
         auth: {}
     },
 
-    // Models / Providers (Replaces 'gateways' array)
-    // Matches User Guide "models.providers" structure
+    // Models Configuration (Fixed: Added 'models' array)
     models: {
         providers: {
             google: {
-                // Ensure the provider knows about 2.5 if not built-in
-                baseUrl: "https://generativelanguage.googleapis.com", // Optional, standard endpoint
+                baseUrl: "https://generativelanguage.googleapis.com",
                 apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY,
-                // Default search model? 
+                // Fix: 'models' array is required by schema (v66 error)
+                models: [
+                    {
+                        id: "gemini-2.5-flash", // Internal ID
+                        name: "gemini-2.5-flash" // Model Name? Or map to explicit string?
+                    }
+                ]
             }
         }
     },
 
     // Agents Configuration
-    // Hypothesis: 'agents' is a configuration object, not a map.
-    // We define the primary agent properties directly here?
-    // OR, if it supports multiple, maybe it needs a 'list' key.
-    // But 'Unrecognized key "main"' suggests strictly defined keys.
-    // Let's try defining standard agent props directly.
+    // Hypothesis: 'agents' object requires specific keys. 'main' (v64) and 'name/role' (v66) failed.
+    // Trying 'default' key.
     agents: {
-        name: "Moltbot",
-        role: "You are a helpful AI assistant. You must respond in Japanese. 日本語で応答してください。",
-        model: "google/gemini-2.5-flash"
+        default: {
+            name: "Moltbot",
+            role: "You are a helpful AI assistant. You must respond in Japanese. 日本語で応答してください。",
+            model: "gemini-2.5-flash"
+        }
     },
 
     channels: {}
