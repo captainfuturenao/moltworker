@@ -1,44 +1,42 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v64 - Canonical / Object Schema / Gemini 2.5)...');
-console.log('[CONFIGURE] Env Check: GOOGLE_API_KEY=' + (process.env.GOOGLE_API_KEY ? 'YES' : 'NO') +
-    ', CF_AI_GATEWAY_API_KEY=' + (process.env.CLOUDFLARE_AI_GATEWAY_API_KEY ? 'YES' : 'NO'));
+console.log('[CONFIGURE] Generating deterministic configuration (v65 - Pure Array Schema)...');
 
-// Base Configuration Structure
+// Pure Array Schema (Strict)
 const config = {
-    gateway: {
-        port: 18789,
-        mode: 'local',
-        trustedProxies: ['10.1.0.0'], // Required for Cloudflare Sandbox networking
-        auth: {}
-    },
-    channels: {},
-
-    // Object Schema (v60 style) - REQUIRED by openclaw@latest (v2026.2.9)
-    agents: {
-        defaults: {
-            model: {
-                primary: 'google/gemini-2.5-flash'
+    // Gateways Array
+    gateways: [
+        {
+            id: "main",
+            provider: "google",
+            model: "gemini-2.5-flash",
+            // Explicitly inject key
+            apiKey: process.env.GOOGLE_API_KEY || process.env.CLOUDFLARE_AI_GATEWAY_API_KEY,
+            params: {
+                temperature: 0.7,
+                contextWindow: 16384,
+                maxTokens: 8192
             }
-        },
-        main: {
+        }
+    ],
+
+    // Agents Array
+    agents: [
+        {
+            id: "main",
             name: "Moltbot",
             role: "You are a helpful AI assistant. You must respond in Japanese. 日本語で応答してください。",
-            model: "google/gemini-2.5-flash"
+            gateway: "main"
         }
-    }
+    ]
 };
 
-// 1. Gateway Authentication
-if (process.env.OPENCLAW_GATEWAY_TOKEN) {
-    config.gateway.auth.token = process.env.OPENCLAW_GATEWAY_TOKEN;
-}
-
-// 2. Developer Mode (Insecure UI)
-if (process.env.OPENCLAW_DEV_MODE === 'true') {
-    config.gateway.controlUi = { allowInsecureAuth: true };
-}
+// Optional: Channels (If supported in Array schema context, usually top-level object is fine if keys don't conflict)
+// But to be safe and "Pure", we will inject channels only if we are sure of the structure.
+// v62 mixed 'channels: {}' (Object).
+// Let's assume 'channels' is still an object map at root, even with arrays for core types.
+config.channels = {};
 
 // 3. Telegram Channel
 if (process.env.TELEGRAM_BOT_TOKEN) {
@@ -49,8 +47,6 @@ if (process.env.TELEGRAM_BOT_TOKEN) {
     };
     if (config.channels.telegram.dmPolicy === 'open') {
         config.channels.telegram.allowFrom = ['*'];
-    } else if (process.env.TELEGRAM_DM_ALLOW_FROM) {
-        config.channels.telegram.allowFrom = process.env.TELEGRAM_DM_ALLOW_FROM.split(',');
     }
 }
 
