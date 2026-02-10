@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration...');
+console.log('[CONFIGURE] Generating deterministic configuration (v55 - Array Schema)...');
 console.log('[CONFIGURE] Env Check: GOOGLE_API_KEY=' + (process.env.GOOGLE_API_KEY ? 'YES' : 'NO') +
     ', CF_AI_GATEWAY_API_KEY=' + (process.env.CLOUDFLARE_AI_GATEWAY_API_KEY ? 'YES' : 'NO'));
 
@@ -83,15 +83,6 @@ if (process.env.SLACK_BOT_TOKEN && process.env.SLACK_APP_TOKEN) {
         appToken: process.env.SLACK_APP_TOKEN,
         enabled: true
     };
-}
-
-// AI Gateway Override (Legacy Support)
-// If manual override is provided, inject it (use with caution)
-if (process.env.CF_AI_GATEWAY_MODEL) {
-    console.log('[CONFIGURE] Detected CF_AI_GATEWAY_MODEL override.');
-    // Logic to parse provider/model from string if needed, 
-    // but for now relying on Gemini 2.0 as primary is safer.
-    // We log a warning if this conflicts.
 }
 
 // Write Configuration to Disk
