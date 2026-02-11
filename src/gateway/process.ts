@@ -53,7 +53,7 @@ export async function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Proc
  */
 export async function ensureMoltbotGateway(sandbox: Sandbox, env: MoltbotEnv): Promise<Process> {
   // Mount R2 storage for persistent data (non-blocking if not configured)
-  // R2 is used as a backup - the startup script will restore from it on boot
+  // Ensure moltbot data will persist - R2 mounting is handled inside
   await mountR2Storage(sandbox, env);
 
   // Check if gateway is already running or starting

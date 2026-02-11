@@ -36,36 +36,28 @@
   ],
   // Build command for vite
   "build": {
-    "command": "npm run build",
+    "command": "npm run build"
   },
   // Container configuration for OpenClaw sandbox
   "containers": [
     {
-      "class_name": "MoltbotSandbox",
-      "image": "./Dockerfile",
-      "instance_type": "standard-1",
-      "max_instances": 10
+      "class_name": "Sandbox",
+      "image": "./Dockerfile"
     }
   ],
   "durable_objects": {
     "bindings": [
       {
-        "class_name": "MoltbotSandbox",
-        "name": "Sandbox",
-      },
-    ],
+        "class_name": "Sandbox",
+        "name": "Sandbox"
+      }
+    ]
   },
   "migrations": [
     {
-      "tag": "v1",
-      "new_sqlite_classes": [
+      "tag": "v20",
+      "new_classes": [
         "Sandbox"
-      ]
-    },
-    {
-      "tag": "v2",
-      "new_sqlite_classes": [
-        "MoltbotSandbox"
       ]
     }
   ],
