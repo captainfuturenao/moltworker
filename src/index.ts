@@ -261,6 +261,8 @@ app.use('*', async (c, next) => {
   // Skip auth for explicit public paths
   const isPublic =
     url.pathname === '/api/status' ||
+    url.pathname === '/api/debug-logs' ||
+    url.pathname === '/api/debug-processes' ||
     url.pathname === '/sandbox-health' ||
     url.pathname === '/logo.png' ||
     url.pathname === '/logo-small.png' ||
