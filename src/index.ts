@@ -48,7 +48,8 @@ function transformErrorMessage(message: string, host: string): string {
   return message;
 }
 
-export { Sandbox };
+// v88: Subclass Sandbox to force Durable Object reset (kill stuck process)
+export class MoltbotSandbox extends Sandbox { }
 
 /**
  * Validate required environment variables.

@@ -50,7 +50,7 @@
   "durable_objects": {
     "bindings": [
       {
-        "class_name": "Sandbox",
+        "class_name": "MoltbotSandbox",
         "name": "Sandbox",
       },
     ],
@@ -62,6 +62,12 @@
       ],
       "tag": "v1",
     },
+    {
+      "tag": "v2",
+      "new_sqlite_classes": [
+        "MoltbotSandbox"
+      ]
+    }
   ],
   // R2 bucket for persistent storage (moltbot data, conversations, etc.)
   // R2 bucket for persistent storage - DISABLED for stability (v80)
