@@ -41,7 +41,7 @@
   // Container configuration for OpenClaw sandbox
   "containers": [
     {
-      "class_name": "Sandbox",
+      "class_name": "MoltbotSandbox",
       "image": "./Dockerfile",
       "instance_type": "standard-1",
       "max_instances": 10
