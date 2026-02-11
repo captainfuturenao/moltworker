@@ -48,9 +48,9 @@ function transformErrorMessage(message: string, host: string): string {
   return message;
 }
 
-// v88: Subclass Sandbox to force Durable Object reset (kill stuck process)
-export class MoltbotSandbox extends Sandbox { }
-// Removed redundant export { Sandbox } to avoid naming conflicts in DO runtime
+// Export both names to satisfy different migrations (v1 expects Sandbox, v2 expects MoltbotSandbox)
+// This ensures the DO runtime can find the classes during startup and migrations.
+export { Sandbox as MoltbotSandbox, Sandbox } from '@cloudflare/sandbox';
 
 /**
  * Validate required environment variables.
