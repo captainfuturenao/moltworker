@@ -56,5 +56,12 @@ terraform.tfvars
 # E2E test credentials
 test/e2e/.dev.vars
 
+# Temporary Logs
+*.txt
+*.json
+!package.json
+!tsconfig.json
+!wrangler.jsonc
+
 # Temporary e2e wrangler configs
 .wrangler-e2e-*.jsonc
