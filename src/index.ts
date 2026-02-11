@@ -48,8 +48,8 @@ function transformErrorMessage(message: string, host: string): string {
   return message;
 }
 
-// Export ONLY Sandbox name for Durable Objects (standard practice)
-export { Sandbox } from '@cloudflare/sandbox';
+// Export both names to satisfy different migrations (v1 expects Sandbox, v2 expects MoltbotSandbox)
+export { Sandbox as MoltbotSandbox, Sandbox } from '@cloudflare/sandbox';
 
 /**
  * Validate required environment variables.
@@ -142,7 +142,7 @@ app.use('*', async (c, next) => {
     console.error('[CONFIG] Sandbox DO binding missing!');
     return c.text('Configuration error: Sandbox binding missing', 500);
   }
-  const sandbox = getSandbox(c.env.Sandbox, 'moltbot-v113', options);
+  const sandbox = getSandbox(c.env.Sandbox, 'moltbot-v114', options);
   c.set('sandbox', sandbox);
   await next();
 });

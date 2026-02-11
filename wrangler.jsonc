@@ -41,23 +41,29 @@
   // Container configuration for OpenClaw sandbox
   "containers": [
     {
-      "class_name": "Sandbox",
+      "class_name": "MoltbotSandbox",
       "image": "./Dockerfile"
     }
   ],
   "durable_objects": {
     "bindings": [
       {
-        "class_name": "Sandbox",
+        "class_name": "MoltbotSandbox",
         "name": "Sandbox"
       }
     ]
   },
   "migrations": [
     {
-      "tag": "v20",
-      "new_classes": [
+      "tag": "v1",
+      "new_sqlite_classes": [
         "Sandbox"
+      ]
+    },
+    {
+      "tag": "v2",
+      "new_sqlite_classes": [
+        "MoltbotSandbox"
       ]
     }
   ],
