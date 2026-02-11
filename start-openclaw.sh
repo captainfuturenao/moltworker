@@ -1,45 +1,21 @@
 #!/bin/sh
-set -e
+set -ex # Exit on error and print all commands
 
-# Turn on debug mode if requested
-if [ "$OPENCLAW_DEV_MODE" = "true" ]; then
-  set -x
-fi
+echo "Starting OpenClaw (Moltbot Edition - DEBUG v107)..."
 
-echo "Starting OpenClaw (Moltbot Edition)..."
-echo "Version: Latest (v76 - User Compliant / Google Direct)"
-
-# ============================================================
-# 0. DEBUGGING INFO
-# ============================================================
-echo "Environment Check:"
-echo "  NODE_ENV: $NODE_ENV"
-echo "  CF_ACCOUNT_ID: ${CF_ACCOUNT_ID:-(not set)}"
-echo "  CF_AI_GATEWAY_ID: ${CF_AI_GATEWAY_ID:-(not set)}"
-echo "  Google Key Present: $(if [ -n "$GOOGLE_API_KEY" ]; then echo "Yes"; else echo "No"; fi)"
-echo "  CF Key Present: $(if [ -n "$CLOUDFLARE_AI_GATEWAY_API_KEY" ]; then echo "Yes"; else echo "No"; fi)"
-
-# ============================================================
-# 1. GENERATE CONFIGURATION
-# ============================================================
-echo "Running holistic configuration generator (v77 - Fix Empty Agent Crash)..."
-
-# FORCE CLEAN: Remove any existing config to prevent R2 persistence issues
-rm -f /root/.openclaw/openclaw.json
+# Ensure the config directory exists before configure.js runs
+mkdir -p /root/.openclaw
 
 if [ -f "/root/clawd/configure.js" ]; then
+    echo "Running configure.js..."
     node /root/clawd/configure.js
 else
-    echo "CRITICAL: configure.js not found! Startup aborted."
+    echo "CRITICAL: configure.js not found!"
+    ls -la /root/clawd
     exit 1
 fi
 
-# Dummy key to prevent startup complaints if binary checks it by default
-export ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-sk-ant-dummy}"
-
-# ============================================================
-# 2. START OPENCLAW
-# ============================================================
-echo "Starting OpenClaw..."
+export PORT=3000
+echo "Starting OpenClaw binary..."
 exec openclaw
 
