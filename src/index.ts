@@ -240,7 +240,7 @@ app.get('/debug/fs', async (c) => {
   const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
 
   try {
-    const result = await sandbox.exec('ls', ['-R', '/root']);
+    const result = await sandbox.exec('ls -R /root');
     return c.text('STDOUT:\n' + result.stdout + '\n\nSTDERR:\n' + result.stderr);
   } catch (e: any) {
     return c.text('Error: ' + e.message + '\n' + e.stack, 500);
