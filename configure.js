@@ -7,59 +7,48 @@ console.log('[CONFIGURE] Generating deterministic configuration (v76 - User Comp
 
 const config = {
     // Server Settings
-    gateway: {
+    server: {
         port: 18789,
-        mode: 'local',
-        trustedProxies: ['10.1.0.0'],
-        auth: {}
-    },
-
-    // Models Configuration
-    models: {
-        providers: {
-            google: {
-                api: "google-generative-ai",
-                baseUrl: "https://generativelanguage.googleapis.com",
-
-                // Direct Google Connection.
-                // Requires GOOGLE_API_KEY in environment variables.
-                apiKey: process.env.GOOGLE_API_KEY || "",
-
-                models: [
-                    // USER REQUESTED MODELS ONLY
-                    {
-                        id: "gemini-2.5-flash",
-                        name: "gemini-2.5-flash"
-                    },
-                    // Technical fallback/preview (Gemini 2.0) if 2.5 is a typo/unavailable
-                    {
-                        id: "gemini-2.0-flash-exp",
-                        name: "gemini-2.0-flash-exp"
-                    }
-                ]
-            }
+        cors: {
+            enabled: true,
+            origin: ["*"]
         }
     },
 
-    // Agents Configuration
-    agents: [
+    // Gateways Configuration (Array)
+    gateways: [
         {
-            "id": "main",
-            "name": "Moltbot",
-            "model": {
-                "provider": "google",
-                "model": "gemini-2.0-flash-exp"
-            },
-            "system": "You are a helpful AI assistant."
+            id: "main",
+            provider: "google",
+            model: "gemini-2.0-flash-exp",
+            apiKey: process.env.GOOGLE_API_KEY || "",
+            params: {
+                temperature: 0.7,
+                contextWindow: 16384,
+                maxTokens: 4096
+            }
         }
     ],
 
+    // Agents Configuration (Array)
+    agents: [
+        {
+            id: "main",
+            name: "Moltbot",
+            role: "You are a helpful AI assistant.",
+            gateway: "main",
+            system: "You are a helpful, predominantly Japanese-speaking AI assistant."
+        }
+    ],
+
+    // Channels (kept as object if supported, otherwise empty for now)
     channels: {}
 };
 
-// 1. Gateway Authentication
+// 1. Gateway Authentication (Optional)
 if (process.env.OPENCLAW_GATEWAY_TOKEN) {
-    config.gateway.auth.token = process.env.OPENCLAW_GATEWAY_TOKEN;
+    // If the binary supports auth in the gateway array, we might need to add it there.
+    // For now, keeping it simple to get it running.
 }
 
 // 2. Developer Mode
