@@ -57,14 +57,14 @@
   },
   "migrations": [
     {
-      "new_sqlite_classes": [
+      "new_classes": [
         "Sandbox"
       ],
       "tag": "v1",
     },
     {
       "tag": "v2",
-      "new_sqlite_classes": [
+      "new_classes": [
         "MoltbotSandbox"
       ]
     }

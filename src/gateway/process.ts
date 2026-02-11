@@ -91,7 +91,7 @@ export async function ensureMoltbotGateway(sandbox: Sandbox, env: MoltbotEnv): P
   const envVars = buildEnvVars(env);
   // const command = '/usr/local/bin/start-openclaw.sh';
   // v87: Run initialization and OpenClaw directly to bypass script path issues
-  const command = '/bin/sh -c "export PORT=3000; node /root/clawd/configure.js && exec openclaw"';
+  const command = '/root/clawd/start-openclaw.sh';
 
   console.log('Starting process with command:', command);
   console.log('Environment vars being passed:', Object.keys(envVars));
