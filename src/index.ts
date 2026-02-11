@@ -163,44 +163,73 @@ app.get('/debug/env', async (c) => {
   }
 });
 
-// Explicit status check - Moved here to enable logging
+// Explicit status check - Enhanced with more metadata
 app.get('/api/status', async (c) => {
   console.log('[STATUS] TOP-LEVEL route hit (Logged)');
   const sandbox = c.get('sandbox');
 
   try {
+    const process = await findExistingMoltbotProcess(sandbox);
+    if (!process) {
+      return c.json({ ok: false, status: 'not_running' }, 200, {
+        'X-Debug': 'explicit-status-route',
+        'Cache-Control': 'no-store'
+      });
+    }
+
+    const logs = await process.getLogs();
+
     try {
-      const process = await findExistingMoltbotProcess(sandbox);
-      if (!process) {
-        return c.text(JSON.stringify({ ok: false, status: 'not_running' }), 200, {
-          'Content-Type': 'application/json',
-          'X-Debug': 'explicit-status-route',
-          'Cache-Control': 'no-store'
-        });
-      }
       await process.waitForPort(MOLTBOT_PORT, { mode: 'tcp', timeout: 5000 });
-      return c.text(JSON.stringify({ ok: true, status: 'running', processId: process.id }), 200, {
-        'Content-Type': 'application/json',
+      return c.json({
+        ok: true,
+        status: 'running',
+        processId: process.id,
+        command: process.command,
+        state: process.status,
+        hasPort: true,
+        logs: { stdout: logs.stdout.slice(-500), stderr: logs.stderr.slice(-500) }
+      }, 200, {
         'X-Debug': 'explicit-status-route',
         'Cache-Control': 'no-store'
       });
     } catch {
-      return c.text(JSON.stringify({ ok: false, status: 'not_responding' }), 200, {
-        'Content-Type': 'application/json',
+      return c.json({
+        ok: false,
+        status: 'not_responding',
+        processId: process.id,
+        command: process.command,
+        state: process.status,
+        hasPort: false,
+        logs: { stdout: logs.stdout.slice(-500), stderr: logs.stderr.slice(-500) }
+      }, 200, {
         'X-Debug': 'explicit-status-route',
         'Cache-Control': 'no-store'
       });
     }
   } catch (err) {
-    return c.text(JSON.stringify({
+    return c.json({
       ok: false,
       status: 'error',
       error: err instanceof Error ? err.message : 'Unknown error',
-    }), 500, {
-      'Content-Type': 'application/json',
+    }, 500, {
       'X-Debug': 'explicit-status-route',
       'Cache-Control': 'no-store'
     });
+  }
+});
+
+// DEBUG: Inspect container process logs
+app.get('/debug/logs', async (c) => {
+  const sandbox = c.get('sandbox');
+  const process = await findExistingMoltbotProcess(sandbox);
+  if (!process) return c.text('No process found');
+
+  try {
+    const logs = await process.getLogs();
+    return c.text(`STDOUT:\n${logs.stdout}\n\nSTDERR:\n${logs.stderr}`);
+  } catch (e: any) {
+    return c.text('Error: ' + e.message, 500);
   }
 });
 
