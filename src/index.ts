@@ -144,6 +144,25 @@ app.use('*', async (c, next) => {
   await next();
 });
 
+// DEBUG: Inspect container environment variables
+app.get('/debug/env', async (c) => {
+  const sandbox = c.get('sandbox');
+
+  try {
+    const result = await sandbox.exec('env');
+    // Redact sensitive keys
+    const redacted = result.stdout.split('\n').map(line => {
+      if (line.includes('KEY=') || line.includes('TOKEN=')) {
+        return line.split('=')[0] + '=********';
+      }
+      return line;
+    }).join('\n');
+    return c.text('STDOUT:\n' + redacted + '\n\nSTDERR:\n' + result.stderr);
+  } catch (e: any) {
+    return c.text('Error: ' + e.message + '\n' + e.stack, 500);
+  }
+});
+
 // Explicit status check - Moved here to enable logging
 app.get('/api/status', async (c) => {
   console.log('[STATUS] TOP-LEVEL route hit (Logged)');
@@ -298,14 +317,14 @@ app.all('*', async (c) => {
 
   // Check if gateway is already running
   const existingProcess = await findExistingMoltbotProcess(sandbox);
-  const isGatewayReady = existingProcess !== null && existingProcess.status === 'running';
-
-  // For browser requests (non-WebSocket, non-API), show loading page if gateway isn't ready
+  // For browser requests, show loading page ONLY if the process doesn't exist at all.
+  // If it exists but is starting, we let it proceed to ensureMoltbotGateway which will wait for the port.
+  // This prevents the "Reload Loop" where the loading page keeps reloading.
   const isWebSocketRequest = request.headers.get('Upgrade')?.toLowerCase() === 'websocket';
   const acceptsHtml = request.headers.get('Accept')?.includes('text/html');
 
-  if (!isGatewayReady && !isWebSocketRequest && acceptsHtml) {
-    console.log('[PROXY] Gateway not ready, serving loading page');
+  if (!existingProcess && !isWebSocketRequest && acceptsHtml) {
+    console.log('[PROXY] Gateway process not found, serving loading page');
 
     // Start the gateway in the background (don't await)
     c.executionCtx.waitUntil(
