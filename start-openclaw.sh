@@ -40,8 +40,7 @@ export ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-sk-ant-dummy}"
 # ============================================================
 # 2. START OPENCLAW
 # ============================================================
-echo "Initialization complete. Launching binary on port 3000..."
-export PORT=3000
-
-# Use exec to replace shell with openclaw process (better signal handling)
-exec openclaw
+# exec openclaw
+# FAILSAFE DEBUG MODE: Run simple Node server
+echo "Starting debug server on 3000..."
+node -e 'require("http").createServer((req,res)=>{res.writeHead(200);res.end("Debug Server Running")}).listen(3000, "0.0.0.0", ()=>console.log("Listening on 3000"))'
