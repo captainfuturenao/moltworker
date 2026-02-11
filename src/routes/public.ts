@@ -93,4 +93,15 @@ publicRoutes.get('/api/debug-google-key', async (c) => {
   }
 });
 
+// GET /api/debug-processes - Public diagnostic for processes
+publicRoutes.get('/api/debug-processes', async (c) => {
+  const sandbox = c.get('sandbox');
+  try {
+    const processes = await sandbox.listProcesses();
+    return c.json({ ok: true, processes });
+  } catch (err: any) {
+    return c.json({ ok: false, error: err.message });
+  }
+});
+
 export { publicRoutes };
