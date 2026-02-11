@@ -31,7 +31,7 @@ RUN echo "Cache bust v82"
 COPY configure.js /root/clawd/configure.js
 
 # Expose port
-EXPOSE 18789
+EXPOSE 3000
 
 # Entrypoint
 CMD ["/root/clawd/start-openclaw.sh"]

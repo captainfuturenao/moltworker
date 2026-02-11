@@ -1,0 +1,1 @@
+﻿completed	success	fix: v84 use valid model gemini-2.0-flash-exp (fix 500 error from inv窶ｦ	Deploy to Cloudflare Workers	main	push	21877566512	5m21s	2026-02-10T18:32:54Z

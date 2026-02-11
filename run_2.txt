@@ -1,0 +1,268 @@
+﻿Deploy	Set up job	・ｿ2026-02-10T19:33:19.9012997Z Current runner version: '2.331.0'
+Deploy	Set up job	2026-02-10T19:33:19.9037868Z ##[group]Runner Image Provisioner
+Deploy	Set up job	2026-02-10T19:33:19.9038712Z Hosted Compute Agent
+Deploy	Set up job	2026-02-10T19:33:19.9039280Z Version: 20260123.484
+Deploy	Set up job	2026-02-10T19:33:19.9039991Z Commit: 6bd6555ca37d84114959e1c76d2c01448ff61c5d
+Deploy	Set up job	2026-02-10T19:33:19.9040661Z Build Date: 2026-01-23T19:41:17Z
+Deploy	Set up job	2026-02-10T19:33:19.9041363Z Worker ID: {181a9710-6fec-486c-b02a-344975166cfa}
+Deploy	Set up job	2026-02-10T19:33:19.9042327Z Azure Region: eastus2
+Deploy	Set up job	2026-02-10T19:33:19.9043037Z ##[endgroup]
+Deploy	Set up job	2026-02-10T19:33:19.9044435Z ##[group]Operating System
+Deploy	Set up job	2026-02-10T19:33:19.9045231Z Ubuntu
+Deploy	Set up job	2026-02-10T19:33:19.9045734Z 24.04.3
+Deploy	Set up job	2026-02-10T19:33:19.9046253Z LTS
+Deploy	Set up job	2026-02-10T19:33:19.9046723Z ##[endgroup]
+Deploy	Set up job	2026-02-10T19:33:19.9047253Z ##[group]Runner Image
+Deploy	Set up job	2026-02-10T19:33:19.9047895Z Image: ubuntu-24.04
+Deploy	Set up job	2026-02-10T19:33:19.9048465Z Version: 20260201.15.1
+Deploy	Set up job	2026-02-10T19:33:19.9049560Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260201.15/images/ubuntu/Ubuntu2404-Readme.md
+Deploy	Set up job	2026-02-10T19:33:19.9051356Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260201.15
+Deploy	Set up job	2026-02-10T19:33:19.9052470Z ##[endgroup]
+Deploy	Set up job	2026-02-10T19:33:19.9055325Z ##[group]GITHUB_TOKEN Permissions
+Deploy	Set up job	2026-02-10T19:33:19.9057306Z Actions: write
+Deploy	Set up job	2026-02-10T19:33:19.9058021Z ArtifactMetadata: write
+Deploy	Set up job	2026-02-10T19:33:19.9058608Z Attestations: write
+Deploy	Set up job	2026-02-10T19:33:19.9059228Z Checks: write
+Deploy	Set up job	2026-02-10T19:33:19.9059769Z Contents: write
+Deploy	Set up job	2026-02-10T19:33:19.9060312Z Deployments: write
+Deploy	Set up job	2026-02-10T19:33:19.9060906Z Discussions: write
+Deploy	Set up job	2026-02-10T19:33:19.9061406Z Issues: write
+Deploy	Set up job	2026-02-10T19:33:19.9061953Z Metadata: read
+Deploy	Set up job	2026-02-10T19:33:19.9063130Z Models: read
+Deploy	Set up job	2026-02-10T19:33:19.9063684Z Packages: write
+Deploy	Set up job	2026-02-10T19:33:19.9064200Z Pages: write
+Deploy	Set up job	2026-02-10T19:33:19.9064884Z PullRequests: write
+Deploy	Set up job	2026-02-10T19:33:19.9065497Z RepositoryProjects: write
+Deploy	Set up job	2026-02-10T19:33:19.9066127Z SecurityEvents: write
+Deploy	Set up job	2026-02-10T19:33:19.9066693Z Statuses: write
+Deploy	Set up job	2026-02-10T19:33:19.9067170Z ##[endgroup]
+Deploy	Set up job	2026-02-10T19:33:19.9069373Z Secret source: Actions
+Deploy	Set up job	2026-02-10T19:33:19.9070400Z Prepare workflow directory
+Deploy	Set up job	2026-02-10T19:33:19.9392901Z Prepare all required actions
+Deploy	Set up job	2026-02-10T19:33:19.9431909Z Getting action download info
+Deploy	Set up job	2026-02-10T19:33:20.3392372Z Download action repository 'actions/checkout@v4' (SHA:34e114876b0b11c390a56381ad16ebd13914f8d5)
+Deploy	Set up job	2026-02-10T19:33:20.4555141Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+Deploy	Set up job	2026-02-10T19:33:20.5434739Z Download action repository 'cloudflare/wrangler-action@v3' (SHA:da0e0dfe58b7a431659754fdf3f186c529afbe65)
+Deploy	Set up job	2026-02-10T19:33:20.9492020Z Complete job name: Deploy
+Deploy	Run actions/checkout@v4	・ｿ2026-02-10T19:33:21.0200483Z ##[group]Run actions/checkout@v4
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0201473Z with:
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0202035Z   repository: captainfuturenao/moltworker
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0203098Z   token: ***
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0203584Z   ssh-strict: true
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0204077Z   ssh-user: git
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0204554Z   persist-credentials: true
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0205175Z   clean: true
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0205712Z   sparse-checkout-cone-mode: true
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0206332Z   fetch-depth: 1
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0206849Z   fetch-tags: false
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0207353Z   show-progress: true
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0207833Z   lfs: false
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0208286Z   submodules: false
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0208797Z   set-safe-directory: true
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.0209622Z ##[endgroup]
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1274547Z Syncing repository: captainfuturenao/moltworker
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1278222Z ##[group]Getting Git version info
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1279701Z Working directory is '/home/runner/work/moltworker/moltworker'
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1283271Z [command]/usr/bin/git version
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1370100Z git version 2.52.0
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1396349Z ##[endgroup]
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1417311Z Temporarily overriding HOME='/home/runner/work/_temp/22bd99f6-ebe1-464f-ac73-b0f903488ac9' before making global git config changes
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1418872Z Adding repository directory to the temporary git global config as a safe directory
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1422411Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/moltworker/moltworker
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1460294Z Deleting the contents of '/home/runner/work/moltworker/moltworker'
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1464070Z ##[group]Initializing the repository
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1467809Z [command]/usr/bin/git init /home/runner/work/moltworker/moltworker
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1569344Z hint: Using 'master' as the name for the initial branch. This default branch name
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1570737Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1571831Z hint: to use in all of your new repositories, which will suppress this warning,
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1573175Z hint: call:
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1573842Z hint:
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1574399Z hint: 	git config --global init.defaultBranch <name>
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1575085Z hint:
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1575745Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1576805Z hint: 'development'. The just-created branch can be renamed via this command:
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1577623Z hint:
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1578215Z hint: 	git branch -m <name>
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1579213Z hint:
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1580314Z hint: Disable this message with "git config set advice.defaultBranchName false"
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1581487Z Initialized empty Git repository in /home/runner/work/moltworker/moltworker/.git/
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1585174Z [command]/usr/bin/git remote add origin https://github.com/captainfuturenao/moltworker
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1618210Z ##[endgroup]
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1619124Z ##[group]Disabling automatic garbage collection
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1622374Z [command]/usr/bin/git config --local gc.auto 0
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1649761Z ##[endgroup]
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1650658Z ##[group]Setting up auth
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1657058Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.1685933Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.2032387Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.2060832Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.2277688Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.2310280Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.2534003Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.2568026Z ##[endgroup]
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.2569482Z ##[group]Fetching the repository
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.2576776Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +b1cb40ee4d87d3510421868ab296e895ac6cc038:refs/remotes/origin/main
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.4793640Z From https://github.com/captainfuturenao/moltworker
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.4795132Z  * [new ref]         b1cb40ee4d87d3510421868ab296e895ac6cc038 -> origin/main
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.4826376Z ##[endgroup]
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.4829859Z ##[group]Determining the checkout info
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.4831407Z ##[endgroup]
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.4833041Z [command]/usr/bin/git sparse-checkout disable
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.4872031Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.4897057Z ##[group]Checking out the ref
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.4900148Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.5022524Z Switched to a new branch 'main'
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.5025187Z branch 'main' set up to track 'origin/main'.
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.5033603Z ##[endgroup]
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.5064872Z [command]/usr/bin/git log -1 --format=%H
+Deploy	Run actions/checkout@v4	2026-02-10T19:33:21.5086161Z b1cb40ee4d87d3510421868ab296e895ac6cc038
+Deploy	Setup Node.js	・ｿ2026-02-10T19:33:21.5418535Z ##[group]Run actions/setup-node@v4
+Deploy	Setup Node.js	2026-02-10T19:33:21.5419831Z with:
+Deploy	Setup Node.js	2026-02-10T19:33:21.5420695Z   node-version: 20
+Deploy	Setup Node.js	2026-02-10T19:33:21.5421644Z   always-auth: false
+Deploy	Setup Node.js	2026-02-10T19:33:21.5422778Z   check-latest: false
+Deploy	Setup Node.js	2026-02-10T19:33:21.5424043Z   token: ***
+Deploy	Setup Node.js	2026-02-10T19:33:21.5424904Z ##[endgroup]
+Deploy	Setup Node.js	2026-02-10T19:33:21.7194648Z Found in cache @ /opt/hostedtoolcache/node/20.20.0/x64
+Deploy	Setup Node.js	2026-02-10T19:33:21.7200532Z ##[group]Environment details
+Deploy	Setup Node.js	2026-02-10T19:33:22.0589061Z node: v20.20.0
+Deploy	Setup Node.js	2026-02-10T19:33:22.0590645Z npm: 10.8.2
+Deploy	Setup Node.js	2026-02-10T19:33:22.0591903Z yarn: 1.22.22
+Deploy	Setup Node.js	2026-02-10T19:33:22.0593940Z ##[endgroup]
+Deploy	Install Dependencies	・ｿ2026-02-10T19:33:22.0730871Z ##[group]Run npm install
+Deploy	Install Dependencies	2026-02-10T19:33:22.0731997Z [36;1mnpm install[0m
+Deploy	Install Dependencies	2026-02-10T19:33:22.0778252Z shell: /usr/bin/bash -e {0}
+Deploy	Install Dependencies	2026-02-10T19:33:22.0779373Z ##[endgroup]
+Deploy	Install Dependencies	2026-02-10T19:33:23.0092314Z npm warn EBADENGINE Unsupported engine {
+Deploy	Install Dependencies	2026-02-10T19:33:23.0095087Z npm warn EBADENGINE   package: 'openclaw@2026.2.6-3',
+Deploy	Install Dependencies	2026-02-10T19:33:23.0097815Z npm warn EBADENGINE   required: { node: '>=22.12.0' },
+Deploy	Install Dependencies	2026-02-10T19:33:23.0100748Z npm warn EBADENGINE   current: { node: 'v20.20.0', npm: '10.8.2' }
+Deploy	Install Dependencies	2026-02-10T19:33:23.0103418Z npm warn EBADENGINE }
+Deploy	Install Dependencies	2026-02-10T19:33:25.9004547Z npm warn deprecated npmlog@6.0.2: This package is no longer supported.
+Deploy	Install Dependencies	2026-02-10T19:33:25.9451548Z npm warn deprecated tar@6.2.1: Old versions of tar are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+Deploy	Install Dependencies	2026-02-10T19:33:26.4615435Z npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+Deploy	Install Dependencies	2026-02-10T19:33:26.6918524Z npm warn deprecated gauge@4.0.4: This package is no longer supported.
+Deploy	Install Dependencies	2026-02-10T19:33:27.2063349Z npm warn deprecated are-we-there-yet@3.0.1: This package is no longer supported.
+Deploy	Install Dependencies	2026-02-10T19:33:32.1153408Z npm warn deprecated glob@10.5.0: Old versions of glob are not supported, and contain widely publicized security vulnerabilities, which have been fixed in the current version. Please update. Support for old versions may be purchased (at exorbitant rates) by contacting i@izs.me
+Deploy	Install Dependencies	2026-02-10T19:33:46.9514242Z 
+Deploy	Install Dependencies	2026-02-10T19:33:46.9515432Z added 846 packages, and audited 847 packages in 25s
+Deploy	Install Dependencies	2026-02-10T19:33:46.9515976Z 
+Deploy	Install Dependencies	2026-02-10T19:33:46.9516287Z 155 packages are looking for funding
+Deploy	Install Dependencies	2026-02-10T19:33:46.9516850Z   run `npm fund` for details
+Deploy	Install Dependencies	2026-02-10T19:33:46.9569138Z 
+Deploy	Install Dependencies	2026-02-10T19:33:46.9570026Z 5 high severity vulnerabilities
+Deploy	Install Dependencies	2026-02-10T19:33:46.9570424Z 
+Deploy	Install Dependencies	2026-02-10T19:33:46.9570878Z To address issues that do not require attention, run:
+Deploy	Install Dependencies	2026-02-10T19:33:46.9571637Z   npm audit fix
+Deploy	Install Dependencies	2026-02-10T19:33:46.9571899Z 
+Deploy	Install Dependencies	2026-02-10T19:33:46.9572617Z To address all issues (including breaking changes), run:
+Deploy	Install Dependencies	2026-02-10T19:33:46.9573333Z   npm audit fix --force
+Deploy	Install Dependencies	2026-02-10T19:33:46.9573694Z 
+Deploy	Install Dependencies	2026-02-10T19:33:46.9573941Z Run `npm audit` for details.
+Deploy	Deploy to Cloudflare Workers	・ｿ2026-02-10T19:33:47.0375117Z ##[group]Run cloudflare/wrangler-action@v3
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0375467Z with:
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0375851Z   accountId: ***
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0376059Z   command: deploy
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0376262Z   quiet: false
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0376451Z env:
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0376719Z   CLOUDFLARE_API_KEY: ***
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0376983Z   CLOUDFLARE_EMAIL: ***
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0377318Z   CLOUDFLARE_ACCOUNT_ID: ***
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0377702Z   MOLTBOT_GATEWAY_TOKEN: ***
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0377945Z   CLOUDFLARE_AI_GATEWAY_ID: 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0378320Z   CLOUDFLARE_AI_GATEWAY_API_KEY: ***
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0378603Z   CF_AI_GATEWAY_MODEL: 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.0378821Z ##[endgroup]
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.1367009Z ##[group]剥 Checking for existing Wrangler installation
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:47.1415798Z [command]/opt/hostedtoolcache/node/20.20.0/x64/bin/npx --no-install wrangler --version
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:48.1611711Z 4.60.0
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:48.3675456Z 笨・No wrangler version specified, using pre-installed wrangler version 4.60.0
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:48.3678527Z ##[endgroup]
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:48.3679198Z ##[endgroup]
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:48.3680133Z ##[group]噫 Running Wrangler Commands
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:48.3706169Z [command]/opt/hostedtoolcache/node/20.20.0/x64/bin/npx wrangler deploy
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.3044285Z 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.3046456Z Cloudflare collects anonymous telemetry about your usage of Wrangler. Learn more at https://github.com/cloudflare/workers-sdk/tree/main/packages/wrangler/telemetry.md
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.8639002Z 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.8640001Z  笵・ｸ・wrangler 4.60.0 (update available 4.64.0)
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.8640904Z 笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.8849970Z [custom build] Running: npm run build
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.9944945Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.9946530Z [custom build] > moltbot-sandbox@1.0.0 build
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.9947270Z [custom build] > vite build
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.9948048Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:49.9951450Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.2885433Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.2888448Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.2896728Z [custom build] [43mWARNING[0m: your worker config (at `wrangler.jsonc`) contains the following configuration options which are ignored since they are not applicable when using Vite:
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.2898842Z [custom build]   - `build`, `rules` which are not relevant in the context of a Vite project
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.2899703Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.2900108Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.3247440Z [custom build] [36mvite v6.4.1 [32mbuilding SSR bundle for production...[36m[39m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.3250182Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.3655893Z [custom build] transforming...
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:51.3657934Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:52.6943544Z [custom build] [32m笨・[39m 269 modules transformed.
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:52.6944101Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:52.8563581Z [custom build] rendering chunks...
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:52.8564136Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0224785Z [custom build] [2mdist/moltbot_sandbox/[22m[32mwrangler.json                                 [39m[1m[2m    1.71 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0226199Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0227970Z [custom build] [2mdist/moltbot_sandbox/[22m[32m.vite/manifest.json                           [39m[1m[2m    2.42 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0239244Z [custom build] [2mdist/moltbot_sandbox/[22m[2massets/[22m[32mconfig-error-BiHBZmt2.html             [39m[1m[2m    4.36 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0241450Z [custom build] [2mdist/moltbot_sandbox/[22m[2massets/[22m[32mloading-DBoxPamg.html                  [39m[1m[2m    5.22 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0243681Z [custom build] [2mdist/moltbot_sandbox/[22m[36mindex.js                                      [39m[1m[2m    0.28 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0245825Z [custom build] [2mdist/moltbot_sandbox/[22m[2massets/[22m[36mBrowserWebSocketTransport-_4zER8KH.js  [39m[1m[2m    0.83 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0248532Z [custom build] [2mdist/moltbot_sandbox/[22m[2massets/[22m[36m_commonjsHelpers-TeSvKOnp.js           [39m[1m[2m    0.90 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0250810Z [custom build] [2mdist/moltbot_sandbox/[22m[2massets/[22m[36mNodeWebSocketTransport-DsiKG_IP.js     [39m[1m[2m    2.06 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0253341Z [custom build] [2mdist/moltbot_sandbox/[22m[2massets/[22m[36mpromises-B5A9WXmw.js                   [39m[1m[2m    5.20 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0254455Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0255940Z [custom build] [2mdist/moltbot_sandbox/[22m[2massets/[22m[36mindex-BAJ0CPJ9.js                      [39m[1m[2m   20.25 kB[22m[1m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0258080Z [custom build] [2mdist/moltbot_sandbox/[22m[2massets/[22m[36mworker-entry-aV_D09M8.js               [39m[1m[33m1,021.83 kB[39m[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0259789Z [custom build] [32m笨・built in 1.67s[39m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0260296Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0261164Z [custom build] [36mvite v6.4.1 [32mbuilding for production...[36m[39m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0261853Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0479597Z [custom build] transforming...
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.0482635Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.6196433Z [custom build] [32m笨・[39m 33 modules transformed.
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.6197479Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7070271Z [custom build] rendering chunks...
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7070844Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7101227Z [custom build] computing gzip size...
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7102393Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7174911Z [custom build] [2mdist/client/[22m[32mindex.html                 [39m[1m[2m  0.41 kB[22m[1m[22m[2m 笏・gzip:  0.28 kB[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7177319Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7178963Z [custom build] [2mdist/client/[22m[2massets/[22m[35mindex-B1XPMD5E.css  [39m[1m[2m  6.09 kB[22m[1m[22m[2m 笏・gzip:  1.73 kB[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7183481Z [custom build] [2mdist/client/[22m[2massets/[22m[36mindex-Oci7mtsq.js   [39m[1m[2m203.55 kB[22m[1m[22m[2m 笏・gzip: 63.19 kB[22m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7184729Z [custom build] [32m笨・built in 694ms[39m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:53.7185149Z [custom build] 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:54.1560603Z 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:54.1937061Z [31m笨・[41;31m[[41;97mERROR[41;31m][0m [1mA request to the Cloudflare API (/accounts/***/workers/services/moltbot-sandbox) failed.[0m
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:54.1938100Z 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:54.1938368Z   Authentication error [code: 10000]
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:54.1938730Z 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:54.1938742Z 
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:54.1938961Z Getting User settings...
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.0168163Z 窓 You are logged in with an Global API Key, associated with the email ***.
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.0207442Z 笏娯楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏ｬ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.0208534Z 笏・Account Name                  笏・Account ID                       笏・Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.0209552Z 笏懌楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏ｼ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏､
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.0210662Z 笏・Naoki.joy@gmail.com's Account 笏・8e5b6223f870c407090a1292d613d17f 笏・Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.0211691Z 笏披楳笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏ｴ笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏・Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.0213380Z 箔 To see token permissions visit https://dash.cloudflare.com/8e5b6223f870c407090a1292d613d17f/api-tokens.
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.0799658Z ｪｵ  Logs were written to "/home/runner/.config/.wrangler/logs/wrangler-2026-02-10_19-33-49_110.log"
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.1060661Z ##[endgroup]
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.1080048Z ##[error]The process '/opt/hostedtoolcache/node/20.20.0/x64/bin/npx' failed with exit code 1
+Deploy	Deploy to Cloudflare Workers	2026-02-10T19:33:55.1088908Z ##[error]圷 Action failed
+Deploy	Post Run actions/checkout@v4	・ｿ2026-02-10T19:33:55.1192984Z Post job cleanup.
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2134917Z [command]/usr/bin/git version
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2170471Z git version 2.52.0
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2212870Z Temporarily overriding HOME='/home/runner/work/_temp/a2aeb44e-8c46-4f2b-acd5-df0791e8190e' before making global git config changes
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2214012Z Adding repository directory to the temporary git global config as a safe directory
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2225203Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/moltworker/moltworker
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2257484Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2288729Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2516575Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2537025Z http.https://github.com/.extraheader
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2549307Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2579176Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2797608Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+Deploy	Post Run actions/checkout@v4	2026-02-10T19:33:55.2828888Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Deploy	Complete job	・ｿ2026-02-10T19:33:55.3148732Z Cleaning up orphan processes

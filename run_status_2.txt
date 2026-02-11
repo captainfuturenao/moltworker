@@ -1,0 +1,1 @@
+﻿completed	failure	Fix deploy workflow to use env vars for Global API Key	Deploy to Cloudflare Workers	main	push	21879507725	41s	2026-02-10T19:33:16Z

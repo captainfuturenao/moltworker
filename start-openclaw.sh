@@ -40,7 +40,8 @@ export ANTHROPIC_API_KEY="${ANTHROPIC_API_KEY:-sk-ant-dummy}"
 # ============================================================
 # 2. START OPENCLAW
 # ============================================================
-echo "Initialization complete. Launching binary..."
+echo "Initialization complete. Launching binary on port 3000..."
+export PORT=3000
 
 # Use exec to replace shell with openclaw process (better signal handling)
 exec openclaw

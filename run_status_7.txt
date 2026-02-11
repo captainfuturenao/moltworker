@@ -1,0 +1,3 @@
+﻿in_progress		Deploy to Cloudflare Workers	Deploy to Cloudflare Workers	main	workflow_dispatch	21880387464	4m21s	2026-02-10T20:01:03Z
+completed	failure	fix: v85 fix configure.js syntax (ESM) and agents schema (Array)	Test	main	push	21879732837	11m6s	2026-02-10T19:40:28Z
+completed	failure	fix: v85 fix configure.js syntax (ESM) and agents schema (Array)	Deploy to Cloudflare Workers	main	push	21879732809	46s	2026-02-10T19:40:28Z

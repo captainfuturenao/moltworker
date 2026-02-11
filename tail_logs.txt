@@ -1,0 +1,463 @@
+﻿
+ 笵・ｸ・wrangler 4.60.0 (update available 4.64.0)
+笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏笏
+Successfully created tail, expires at 2026-02-11T08:29:07Z
+Connected to moltbot-sandbox, waiting for logs...
+Alarm @ 2026/2/11 11:29:07 - Exception Thrown
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:29:19
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:29:18
+Alarm @ 2026/2/11 11:29:15 - Exception Thrown
+  (debug) Error checking if container is ready: The operation was aborted
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+Sandbox.listProcesses - Ok @ 2026/2/11 11:29:19
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:29:19
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:29:26 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:29:31.599Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:29:31.599Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:29:31.599Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:29:33
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:29:33
+Sandbox.listProcesses - Ok @ 2026/2/11 11:29:33
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:29:33
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:29:33 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:29:47
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:29:47
+Sandbox.listProcesses - Ok @ 2026/2/11 11:29:47
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:29:47
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:28:54 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:29:45.677Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:29:45.677Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:29:45.677Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:30:00
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:30:00
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:30:00
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Sandbox.listProcesses - Ok @ 2026/2/11 11:30:00
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:30:11.951Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:30:11.951Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:30:11.951Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Alarm @ 2026/2/11 11:29:40 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:29:58.807Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:29:58.807Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:29:58.807Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:30:14
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:30:13
+Sandbox.listProcesses - Ok @ 2026/2/11 11:30:14
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:30:13
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:30:00 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:30:27
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:30:27
+Alarm @ 2026/2/11 11:30:14 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:30:25.058Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:30:25.058Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:30:25.058Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.listProcesses - Ok @ 2026/2/11 11:30:27
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:30:27
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:30:27 - Ok
+  (debug) Error checking if container is ready: The operation was aborted
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:30:39.596Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:30:39.596Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:30:39.596Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:30:41
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:30:41
+Alarm @ 2026/2/11 11:30:41 - Exception Thrown
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+Sandbox.listProcesses - Ok @ 2026/2/11 11:30:41
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:30:41
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:30:33 - Ok
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:30:54
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:30:54
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:30:54
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Sandbox.listProcesses - Ok @ 2026/2/11 11:30:54
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:05.995Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:05.995Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:31:05.995Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Alarm @ 2026/2/11 11:30:41 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:30:52.653Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:30:52.653Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:30:52.653Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:31:08
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:31:07
+Sandbox.listProcesses - Ok @ 2026/2/11 11:31:08
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:31:08
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:30:54 - Ok
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:31:21
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:31:21
+Alarm @ 2026/2/11 11:31:08 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:19.548Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:19.548Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:31:19.548Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.listProcesses - Ok @ 2026/2/11 11:31:21
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:31:21
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:31:21 - Ok
+  (debug) Error checking if container is ready: The operation was aborted
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:33.795Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:33.795Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:31:33.795Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:31:35
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:31:35
+Sandbox.listProcesses - Ok @ 2026/2/11 11:31:35
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:31:35
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:31:27 - Ok
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:31:47
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:31:48
+Sandbox.listProcesses - Ok @ 2026/2/11 11:31:48
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:31:48
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:31:35 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:45.956Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:45.956Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:31:45.956Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:32:00
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:32:00
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:32:00
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Sandbox.listProcesses - Ok @ 2026/2/11 11:32:00
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:32:11.628Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:32:11.628Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:32:11.628Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Alarm @ 2026/2/11 11:31:48 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:58.404Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:31:58.404Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:31:58.404Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:32:12
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:32:13
+Alarm @ 2026/2/11 11:32:00 - Ok
+Alarm @ 2026/2/11 11:32:13 - Exception Thrown
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+Sandbox.listProcesses - Ok @ 2026/2/11 11:32:13
+  (debug) Error checking if container is ready: The operation was aborted
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:32:13
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:32:20 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:32:27
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:32:27
+Sandbox.listProcesses - Ok @ 2026/2/11 11:32:27
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:32:27
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:32:20 - Ok
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:32:25.864Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:32:25.864Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:32:25.864Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:32:40
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:32:40
+Sandbox.listProcesses - Ok @ 2026/2/11 11:32:40
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:32:40
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:32:27 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:32:38.526Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:32:38.526Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:32:38.526Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:32:52
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:32:53
+Sandbox.listProcesses - Ok @ 2026/2/11 11:32:53
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:32:53
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:32:40 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:32:51.094Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:32:51.094Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:32:51.094Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:33:06
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:33:06
+Alarm @ 2026/2/11 11:32:53 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:04.729Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:04.729Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:33:04.729Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Alarm @ 2026/2/11 11:33:06 - Exception Thrown
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+Sandbox.listProcesses - Ok @ 2026/2/11 11:33:06
+  (debug) Error checking if container is ready: The operation was aborted
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:33:06
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:33:13 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:18.960Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:18.960Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:33:18.960Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:33:21
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:33:20
+Alarm @ 2026/2/11 11:33:14 - Exception Thrown
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+Sandbox.listProcesses - Ok @ 2026/2/11 11:33:21
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:33:21
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:33:21 - Ok
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:33:34
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:33:34
+Sandbox.listProcesses - Ok @ 2026/2/11 11:33:34
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:33:34
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:33:21 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:32.485Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:32.485Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:33:32.485Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:33:46
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:33:46
+Sandbox.listProcesses - Ok @ 2026/2/11 11:33:46
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:33:46
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:33:34 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:44.531Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:44.531Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:33:44.531Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:33:59
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:33:59
+Alarm @ 2026/2/11 11:33:46 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:57.776Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:33:57.776Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:33:57.776Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.listProcesses - Ok @ 2026/2/11 11:33:59
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:33:59
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:33:59 - Ok
+  (debug) Error checking if container is ready: The operation was aborted
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:34:12.004Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:34:12.004Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:34:12.004Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:34:13
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:34:14
+Sandbox.listProcesses - Ok @ 2026/2/11 11:34:14
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:34:14
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:34:05 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:34:26.111Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:34:26.111Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:34:26.111Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:34:28
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:34:28
+Sandbox.listProcesses - Ok @ 2026/2/11 11:34:28
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:34:28
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Alarm @ 2026/2/11 11:34:14 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:34:38.406Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:34:38.406Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:34:38.406Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:34:40
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:34:39
+GET https://moltbot-sandbox.naoki-joy.workers.dev/api/status - Ok @ 2026/2/11 11:34:40
+  (log) [STATUS] TOP-LEVEL route hit
+  (log) Could not list processes: Error: SandboxError: HTTP error! status: 500
+Sandbox.listProcesses - Ok @ 2026/2/11 11:34:40
+Alarm @ 2026/2/11 11:34:28 - Ok
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
+  (debug) Error checking 3000: The container is not running, consider calling start()
+  (error) {"level":"error","msg":"Sandbox error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:34:51.839Z","error":{"message":"Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?","stack":"Error: Container crashed while checking for ports, did you start the container and setup the entrypoint correctly?\n    at Sandbox.waitForPort (index.js:5456:32)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Container startup failed with permanent error","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","timestamp":"2026-02-11T02:34:51.839Z","error":{"message":"The container is not running, consider calling start()","stack":"Error: The container is not running, consider calling start()\n    at async Sandbox.waitForPort (index.js:5448:9)\n    at async Sandbox.startAndWaitForPorts (index.js:5410:19)\n    at async Sandbox.containerFetch (index.js:8727:7)\n    at async HttpTransport.fetch (index.js:6662:24)\n    at async UtilityClient.post (index.js:7170:22)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"Error"}}
+  (error) {"level":"error","msg":"Unexpected error in createSession","component":"sandbox-do","sandboxId":"56188faffac753dde56a5bd55073d1ecc9b776578635af8227349e779feb81bd","traceId":"tr_0c3c65462e5e43dc","httpStatus":500,"timestamp":"2026-02-11T02:34:51.839Z","error":{"message":"HTTP error! status: 500","stack":"SandboxError: HTTP error! status: 500\n    at createErrorFromResponse (index.js:6634:14)\n    at UtilityClient.handleErrorResponse (index.js:7225:20)\n    at async UtilityClient.handleResponse (index.js:7195:23)\n    at async UtilityClient.createSession (index.js:7971:24)\n    at async Sandbox.ensureDefaultSession (index.js:8871:7)\n    at async Sandbox.listProcesses (index.js:9297:34)","name":"SandboxError"}}
+Sandbox.setSandboxName - Ok @ 2026/2/11 11:34:53
+Sandbox.setKeepAlive - Ok @ 2026/2/11 11:34:53
+Alarm @ 2026/2/11 11:34:40 - Ok
+Alarm @ 2026/2/11 11:34:59 - Exception Thrown
+  (debug) Error checking 3000: The container is not listening in the TCP address 10.0.0.1:3000
