@@ -13,32 +13,24 @@ import { mountR2Storage } from './r2';
 export async function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Process | null> {
   try {
     const processes = await sandbox.listProcesses();
-    for (const proc of processes) {
-      // Match gateway process (openclaw gateway or legacy clawdbot gateway)
-      // Don't match CLI commands like "openclaw devices list"
-      const isGatewayProcess =
-        proc.command.includes('start-openclaw.sh') ||
-        proc.command.includes('openclaw gateway') ||
-        // Legacy: match old startup script during transition
-        proc.command.includes('start-moltbot.sh') ||
-        proc.command.includes('clawdbot gateway');
-      const isCliCommand =
-        proc.command.includes('openclaw devices') ||
-        proc.command.includes('openclaw --version') ||
-        proc.command.includes('openclaw onboard') ||
-        proc.command.includes('clawdbot devices') ||
-        proc.command.includes('clawdbot --version');
+    proc.command.includes('clawdbot gateway');
+    const isCliCommand =
+      proc.command.includes('openclaw devices') ||
+      proc.command.includes('openclaw --version') ||
+      proc.command.includes('openclaw onboard') ||
+      proc.command.includes('clawdbot devices') ||
+      proc.command.includes('clawdbot --version');
 
-      if (isGatewayProcess && !isCliCommand) {
-        if (proc.status === 'starting' || proc.status === 'running') {
-          return proc;
-        }
+    if (isGatewayProcess && !isCliCommand) {
+      if (proc.status === 'starting' || proc.status === 'running') {
+        return proc;
       }
     }
-  } catch (e) {
-    console.log('Could not list processes:', e);
   }
-  return null;
+  } catch (e) {
+  console.log('Could not list processes:', e);
+}
+return null;
 }
 
 /**

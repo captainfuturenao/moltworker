@@ -121,62 +121,6 @@ function buildSandboxOptions(env: MoltbotEnv): SandboxOptions {
 // Main app
 const app = new Hono<AppEnv>();
 
-// Status route moved below logging middleware
-
-// DEBUG: Validate Google Model Availability directly (Bypassing OpenClaw)
-// MOUNTED Top-Level to bypass Access Auth
-app.get('/debug/validate-model', async (c) => {
-  const apiKey = c.env.GOOGLE_API_KEY;
-  if (!apiKey) return c.json({ error: 'No API Key' });
-  const model = c.req.query('model') || 'gemini-2.5-flash';
-
-  try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-    const resp = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: 'Test' }] }] })
-    });
-
-    const data = await resp.json();
-    return c.text(JSON.stringify({
-      status: resp.status,
-      ok: resp.ok,
-      model,
-      data
-    }), 200, { 'Content-Type': 'application/json' });
-  } catch (e: any) {
-    return c.json({ error: e.message });
-  }
-});
-
-// DEBUG: Validate Google Model Availability directly (Bypassing OpenClaw)
-app.get('/debug/validate-model', async (c) => {
-  const apiKey = c.env.GOOGLE_API_KEY;
-  if (!apiKey) return c.json({ error: 'No API Key' });
-  const model = c.req.query('model') || 'gemini-2.5-flash';
-
-  try {
-    // Try to generate a single token to test model availability
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-    const resp = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ contents: [{ parts: [{ text: 'Test' }] }] })
-    });
-
-    const data = await resp.json();
-    return c.json({
-      status: resp.status,
-      ok: resp.ok,
-      model,
-      data
-    });
-  } catch (e: any) {
-    return c.json({ error: e.message });
-  }
-});
-
 // =============================================================================
 // MIDDLEWARE: Applied to ALL routes
 // =============================================================================
@@ -192,11 +136,18 @@ app.use('*', async (c, next) => {
   await next();
 });
 
+// Middleware: Initialize sandbox for all requests (Moved up)
+app.use('*', async (c, next) => {
+  const options = buildSandboxOptions(c.env);
+  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
+  c.set('sandbox', sandbox);
+  await next();
+});
+
 // Explicit status check - Moved here to enable logging
 app.get('/api/status', async (c) => {
   console.log('[STATUS] TOP-LEVEL route hit (Logged)');
-  const options = buildSandboxOptions(c.env);
-  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
+  const sandbox = c.get('sandbox');
 
   try {
     try {
@@ -236,8 +187,7 @@ app.get('/api/status', async (c) => {
 
 // DEBUG: Inspect container filesystem
 app.get('/debug/fs', async (c) => {
-  const options = buildSandboxOptions(c.env);
-  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
+  const sandbox = c.get('sandbox');
 
   try {
     const result = await sandbox.exec('ls -R /root');
@@ -247,13 +197,8 @@ app.get('/debug/fs', async (c) => {
   }
 });
 
-// Middleware: Initialize sandbox for all requests
-app.use('*', async (c, next) => {
-  const options = buildSandboxOptions(c.env);
-  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
-  c.set('sandbox', sandbox);
-  await next();
-});
+
+
 
 // =============================================================================
 // PUBLIC ROUTES: No Cloudflare Access authentication required
