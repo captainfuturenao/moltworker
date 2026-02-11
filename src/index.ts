@@ -167,61 +167,7 @@ app.get('/debug/env', async (c) => {
   }
 });
 
-// Explicit status check - Enhanced with more metadata
-app.get('/api/status', async (c) => {
-  console.log('[STATUS] TOP-LEVEL route hit (Logged)');
-  const sandbox = c.get('sandbox');
-
-  try {
-    const process = await findExistingMoltbotProcess(sandbox);
-    if (!process) {
-      return c.json({ ok: false, status: 'not_running' }, 200, {
-        'X-Debug': 'explicit-status-route',
-        'Cache-Control': 'no-store'
-      });
-    }
-
-    const logs = await process.getLogs();
-
-    try {
-      await process.waitForPort(MOLTBOT_PORT, { mode: 'tcp', timeout: 5000 });
-      return c.json({
-        ok: true,
-        status: 'running',
-        processId: process.id,
-        command: process.command,
-        state: process.status,
-        hasPort: true,
-        logs: { stdout: logs.stdout.slice(-500), stderr: logs.stderr.slice(-500) }
-      }, 200, {
-        'X-Debug': 'explicit-status-route',
-        'Cache-Control': 'no-store'
-      });
-    } catch {
-      return c.json({
-        ok: false,
-        status: 'not_responding',
-        processId: process.id,
-        command: process.command,
-        state: process.status,
-        hasPort: false,
-        logs: { stdout: logs.stdout.slice(-500), stderr: logs.stderr.slice(-500) }
-      }, 200, {
-        'X-Debug': 'explicit-status-route',
-        'Cache-Control': 'no-store'
-      });
-    }
-  } catch (err) {
-    return c.json({
-      ok: false,
-      status: 'error',
-      error: err instanceof Error ? err.message : 'Unknown error',
-    }, 500, {
-      'X-Debug': 'explicit-status-route',
-      'Cache-Control': 'no-store'
-    });
-  }
-});
+// (Redundant route removed, now handled by publicRoutes correctly)
 
 // DEBUG: Inspect container process logs
 app.get('/debug/logs', async (c) => {
@@ -311,6 +257,18 @@ app.use('*', async (c, next) => {
 
 // Middleware: Cloudflare Access authentication for protected routes
 app.use('*', async (c, next) => {
+  const url = new URL(c.req.url);
+  // Skip auth for explicit public paths
+  const isPublic =
+    url.pathname === '/api/status' ||
+    url.pathname === '/sandbox-health' ||
+    url.pathname === '/logo.png' ||
+    url.pathname === '/logo-small.png' ||
+    url.pathname.startsWith('/_admin/assets/');
+
+  if (isPublic) {
+    return next();
+  }
 
   // Determine response type based on Accept header
   const acceptsHtml = c.req.header('Accept')?.includes('text/html');
