@@ -50,7 +50,7 @@ function transformErrorMessage(message: string, host: string): string {
 
 // v88: Subclass Sandbox to force Durable Object reset (kill stuck process)
 export class MoltbotSandbox extends Sandbox { }
-export { Sandbox };
+// Removed redundant export { Sandbox } to avoid naming conflicts in DO runtime
 
 /**
  * Validate required environment variables.
@@ -139,6 +139,10 @@ app.use('*', async (c, next) => {
 // Middleware: Initialize sandbox for all requests (Moved up)
 app.use('*', async (c, next) => {
   const options = buildSandboxOptions(c.env);
+  if (!c.env.Sandbox) {
+    console.error('[CONFIG] Sandbox DO binding missing!');
+    return c.text('Configuration error: Sandbox binding missing', 500);
+  }
   const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
   c.set('sandbox', sandbox);
   await next();

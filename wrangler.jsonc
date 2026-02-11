@@ -2,7 +2,7 @@
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "moltbot-sandbox",
   "main": "src/index.ts",
-  "compatibility_date": "2025-05-06",
+  "compatibility_date": "2025-01-30",
   "compatibility_flags": [
     "nodejs_compat"
   ],
@@ -65,6 +65,12 @@
     {
       "tag": "v2",
       "new_sqlite_classes": [
+        "MoltbotSandbox"
+      ]
+    },
+    {
+      "tag": "v3",
+      "new_classes": [
         "MoltbotSandbox"
       ]
     }
