@@ -93,12 +93,22 @@ publicRoutes.get('/api/debug-google-key', async (c) => {
   }
 });
 
-// GET /api/debug-processes - Public diagnostic for processes
-publicRoutes.get('/api/debug-processes', async (c) => {
+// GET /api/debug-logs - Public diagnostic for all container logs
+publicRoutes.get('/api/debug-logs', async (c) => {
   const sandbox = c.get('sandbox');
   try {
     const processes = await sandbox.listProcesses();
-    return c.json({ ok: true, processes });
+    const results = [];
+    for (const p of processes) {
+      const logs = await p.getLogs();
+      results.push({
+        id: p.id,
+        command: p.command,
+        status: p.status,
+        logs
+      });
+    }
+    return c.json({ ok: true, processLogs: results });
   } catch (err: any) {
     return c.json({ ok: false, error: err.message });
   }
