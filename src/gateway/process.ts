@@ -91,7 +91,9 @@ export async function ensureMoltbotGateway(sandbox: Sandbox, env: MoltbotEnv): P
   // Start a new OpenClaw gateway
   console.log('Starting new OpenClaw gateway...');
   const envVars = buildEnvVars(env);
-  const command = '/usr/local/bin/start-openclaw.sh';
+  // const command = '/usr/local/bin/start-openclaw.sh';
+  // DEBUG: Run node server directly to bypass script path issues
+  const command = 'node -e \'require("http").createServer((req,res)=>{res.writeHead(200);res.end("Debug Server Running")}).listen(3000,"0.0.0.0",()=>console.log("Listening on 3000"))\'';
 
   console.log('Starting process with command:', command);
   console.log('Environment vars being passed:', Object.keys(envVars));
