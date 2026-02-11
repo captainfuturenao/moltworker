@@ -57,14 +57,9 @@
   },
   "migrations": [
     {
+      "tag": "v10",
       "new_classes": [
-        "Sandbox"
-      ],
-      "tag": "v1",
-    },
-    {
-      "tag": "v2",
-      "new_classes": [
+        "Sandbox",
         "MoltbotSandbox"
       ]
     }
