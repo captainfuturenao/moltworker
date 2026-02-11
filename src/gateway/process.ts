@@ -27,7 +27,14 @@ export async function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Proc
       return isGatewayProcess && !isCliCommand && (p.status === 'starting' || p.status === 'running');
     }) || null;
   } catch (error) {
-    console.error('Could not list processes:', error);
+    console.error('[SANDBOX] Could not list processes:', error);
+    if (error instanceof Error) {
+      console.error('[SANDBOX] Error name:', error.name);
+      console.error('[SANDBOX] Error message:', error.message);
+      console.error('[SANDBOX] Error stack:', error.stack);
+    } else {
+      console.error('[SANDBOX] Raw error:', JSON.stringify(error));
+    }
     return null;
   }
 }
