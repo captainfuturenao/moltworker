@@ -8,7 +8,8 @@ console.log('[CONFIGURE] Generating deterministic configuration (v76 - User Comp
 const config = {
     // Server Settings
     server: {
-        port: 18789,
+        port: 3000,
+        host: "0.0.0.0",
         cors: {
             enabled: true,
             origin: ["*"]
