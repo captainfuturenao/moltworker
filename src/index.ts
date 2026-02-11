@@ -121,45 +121,7 @@ function buildSandboxOptions(env: MoltbotEnv): SandboxOptions {
 // Main app
 const app = new Hono<AppEnv>();
 
-// Explicit status check - MOUNTED FIRST to bypass all middleware/routing issues
-app.get('/api/status', async (c) => {
-  console.log('[STATUS] TOP-LEVEL route hit');
-  // Manual sandbox init since middleware hasn't run yet
-  const options = buildSandboxOptions(c.env);
-  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
-
-  try {
-    // Process exists, check if it's actually responding
-    try {
-      const process = await findExistingMoltbotProcess(sandbox);
-      if (!process) {
-        return c.text(JSON.stringify({ ok: false, status: 'not_running' }), 200, {
-          'Content-Type': 'application/json',
-          'X-Debug': 'explicit-status-route'
-        });
-      }
-      await process.waitForPort(MOLTBOT_PORT, { mode: 'tcp', timeout: 5000 });
-      return c.text(JSON.stringify({ ok: true, status: 'running', processId: process.id }), 200, {
-        'Content-Type': 'application/json',
-        'X-Debug': 'explicit-status-route'
-      });
-    } catch {
-      return c.text(JSON.stringify({ ok: false, status: 'not_responding' }), 200, {
-        'Content-Type': 'application/json',
-        'X-Debug': 'explicit-status-route'
-      });
-    }
-  } catch (err) {
-    return c.text(JSON.stringify({
-      ok: false,
-      status: 'error',
-      error: err instanceof Error ? err.message : 'Unknown error',
-    }), 500, {
-      'Content-Type': 'application/json',
-      'X-Debug': 'explicit-status-route'
-    });
-  }
-});
+// Status route moved below logging middleware
 
 // DEBUG: Validate Google Model Availability directly (Bypassing OpenClaw)
 // MOUNTED Top-Level to bypass Access Auth
@@ -228,6 +190,61 @@ app.use('*', async (c, next) => {
   console.log(`[REQ] DEV_MODE: ${c.env.DEV_MODE}`);
   console.log(`[REQ] DEBUG_ROUTES: ${c.env.DEBUG_ROUTES}`);
   await next();
+});
+
+// Explicit status check - Moved here to enable logging
+app.get('/api/status', async (c) => {
+  console.log('[STATUS] TOP-LEVEL route hit (Logged)');
+  const options = buildSandboxOptions(c.env);
+  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
+
+  try {
+    try {
+      const process = await findExistingMoltbotProcess(sandbox);
+      if (!process) {
+        return c.text(JSON.stringify({ ok: false, status: 'not_running' }), 200, {
+          'Content-Type': 'application/json',
+          'X-Debug': 'explicit-status-route',
+          'Cache-Control': 'no-store'
+        });
+      }
+      await process.waitForPort(MOLTBOT_PORT, { mode: 'tcp', timeout: 5000 });
+      return c.text(JSON.stringify({ ok: true, status: 'running', processId: process.id }), 200, {
+        'Content-Type': 'application/json',
+        'X-Debug': 'explicit-status-route',
+        'Cache-Control': 'no-store'
+      });
+    } catch {
+      return c.text(JSON.stringify({ ok: false, status: 'not_responding' }), 200, {
+        'Content-Type': 'application/json',
+        'X-Debug': 'explicit-status-route',
+        'Cache-Control': 'no-store'
+      });
+    }
+  } catch (err) {
+    return c.text(JSON.stringify({
+      ok: false,
+      status: 'error',
+      error: err instanceof Error ? err.message : 'Unknown error',
+    }), 500, {
+      'Content-Type': 'application/json',
+      'X-Debug': 'explicit-status-route',
+      'Cache-Control': 'no-store'
+    });
+  }
+});
+
+// DEBUG: Inspect container filesystem
+app.get('/debug/fs', async (c) => {
+  const options = buildSandboxOptions(c.env);
+  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
+
+  try {
+    const result = await sandbox.exec('ls', ['-R', '/root']);
+    return c.text('STDOUT:\n' + result.stdout + '\n\nSTDERR:\n' + result.stderr);
+  } catch (e: any) {
+    return c.text('Error: ' + e.message + '\n' + e.stack, 500);
+  }
 });
 
 // Middleware: Initialize sandbox for all requests
