@@ -13,24 +13,23 @@ import { mountR2Storage } from './r2';
 export async function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Process | null> {
   try {
     const processes = await sandbox.listProcesses();
-    proc.command.includes('clawdbot gateway');
-    const isCliCommand =
-      proc.command.includes('openclaw devices') ||
-      proc.command.includes('openclaw --version') ||
-      proc.command.includes('openclaw onboard') ||
-      proc.command.includes('clawdbot devices') ||
-      proc.command.includes('clawdbot --version');
+    // Log all processes to catch naming issues (e.g. /usr/local/bin/openclaw)
+    console.log('[SANDBOX] Current processes:', processes.map(p => `${p.id}: ${p.command} (${p.status})`).join(', '));
 
-    if (isGatewayProcess && !isCliCommand) {
-      if (proc.status === 'starting' || proc.status === 'running') {
-        return proc;
-      }
-    }
+    // Check if any process command contains 'openclaw' (case-insensitive)
+    return processes.find((p) => {
+      const cmd = p.command.toLowerCase();
+      // Match gateway process (openclaw gateway or similar)
+      // Don't match CLI commands like "openclaw devices list"
+      const isGatewayProcess = cmd.includes('openclaw') || cmd.includes('clawdbot');
+      const isCliCommand = cmd.includes('devices') || cmd.includes('--version') || cmd.includes('onboard');
+
+      return isGatewayProcess && !isCliCommand && (p.status === 'starting' || p.status === 'running');
+    }) || null;
+  } catch (error) {
+    console.error('Could not list processes:', error);
+    return null;
   }
-  } catch (e) {
-  console.log('Could not list processes:', e);
-}
-return null;
 }
 
 /**
