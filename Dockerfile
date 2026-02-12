@@ -8,8 +8,10 @@ RUN apt-get update && apt-get install -y \
     git \
     && rm -rf /var/lib/apt/lists/*
 
-# Install OpenClaw globally
-RUN npm install -g openclaw@latest
+# Install OpenClaw globally and clean up
+RUN npm install -g openclaw@latest && \
+    npm cache clean --force && \
+    rm -rf /root/.npm/_cacache /tmp/*
 
 # Set working directory
 WORKDIR /root/clawd
