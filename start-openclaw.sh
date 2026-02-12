@@ -1,21 +1,13 @@
 #!/bin/sh
-set -ex # Exit on error and print all commands
-
-echo "Starting OpenClaw (Moltbot Edition - DEBUG v107)..."
-
-# Ensure the config directory exists before configure.js runs
+# OpenClaw Startup Script (v131 - Debug Enhanced)
 mkdir -p /root/.openclaw
+# Ensure the config is generated
+node /root/clawd/configure.js
 
-if [ -f "/root/clawd/configure.js" ]; then
-    echo "Running configure.js..."
-    node /root/clawd/configure.js
-else
-    echo "CRITICAL: configure.js not found!"
-    ls -la /root/clawd
-    exit 1
-fi
+echo "[DEBUG] Starting OpenClaw at $(date)..."
+# Stream logs to a file for extraction, but don't exit if it fails
+openclaw 2>&1 | tee /root/openclaw_startup.log
 
-export PORT=3000
-echo "Starting OpenClaw binary..."
-exec openclaw
-
+echo "[DEBUG] OpenClaw process exited with code $?. Keeping container alive for 1 hour for diagnostics..."
+# Keep the container alive even if OpenClaw crashes
+sleep 3600

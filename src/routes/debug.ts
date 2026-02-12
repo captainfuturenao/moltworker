@@ -362,17 +362,22 @@ debug.get('/env', async (c) => {
   });
 });
 
-// GET /debug/container-config - Read the moltbot config from inside the container
-debug.get('/container-config', async (c) => {
+// GET /debug/fs/cat - Read a file from the container
+debug.get('/fs/cat', async (c) => {
   const sandbox = c.get('sandbox');
+  const path = c.req.query('path');
+
+  if (!path) {
+    return c.json({ error: 'path query parameter is required' }, 400);
+  }
 
   try {
-    const proc = await sandbox.startProcess('cat /root/.openclaw/openclaw.json');
+    const proc = await sandbox.startProcess(`cat ${path}`);
 
     let attempts = 0;
-    while (attempts < 10) {
-      // eslint-disable-next-line no-await-in-loop -- intentional sequential polling
-      await new Promise((r) => setTimeout(r, 200));
+    while (attempts < 20) {
+      // eslint-disable-next-line no-await-in-loop
+      await new Promise((r) => setTimeout(r, 500));
       if (proc.status !== 'running') break;
       attempts++;
     }
@@ -381,18 +386,11 @@ debug.get('/container-config', async (c) => {
     const stdout = logs.stdout || '';
     const stderr = logs.stderr || '';
 
-    let config = null;
-    try {
-      config = JSON.parse(stdout);
-    } catch {
-      // Not valid JSON
-    }
-
     return c.json({
       status: proc.status,
       exitCode: proc.exitCode,
-      config,
-      raw: config ? undefined : stdout,
+      path,
+      content: stdout,
       stderr,
     });
   } catch (error) {
