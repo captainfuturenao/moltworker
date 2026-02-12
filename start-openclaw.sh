@@ -1,28 +1,30 @@
 #!/bin/sh
-# OpenClaw Final Deployment (v139 - Log to Stdout/File & Robust)
+# OpenClaw Final Deployment (v140 - WS Fix & Log Consistency)
 mkdir -p /root/.openclaw
 
-echo "[STARTUP] Generating config v139..."
+echo "[STARTUP] Generating config v140..."
 node /root/clawd/configure.js
 
 echo "[STARTUP] Starting OpenClaw..."
-# Use tee to send logs to BOTH stdout (for /api/debug-logs) and file (for /api/emergency-log)
-# We run in background, but tee needs to flow.
+# Standard cleanup
+rm -f /root/openclaw.log
+
+# Start OpenClaw with log piping
+# 2>&1 | tee is excellent for debug + persistence
 openclaw 2>&1 | tee /root/openclaw.log &
 OPENCLAW_PID=$!
 
-echo "[STARTUP] OpenClaw started (PID: $OPENCLAW_PID). Logs are streaming to stdout and file."
+echo "[STARTUP] OpenClaw started (PID: $OPENCLAW_PID). Logs are streaming."
 
 # Heartbeat loop
 while true; do
   if kill -0 $OPENCLAW_PID 2>/dev/null; then
-    # We don't echo every minute to avoid spamming logs, maybe every 5 mins?
-    # actually getting "still alive" is good for debug.
-    echo "[HEALTH] OpenClaw is running (PID: $OPENCLAW_PID) at $(date)"
+    # Silent success to avoid log spam, process is alive
+    sleep 60
   else
-    echo "[CRITICAL] OpenClaw process EXITED at $(date). Checking tail of log:"
+    echo "[CRITICAL] OpenClaw process EXITED at $(date). Checking tail:"
     tail -n 20 /root/openclaw.log
-    # Don't exit, stay alive for debug
+    # If it dies, we just sleep to keep container alive for debug inspection
+    sleep 60
   fi
-  sleep 60
 done

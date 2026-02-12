@@ -265,7 +265,10 @@ app.use('*', async (c, next) => {
     url.pathname === '/sandbox-health' ||
     url.pathname === '/logo.png' ||
     url.pathname === '/logo-small.png' ||
-    url.pathname.startsWith('/_admin/assets/');
+    url.pathname === '/logo-small.png' ||
+    url.pathname.startsWith('/_admin/assets/') ||
+    // WebSocket upgrades must be handled by the catch-all route to inject tokens
+    c.req.header('Upgrade')?.toLowerCase() === 'websocket';
 
   if (isPublic) {
     return next();
