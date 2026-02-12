@@ -1,12 +1,10 @@
 import fs from 'node:fs';
-// const path = '/root/.openclaw/openclaw.json';
-// Use process.env.OPENCLAW_CONFIG_PATH or default
 const path = process.env.OPENCLAW_CONFIG_PATH || '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v129 - Native Schema Fix)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v130 - Latest Schema Compliance)...');
 
 const config = {
-    // Server Settings
+    // Gateway Settings (Singular as per research)
     gateway: {
         port: 3000,
         host: "0.0.0.0",
@@ -17,47 +15,38 @@ const config = {
         }
     },
 
-    // Models Configuration (Object - v68 Success Pattern)
+    // Models Configuration (Native Provider Format)
     models: {
         providers: {
             google: {
-                baseUrl: "https://generativelanguage.googleapis.com",
-                apiKey: process.env.GOOGLE_API_KEY || "",
-                models: [
-                    {
-                        id: "gemini-2.0-flash",
-                        name: "gemini-2.0-flash"
-                    }
-                ]
+                apiKey: process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY || ""
             }
         }
     },
 
-    // Agents Configuration (Object - v68 Success Pattern)
-    agents: {},
+    // Agents Configuration (Plural with defaults)
+    agents: {
+        defaults: {
+            model: "google/gemini-2.0-flash"
+        }
+    },
 
     // Channels
     channels: {}
 };
 
-// 1. Gateway Authentication (Optional)
-// ...
-
-// 2. Developer Mode
+// 1. Developer Mode
 if (process.env.OPENCLAW_DEV_MODE === 'true' && config.gateway) {
     config.gateway.controlUi = { allowInsecureAuth: true };
 }
 
-// 3. Telegram
+// 2. Telegram
 if (process.env.TELEGRAM_BOT_TOKEN) {
     config.channels.telegram = {
         botToken: process.env.TELEGRAM_BOT_TOKEN,
         enabled: true,
         dmPolicy: process.env.TELEGRAM_DM_POLICY || 'pairing'
     };
-    if (config.channels.telegram.dmPolicy === 'open') {
-        config.channels.telegram.allowFrom = ['*'];
-    }
 }
 
 try {
@@ -67,6 +56,10 @@ try {
     }
     fs.writeFileSync(path, JSON.stringify(config, null, 2));
     console.log('[CONFIGURE] Configuration generated successfully at ' + path);
+    // Log the generated config for debugging (redacted keys)
+    const logConfig = JSON.parse(JSON.stringify(config));
+    if (logConfig.models?.providers?.google?.apiKey) logConfig.models.providers.google.apiKey = "***";
+    console.log('[CONFIGURE] Generated config:', JSON.stringify(logConfig, null, 2));
 } catch (e) {
     console.error('[CONFIGURE] CRITICAL ERROR writing config:', e);
     process.exit(1);
