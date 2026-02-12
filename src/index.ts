@@ -282,7 +282,7 @@ app.use('*', async (c, next) => {
   });
 
   return middleware(c, next);
-  */
+
 });
 
 // Mount API routes (protected by Cloudflare Access)
