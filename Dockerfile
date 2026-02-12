@@ -36,4 +36,4 @@ COPY configure.js /root/clawd/configure.js
 EXPOSE 3000
 
 # Entrypoint
-CMD ["/root/clawd/start-openclaw.sh"]
+ENTRYPOINT ["/bin/sh", "/root/clawd/start-openclaw.sh"]
