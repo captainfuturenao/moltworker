@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 const path = process.env.OPENCLAW_CONFIG_PATH || '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v130 - Latest Schema Compliance)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v132 - World Standard Model Alias)...');
 
 const config = {
     // Gateway Settings (Singular as per research)
@@ -24,10 +24,10 @@ const config = {
         }
     },
 
-    // Agents Configuration (Plural with defaults)
+    // Agents Configuration (Using World Standard Alias)
     agents: {
         defaults: {
-            model: "google/gemini-2.0-flash"
+            model: "google/gemini-3-flash-preview"
         }
     },
 
@@ -56,7 +56,7 @@ try {
     }
     fs.writeFileSync(path, JSON.stringify(config, null, 2));
     console.log('[CONFIGURE] Configuration generated successfully at ' + path);
-    // Log the generated config for debugging (redacted keys)
+    // Log redacted config
     const logConfig = JSON.parse(JSON.stringify(config));
     if (logConfig.models?.providers?.google?.apiKey) logConfig.models.providers.google.apiKey = "***";
     console.log('[CONFIGURE] Generated config:', JSON.stringify(logConfig, null, 2));
