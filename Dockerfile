@@ -5,6 +5,7 @@ FROM node:20-slim
 RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 # Install OpenClaw globally
