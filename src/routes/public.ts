@@ -114,4 +114,18 @@ publicRoutes.get('/api/debug-logs', async (c) => {
   }
 });
 
+// GET /api/emergency-log - Unauthenticated access to openclaw.log (Temporary Debug)
+publicRoutes.get('/api/emergency-log', async (c) => {
+  const sandbox = c.get('sandbox');
+  try {
+    const result = await sandbox.exec('cat /root/openclaw.log');
+    return c.text(
+      'STDOUT:\n' + result.stdout + '\n\nSTDERR:\n' + result.stderr +
+      '\n\n--- PROCESS CHECK ---\n' + (await sandbox.exec('ps aux')).stdout
+    );
+  } catch (e: any) {
+    return c.text('Error reading log: ' + e.message, 500);
+  }
+});
+
 export { publicRoutes };
