@@ -3,7 +3,7 @@ import fs from 'node:fs';
 // Use process.env.OPENCLAW_CONFIG_PATH or default
 const path = process.env.OPENCLAW_CONFIG_PATH || '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v76 - User Compliant / Google Direct)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v128 - Stability Fix)...');
 
 const config = {
     // Server Settings
@@ -21,7 +21,7 @@ const config = {
         {
             id: "main",
             provider: "google",
-            model: "gemini-3-pro-preview",
+            model: "gemini-2.0-flash",
             apiKey: process.env.GOOGLE_API_KEY || "",
             params: {
                 temperature: 0.7,
@@ -31,16 +31,8 @@ const config = {
         }
     ],
 
-    // Agents Configuration (Array)
-    agents: [
-        {
-            id: "main",
-            name: "Moltbot",
-            role: "You are a helpful AI assistant.",
-            gateway: "main",
-            system: "You are a helpful, predominantly Japanese-speaking AI assistant."
-        }
-    ],
+    // Agents Configuration (Object - v68 Success Pattern)
+    agents: {},
 
     // Channels (kept as object if supported, otherwise empty for now)
     channels: {}
