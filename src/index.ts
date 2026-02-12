@@ -270,12 +270,6 @@ app.use('*', async (c, next) => {
     // WebSocket upgrades must be handled by the catch-all route to inject tokens
     c.req.header('Upgrade')?.toLowerCase() === 'websocket';
 
-  // [DEBUG] v143: Force bypass ALL authentication to allow external diagnostics
-  // This eliminates redirect loops and allows curl access from the agent.
-  console.log('[AUTH] Skipping Access Middleware (v143 Diagnostic Mode)');
-  return next();
-
-  /* 
   if (isPublic) {
     return next();
   }

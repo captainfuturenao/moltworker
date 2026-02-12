@@ -1,6 +1,9 @@
 # Base image
 FROM node:20-slim
 
+# Force rebuild trigger v144
+ENV REBUILD_DATE=2026-02-13
+
 # Install minimal system dependencies
 RUN apt-get update && apt-get install -y \
     ca-certificates \
