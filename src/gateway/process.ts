@@ -35,7 +35,19 @@ export async function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Proc
         await sandbox.start();
         // Try listing processes again once after start
         const processes = await sandbox.listProcesses();
-        return processes.find((p) => p.command.toLowerCase().includes('openclaw') && p.status === 'running') || null;
+
+        // 1. Look for already running process
+        const running = processes.find((p) => p.command.toLowerCase().includes('openclaw') && p.status === 'running');
+        if (running) return running;
+
+        // 2. Look for starting process - if found, we should WAIT or return it to avoid calling startProcess again
+        const starting = processes.find((p) => p.command.toLowerCase().includes('openclaw') && (p.status === 'starting' || p.status === 'pending'));
+        if (starting) {
+          console.log('[SANDBOX] Found process in starting/pending state, waiting...');
+          return starting;
+        }
+
+        return null;
       } catch (startErr) {
         console.error('[SANDBOX] Failed to start container after list failure:', startErr);
       }

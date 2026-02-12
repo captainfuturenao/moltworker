@@ -141,7 +141,7 @@ app.use('*', async (c, next) => {
     console.error('[CONFIG] Sandbox DO binding missing!');
     return c.text('Configuration error: Sandbox binding missing', 500);
   }
-  const sandbox = getSandbox(c.env.Sandbox, 'moltbot-v126', options);
+  const sandbox = getSandbox(c.env.Sandbox, 'moltbot-v127', options);
   c.set('sandbox', sandbox);
   await next();
 });
