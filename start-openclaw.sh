@@ -1,28 +1,41 @@
 #!/bin/sh
-# OpenClaw Diagnostic v142 (Dummy Server)
-# Listens on port 3000 to satisfy Sandbox readiness checks.
+# OpenClaw Startup Script (v145 - Correct Model Name & Production Boot)
+# Reverts dummy server usage and attempts to start OpenClaw with correct config.
 
-echo "[STARTUP] v142: Starting dummy HTTP server on port 3000..."
+mkdir -p /root/.openclaw
 
-# Create the dummy server script
-cat <<EOF > /root/dummy_server.js
-const http = require('http');
-const port = 3000; // Matches src/config.ts MOLTBOT_PORT
+echo "[STARTUP] Generating config v145 (Model: gemini-1.5-flash-latest)..."
+node /root/clawd/configure.js
 
-const server = http.createServer((req, res) => {
-    console.log('[DUMMY] Request received: ' + req.method + ' ' + req.url);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({
-        ok: true,
-        status: 'dummy-server-alive-v142',
-        time: new Date().toISOString()
-    }));
-});
+echo "[STARTUP] Starting OpenClaw..."
+# Standard cleanup
+rm -f /root/openclaw.log
 
-server.listen(port, () => {
-    console.log('[DUMMY] Server listening on port ' + port);
-});
-EOF
+# Start OpenClaw with log piping to both file (for emergency-log) and stdout (for Cloudflare logs)
+# Using 2>&1 to capture stderr as well.
+# We trust that the model name fix will prevent the immediate crash.
+openclaw 2>&1 | tee /root/openclaw.log &
+OPENCLAW_PID=$!
 
-# Run the dummy server (using exec to replace shell process)
-exec node /root/dummy_server.js
+echo "[STARTUP] OpenClaw started (PID: $OPENCLAW_PID). Logs are streaming."
+
+# Monitor the process. If it dies, the container will exit (and restart),
+# effectively signaling a crash to Cloudflare.
+# However, to allow 'emergency-log' to work, we might want to keep it alive slightly longer?
+# No, user wants real fix. If it crashes, let it crash (or 500).
+# But for debugging 500s, we DO need it to stay alive if it crashes immediately.
+
+# Survival loop: Monitor PID, if dead, sleep to allow log extraction.
+while true; do
+  if kill -0 $OPENCLAW_PID 2>/dev/null; then
+    sleep 10
+  else
+    echo "[CRITICAL] OpenClaw process EXITED at $(date). Entering troubleshooting mode."
+    echo "--- TAIL OF LOG ---"
+    tail -n 20 /root/openclaw.log
+    
+    # Do NOT exit. Sleep to allow log retrieval via /api/emergency-log
+    echo "Sleeping indefinitely to verify logs..."
+    sleep infinity
+  fi
+done

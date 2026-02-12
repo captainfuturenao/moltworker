@@ -28,7 +28,7 @@ const config = {
     agents: {
         defaults: {
             model: {
-                primary: "google/gemini-1.5-flash"
+                primary: "google/gemini-1.5-flash-latest"
             }
         }
     },
