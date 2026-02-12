@@ -1,17 +1,11 @@
 #!/bin/sh
-# OpenClaw Incremental Test (v134 - Config Generation Only)
-mkdir -p /root/.openclaw
+# OpenClaw Diagnostic Survival (v135 - Bare Minimal)
+echo "[STARTUP] Container v135 is alive at $(date)"
+echo "[ENVIRONMENT]"
+env | grep -v "_KEY" | grep -v "_TOKEN" # Logs env vars but redacts secrets
 
-echo "[DEBUG] v134: Testing configure.js execution..."
-# Run config generation and capture output
-node /root/clawd/configure.js > /root/config_gen.log 2>&1
-CONFIG_EXIT=$?
-
-if [ $CONFIG_EXIT -eq 0 ]; then
-    echo "CONFIG_SUCCESS" > /root/isolation_test.txt
-else
-    echo "CONFIG_FAILED_CODE_$CONFIG_EXIT" > /root/isolation_test.txt
-fi
-
-echo "[DEBUG] Execution finished. Keeping container alive for diagnostics..."
-sleep infinity
+# Just stay alive and output occasionally
+while true; do
+  echo "[HEARTBEAT] Still alive at $(date)"
+  sleep 60
+done
