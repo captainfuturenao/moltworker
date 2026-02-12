@@ -6,7 +6,7 @@ console.log('[CONFIGURE] Generating deterministic configuration (v132 - World St
 const config = {
     // Gateway Settings (Singular as per research)
     gateway: {
-        port: 3000,
+        port: 3001,
         host: "0.0.0.0",
         mode: 'local',
         cors: {
