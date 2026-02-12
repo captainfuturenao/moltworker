@@ -1,0 +1,11 @@
+.git
+.wrangler
+node_modules
+dist
+*.txt
+*.log
+*.tar
+*.json
+!package.json
+!tsconfig.json
+!wrangler.jsonc
