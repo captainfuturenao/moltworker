@@ -260,6 +260,7 @@ app.use('*', async (c, next) => {
   const isPublic =
     url.pathname === '/api/status' ||
     url.pathname === '/api/debug-logs' ||
+    url.pathname === '/api/emergency-log' ||
     url.pathname === '/api/debug-processes' ||
     url.pathname === '/sandbox-health' ||
     url.pathname === '/logo.png' ||
