@@ -20,20 +20,25 @@ export async function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Proc
     return processes.find((p) => {
       const cmd = p.command.toLowerCase();
       // Match gateway process (openclaw gateway or similar)
-      // Don't match CLI commands like "openclaw devices list"
       const isGatewayProcess = cmd.includes('openclaw') || cmd.includes('clawdbot');
       const isCliCommand = cmd.includes('devices') || cmd.includes('--version') || cmd.includes('onboard');
 
       return isGatewayProcess && !isCliCommand && (p.status === 'starting' || p.status === 'running');
     }) || null;
-  } catch (error) {
-    console.error('[SANDBOX] Could not list processes:', error);
-    if (error instanceof Error) {
-      console.error('[SANDBOX] Error name:', error.name);
-      console.error('[SANDBOX] Error message:', error.message);
-      console.error('[SANDBOX] Error stack:', error.stack);
-    } else {
-      console.error('[SANDBOX] Raw error:', JSON.stringify(error));
+  } catch (error: any) {
+    console.warn('[SANDBOX] Could not list processes:', error?.message || error);
+
+    // If it's a "container not running" error, try to start it
+    if (error?.message?.includes('not running') || error?.message?.includes('consider calling start') || error?.status === 500) {
+      console.log('[SANDBOX] Container might be stopped. Attempting to start...');
+      try {
+        await sandbox.start();
+        // Try listing processes again once after start
+        const processes = await sandbox.listProcesses();
+        return processes.find((p) => p.command.toLowerCase().includes('openclaw') && p.status === 'running') || null;
+      } catch (startErr) {
+        console.error('[SANDBOX] Failed to start container after list failure:', startErr);
+      }
     }
     return null;
   }
