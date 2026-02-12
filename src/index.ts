@@ -262,6 +262,8 @@ app.use('*', async (c, next) => {
     url.pathname === '/api/debug-logs' ||
     url.pathname === '/api/emergency-log' ||
     url.pathname === '/api/debug-processes' ||
+    url.pathname === '/api/debug-processes' ||
+    url.pathname === '/api/worker-health' || // v150: Worker Health Check (No Sandbox)
     url.pathname === '/sandbox-health' ||
     url.pathname === '/logo.png' ||
     url.pathname === '/logo-small.png' ||
