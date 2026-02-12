@@ -1,19 +1,25 @@
 #!/bin/sh
-# OpenClaw Incremental Test (v136 - Version Check)
-echo "[STARTUP] Container v136 is alive"
+# OpenClaw Final Deployment (v137 - Official Schema & Robust)
+mkdir -p /root/.openclaw
 
-echo "[DEBUG] Checking OpenClaw version..."
-openclaw --version > /root/version.txt 2>&1
-VERSION_EXIT=$?
+echo "[STARTUP] Generating config v137..."
+node /root/clawd/configure.js
 
-if [ $VERSION_EXIT -eq 0 ]; then
-    echo "VERSION_SUCCESS: $(cat /root/version.txt)" > /root/isolation_test.txt
-else
-    echo "VERSION_FAILED_CODE_$VERSION_EXIT: $(cat /root/version.txt)" > /root/isolation_test.txt
-fi
+echo "[STARTUP] Starting OpenClaw..."
+# We use --non-interactive (or equivalent environment if supported)
+# And we ensure logs are captured
+openclaw > /root/openclaw.log 2>&1 &
+OPENCLAW_PID=$!
 
-echo "[DEBUG] Monitoring heartbeat..."
+echo "[STARTUP] OpenClaw started (PID: $OPENCLAW_PID). Waiting for it to stabilize..."
+
+# Heartbeat loop to keep container alive and provide diagnostics
 while true; do
-  echo "[HEARTBEAT] $(date)"
+  if kill -0 $OPENCLAW_PID 2>/dev/null; then
+    echo "[HEALTH] OpenClaw is running (PID: $OPENCLAW_PID) at $(date)"
+  else
+    echo "[CRITICAL] OpenClaw process EXITED at $(date). Check /root/openclaw.log"
+    # Even if it exits, we don't exit the script to avoid Sandbox reset loop
+  fi
   sleep 60
 done

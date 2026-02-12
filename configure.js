@@ -24,10 +24,12 @@ const config = {
         }
     },
 
-    // Agents Configuration (Using World Standard Alias)
+    // Agents Configuration (Latest Official Schema: defaults.model.primary)
     agents: {
         defaults: {
-            model: "google/gemini-3-flash-preview"
+            model: {
+                primary: "google/gemini-1.5-flash"
+            }
         }
     },
 
