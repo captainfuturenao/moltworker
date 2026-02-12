@@ -48,7 +48,7 @@ function transformErrorMessage(message: string, host: string): string {
   return message;
 }
 
-export { Sandbox } from '@cloudflare/sandbox';
+export { Sandbox as MoltbotSandbox, Sandbox } from '@cloudflare/sandbox';
 
 /**
  * Validate required environment variables.
