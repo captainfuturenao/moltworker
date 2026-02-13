@@ -137,9 +137,8 @@ app.use('*', async (c, next) => {
 // Middleware: Initialize sandbox for all requests (Moved up)
 // Middleware: Initialize sandbox for all requests
 app.use('*', async (c, next) => {
-  // [DEBUG v151] Skip Sandbox Init to ensure Worker-only health check works
-  if (c.req.path === '/api/worker-health' || c.req.path === '/') {
-    console.log('[DEBUG] Skipping Sandbox Init for health check');
+  // [DEBUG v152] Skip Sandbox Init ONLY for worker-health check
+  if (c.req.path === '/api/worker-health') {
     return next();
   }
 
@@ -160,8 +159,8 @@ app.get('/api/worker-health', (c) => c.json({
   msg: 'Worker is reachable. Sandbox ignored.'
 }));
 
-// [DEBUG v151] Root Health Check
-app.get('/', (c) => c.text('Moltbot Worker is Coming Online (v151)'));
+// [DEBUG v152] Root Health Check - REMOVED to allow proxying to Sandbox
+// app.get('/', (c) => c.text('Moltbot Worker is Coming Online (v151)'));
 
 // DEBUG: Inspect container environment variables
 app.get('/debug/env', async (c) => {
