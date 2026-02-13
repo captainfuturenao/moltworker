@@ -1,41 +1,41 @@
 import fs from 'node:fs';
 const path = process.env.OPENCLAW_CONFIG_PATH || '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v159 - Gemini 2.0 Flash)...');
+console.log('[CONFIGURE] Generating updated configuration (v162 - Schema Fixes)...');
 
 const config = {
-    // Gateway Settings (Singular as per research)
+    // Gateway Settings
+    // [v162] Removed 'host' and 'cors' as they are unrecognized by current OpenClaw schema
     gateway: {
         port: 3001,
-        host: "0.0.0.0",
-        mode: 'local',
-        cors: {
-            enabled: true,
-            origin: ["*"]
-        }
+        mode: 'local'
     },
 
-    // Models Configuration (Native Provider Format)
+    // Models Configuration
     models: {
         providers: {
             google: {
-                apiKey: process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY || ""
+                apiKey: process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY || "",
+                // [v162] Added missing required fields based on error logs
+                baseUrl: "https://generativelanguage.googleapis.com/v1beta",
+                models: ["gemini-2.0-flash-exp", "gemini-1.5-flash"]
             }
         }
     },
 
-    // Agents Configuration (Latest Official Schema: defaults.model.primary)
+    // Agents Configuration
     agents: {
         defaults: {
             model: {
                 // v159: Updated to gemini-2.0-flash-exp per user feedback
                 primary: "google/gemini-2.0-flash-exp"
             }
-        },
+        }
+    },
 
-        // Channels
-        channels: {}
-    }
+    // Channels
+    // [v162] Moved 'channels' OUT of 'agents' block (Fixed Syntax Logic Error)
+    channels: {}
 };
 
 // 1. Developer Mode
@@ -60,6 +60,7 @@ try {
     }
     fs.writeFileSync(path, JSON.stringify(config, null, 2));
     console.log('[CONFIGURE] Configuration generated successfully at ' + path);
+
     // Log redacted config
     const logConfig = JSON.parse(JSON.stringify(config));
     if (logConfig.models?.providers?.google?.apiKey) logConfig.models.providers.google.apiKey = "***";
