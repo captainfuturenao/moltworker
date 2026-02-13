@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 const path = process.env.OPENCLAW_CONFIG_PATH || '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating deterministic configuration (v132 - World Standard Model Alias)...');
+console.log('[CONFIGURE] Generating deterministic configuration (v159 - Gemini 2.0 Flash)...');
 
 const config = {
     // Gateway Settings (Singular as per research)
@@ -35,15 +35,17 @@ const config = {
 
         // Channels
         channels: {}
-    },
+    }
+};
 
-    // 1. Developer Mode
-    if(process.env.OPENCLAW_DEV_MODE === 'true' && config.gateway) {
-        config.gateway.controlUi = { allowInsecureAuth: true };
+// 1. Developer Mode
+if (process.env.OPENCLAW_DEV_MODE === 'true' && config.gateway) {
+    config.gateway.controlUi = { allowInsecureAuth: true };
 }
 
 // 2. Telegram
 if (process.env.TELEGRAM_BOT_TOKEN) {
+    config.channels = config.channels || {};
     config.channels.telegram = {
         botToken: process.env.TELEGRAM_BOT_TOKEN,
         enabled: true,
