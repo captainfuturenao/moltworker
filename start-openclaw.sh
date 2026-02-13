@@ -156,6 +156,25 @@ function checkPort3001() {
 process.on('uncaughtException', (err) => console.error('[WRAPPER] Uncaught:', err));
 EOF
 
+
+# v161: Helper - Install Node.js v22.12.0 (Required by OpenClaw)
+install_node() {
+    if [ -f "/root/node-v22.12.0-linux-x64/bin/node" ]; then
+        echo "[STARTUP] Node v22 already installed."
+    else
+        echo "[STARTUP] Installing Node.js v22.12.0..."
+        curl -L -o node.tar.gz https://nodejs.org/dist/v22.12.0/node-v22.12.0-linux-x64.tar.gz
+        tar -xzf node.tar.gz -C /root/
+        rm node.tar.gz
+        echo "[STARTUP] Node v22 installed."
+    fi
+    # Update PATH for this session
+    export PATH="/root/node-v22.12.0-linux-x64/bin:$PATH"
+    echo "[STARTUP] Current Node Version: $(node -v)"
+}
+
+install_node
+
 echo "[STARTUP] Executing Wrapper v154..."
 # v156: Redirect output to log file so /api/emergency-log can read it!
 exec node /root/wrapper.js > /root/openclaw.log 2>&1
