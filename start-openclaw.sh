@@ -13,7 +13,7 @@ const OPENCLAW_PORT = 3001;
 let openclawProcess = null;
 let isOpenClawReady = false;
 
-console.log('[WRAPPER] Starting v157 Wrapper on port ' + PROXY_PORT);
+console.log('[WRAPPER] Starting v158 Wrapper on port ' + PROXY_PORT);
 
 // 1. Start Proxy Server immediately
 const proxyServer = http.createServer((req, res) => {
@@ -26,7 +26,7 @@ const proxyServer = http.createServer((req, res) => {
             try { psOutput = execSync('ps aux').toString(); } catch (e) { psOutput = 'ps failed: ' + e.message; }
             
             res.end(
-                '--- WRAPPER LOGS (v157) ---\n' +
+                '--- WRAPPER LOGS (v158) ---\n' +
                 'Status: ' + (isOpenClawReady ? 'READY' : 'STARTING') + '\n\n' +
                 '--- STDOUT/STDERR (openclaw.log) ---\n' + logContent + '\n\n' +
                 '--- PROCESS LIST ---\n' + psOutput
@@ -79,8 +79,20 @@ proxyServer.listen(PROXY_PORT, '0.0.0.0', () => {
     startOpenClaw();
 });
 
-// 2. Start OpenClaw
+// 2. Diagnostics & Start OpenClaw
 function startOpenClaw() {
+    console.log('[WRAPPER] --- DIAGNOSTICS v158 START ---');
+    try {
+        console.log('[DIAG] Check binary exists:');
+        console.log(execSync('ls -l /usr/local/bin/openclaw || echo "NOT FOUND"').toString());
+        
+        console.log('[DIAG] Check version:');
+        console.log(execSync('openclaw --version || echo "EXEC FAILED"').toString());
+    } catch (e) {
+        console.error('[DIAG] Diagnostic command failed:', e.message);
+    }
+    console.log('[WRAPPER] --- DIAGNOSTICS v158 END ---');
+
     console.log('[WRAPPER] Generating config...');
     // Run configure.js first
     const configProc = spawn('node', ['/root/clawd/configure.js']);
@@ -89,11 +101,20 @@ function startOpenClaw() {
             console.error('[WRAPPER] Config generation failed with code', code);
             return;
         }
-        console.log('[WRAPPER] Config generated. Launching openclaw...');
+        console.log('[WRAPPER] Config generated. Launching openclaw (v158 captured)...');
         
         // Launch OpenClaw
+        // v158: Use 'pipe' to capture output manually, ensuring it goes to our log file
         openclawProcess = spawn('openclaw', ['--config', '/root/.openclaw/openclaw.json'], {
-            stdio: 'inherit' // Pipe logs to stdout/stderr directly
+            stdio: ['ignore', 'pipe', 'pipe'] 
+        });
+
+        openclawProcess.stdout.on('data', (data) => {
+            console.log('[OPENCLAW STDOUT]', data.toString().trim());
+        });
+
+        openclawProcess.stderr.on('data', (data) => {
+            console.error('[OPENCLAW STDERR]', data.toString().trim());
         });
 
         openclawProcess.on('error', (err) => {
@@ -103,7 +124,6 @@ function startOpenClaw() {
         openclawProcess.on('close', (code) => {
              console.error('[WRAPPER] OpenClaw exited with code', code);
              isOpenClawReady = false;
-             // Simple restart logic could go here
         });
 
         // Check for port 3001 availability
