@@ -300,6 +300,10 @@ app.all('*', async (c) => {
 
   console.log('[PROXY] Handling request:', url.pathname);
 
+  // v153: Define these variables as they are used later, even if checks are bypassed
+  const isWebSocketRequest = request.headers.get('Upgrade')?.toLowerCase() === 'websocket';
+  // const acceptsHtml = request.headers.get('Accept')?.includes('text/html'); // Unused for now
+
   // [DEBUG v153] FORCE BYPASS STARTUP CHECKS
   // We assume v149 survival server is already running inside the container.
   // We skip findProcess and ensureGateway to avoid infinite loops waiting for "openclaw" process name.
