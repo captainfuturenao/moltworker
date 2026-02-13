@@ -115,5 +115,6 @@ process.on('uncaughtException', (err) => console.error('[WRAPPER] Uncaught:', er
 EOF
 
 echo "[STARTUP] Executing Wrapper v154..."
-exec node /root/wrapper.js
+# v156: Redirect output to log file so /api/emergency-log can read it!
+exec node /root/wrapper.js > /root/openclaw.log 2>&1
 

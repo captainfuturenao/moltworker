@@ -115,16 +115,20 @@ publicRoutes.get('/api/debug-logs', async (c) => {
 });
 
 // GET /api/emergency-log - Unauthenticated access to openclaw.log (Temporary Debug)
+// GET /api/emergency-log - Unauthenticated access to openclaw.log (Temporary Debug)
 publicRoutes.get('/api/emergency-log', async (c) => {
   const sandbox = c.get('sandbox');
   try {
-    const result = await sandbox.exec('cat /root/openclaw.log');
+    const logResult = await sandbox.exec('cat /root/openclaw.log').catch((e: Error) => ({ stdout: '', stderr: e.message }));
+    const psResult = await sandbox.exec('ps aux').catch((e: Error) => ({ stdout: '', stderr: e.message }));
+
     return c.text(
-      'STDOUT:\n' + result.stdout + '\n\nSTDERR:\n' + result.stderr +
-      '\n\n--- PROCESS CHECK ---\n' + (await sandbox.exec('ps aux')).stdout
+      'STDOUT:\n' + (logResult?.stdout || '(empty)') +
+      '\n\nSTDERR:\n' + (logResult?.stderr || '(empty)') +
+      '\n\n--- PROCESS CHECK ---\n' + (psResult?.stdout || psResult?.stderr || '(failed)')
     );
   } catch (e: any) {
-    return c.text('Error reading log: ' + e.message, 500);
+    return c.text('Error inside emergency-log: ' + e.message, 500);
   }
 });
 
