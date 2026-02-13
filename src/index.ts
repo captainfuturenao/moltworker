@@ -271,7 +271,9 @@ app.use('*', async (c, next) => {
 });
 
 // [DEBUG v151] Disable ALL Authentication
-return next();
+app.use('*', async (c, next) => {
+  return next();
+});
 
 // Mount API routes (protected by Cloudflare Access)
 app.route('/api', api);
