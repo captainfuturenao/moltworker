@@ -28,16 +28,14 @@ const config = {
     agents: {
         defaults: {
             model: {
-                model: {
-                    // v159: Updated to gemini-2.0-flash-exp per user feedback
-                    primary: "google/gemini-2.0-flash-exp"
-                }
+                // v159: Updated to gemini-2.0-flash-exp per user feedback
+                primary: "google/gemini-2.0-flash-exp"
             }
         },
 
         // Channels
         channels: {}
-    };
+    },
 
     // 1. Developer Mode
     if(process.env.OPENCLAW_DEV_MODE === 'true' && config.gateway) {
