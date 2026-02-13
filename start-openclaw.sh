@@ -11,7 +11,7 @@ cat <<'EOF' > /root/clawd/configure.js
 import fs from 'node:fs';
 const path = process.env.OPENCLAW_CONFIG_PATH || '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating updated configuration (v163 - Manual Injection)...');
+console.log('[CONFIGURE] Generating updated configuration (v164 - Manual Injection)...');
 
 const config = {
     // Gateway Settings
@@ -28,7 +28,11 @@ const config = {
                 apiKey: process.env.GOOGLE_API_KEY || process.env.GEMINI_API_KEY || "",
                 // [v162] Added missing required fields based on error logs
                 baseUrl: "https://generativelanguage.googleapis.com/v1beta",
-                models: ["gemini-2.0-flash-exp", "gemini-1.5-flash"]
+                // [v164] Fix schema: models must be objects, not strings. Using { name: ... }
+                models: [
+                    { name: "gemini-2.0-flash-exp" },
+                    { name: "gemini-1.5-flash" }
+                ]
             }
         }
     },
@@ -90,7 +94,7 @@ const OPENCLAW_PORT = 3001;
 let openclawProcess = null;
 let isOpenClawReady = false;
 
-console.log('[WRAPPER] Starting v163 Wrapper on port ' + PROXY_PORT);
+console.log('[WRAPPER] Starting v164 Wrapper on port ' + PROXY_PORT);
 
 // 1. Start Proxy Server immediately
 const proxyServer = http.createServer((req, res) => {
@@ -103,7 +107,7 @@ const proxyServer = http.createServer((req, res) => {
             try { psOutput = execSync('ps aux').toString(); } catch (e) { psOutput = 'ps failed: ' + e.message; }
             
             res.end(
-                '--- WRAPPER LOGS (v163) ---\n' +
+                '--- WRAPPER LOGS (v164) ---\n' +
                 'Status: ' + (isOpenClawReady ? 'READY' : 'STARTING') + '\n\n' +
                 '--- STDOUT/STDERR (openclaw.log) ---\n' + logContent + '\n\n' +
                 '--- PROCESS LIST ---\n' + psOutput
