@@ -300,51 +300,22 @@ app.all('*', async (c) => {
 
   console.log('[PROXY] Handling request:', url.pathname);
 
+  // [DEBUG v153] FORCE BYPASS STARTUP CHECKS
+  // We assume v149 survival server is already running inside the container.
+  // We skip findProcess and ensureGateway to avoid infinite loops waiting for "openclaw" process name.
+
+  /*
   // Check if gateway is already running
   const existingProcess = await findExistingMoltbotProcess(sandbox);
-  // For browser requests, show loading page ONLY if the process doesn't exist at all.
-  // If it exists but is starting, we let it proceed to ensureMoltbotGateway which will wait for the port.
-  // This prevents the "Reload Loop" where the loading page keeps reloading.
-  const isWebSocketRequest = request.headers.get('Upgrade')?.toLowerCase() === 'websocket';
-  const acceptsHtml = request.headers.get('Accept')?.includes('text/html');
-
-  if (!existingProcess && !isWebSocketRequest && acceptsHtml) {
-    console.log('[PROXY] Gateway process not found, serving loading page');
-
-    // Start the gateway in the background (don't await)
-    c.executionCtx.waitUntil(
-      ensureMoltbotGateway(sandbox, c.env).catch((err: Error) => {
-        console.error('[PROXY] Background gateway start failed:', err);
-      }),
-    );
-
-    // Return the loading page immediately
-    return c.html(loadingPageHtml);
-  }
-
+  // ... (snip) ...
   // Ensure moltbot is running (this will wait for startup)
   try {
     await ensureMoltbotGateway(sandbox, c.env);
   } catch (error) {
-    console.error('[PROXY] Failed to start Moltbot:', error);
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-
-    let hint = 'Check worker logs with: wrangler tail';
-    if (!c.env.ANTHROPIC_API_KEY) {
-      hint = 'ANTHROPIC_API_KEY is not set. Run: wrangler secret put ANTHROPIC_API_KEY';
-    } else if (errorMessage.includes('heap out of memory') || errorMessage.includes('OOM')) {
-      hint = 'Gateway ran out of memory. Try again or check for memory leaks.';
-    }
-
-    return c.json(
-      {
-        error: 'Moltbot gateway failed to start',
-        details: errorMessage,
-        hint,
-      },
-      503,
-    );
+     // ...
   }
+  */
+  console.log('[PROXY v153] Bypassing startup checks. Forwarding to port ' + MOLTBOT_PORT);
 
   // Proxy to Moltbot with WebSocket message interception
   if (isWebSocketRequest) {
