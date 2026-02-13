@@ -5,29 +5,51 @@
 
 cat <<EOF > /root/wrapper.js
 const http = require('http');
-const { spawn } = require('child_process');
+const { spawn, execSync } = require('child_process');
+const fs = require('fs');
 
 const PROXY_PORT = 3000;
 const OPENCLAW_PORT = 3001;
 let openclawProcess = null;
 let isOpenClawReady = false;
 
-console.log('[WRAPPER] Starting v154 Wrapper on port ' + PROXY_PORT);
+console.log('[WRAPPER] Starting v157 Wrapper on port ' + PROXY_PORT);
 
 // 1. Start Proxy Server immediately
 const proxyServer = http.createServer((req, res) => {
+    // [v157] Log-over-HTTP Endpoint
+    if (req.url === '/wrapper-logs') {
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        try {
+            const logContent = fs.existsSync('/root/openclaw.log') ? fs.readFileSync('/root/openclaw.log', 'utf8') : '(openclaw.log not found)';
+            let psOutput = '';
+            try { psOutput = execSync('ps aux').toString(); } catch (e) { psOutput = 'ps failed: ' + e.message; }
+            
+            res.end(
+                '--- WRAPPER LOGS (v157) ---\n' +
+                'Status: ' + (isOpenClawReady ? 'READY' : 'STARTING') + '\n\n' +
+                '--- STDOUT/STDERR (openclaw.log) ---\n' + logContent + '\n\n' +
+                '--- PROCESS LIST ---\n' + psOutput
+            );
+        } catch (e) {
+            res.end('Error reading logs: ' + e.message);
+        }
+        return;
+    }
+
     if (!isOpenClawReady) {
         // Still starting
         if (req.url === '/') {
              res.writeHead(200, { 'Content-Type': 'text/html' });
-             res.end('<h1>OpenClaw is Starting... (v155)</h1><p>Please reload in a few seconds.</p><script>setTimeout(() => location.reload(), 3000);</script>');
+             res.end('<h1>OpenClaw is Starting... (v157 Log-Http)</h1><p>Please reload in a few seconds.</p><script>setTimeout(() => location.reload(), 3000);</script>');
              return;
         }
         // [v155] Return 200 even if starting, because Cloudflare Sandbox library throws error on 503
         res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ status: 'starting', message: 'OpenClaw is booting up (v155 log-fix)...' }));
+        res.end(JSON.stringify({ status: 'starting', message: 'OpenClaw is booting up (v157)...' }));
         return;
     }
+
 
     // Proxy logic (Simplified)
     const options = {

@@ -114,21 +114,29 @@ publicRoutes.get('/api/debug-logs', async (c) => {
   }
 });
 
-// GET /api/emergency-log - Unauthenticated access to openclaw.log (Temporary Debug)
-// GET /api/emergency-log - Unauthenticated access to openclaw.log (Temporary Debug)
+// GET /api/emergency-log - Unauthenticated access to openclaw.log (Log-over-HTTP v157)
 publicRoutes.get('/api/emergency-log', async (c) => {
   const sandbox = c.get('sandbox');
   try {
-    const logResult = await sandbox.exec('cat /root/openclaw.log').catch((e: Error) => ({ stdout: '', stderr: e.message }));
-    const psResult = await sandbox.exec('ps aux').catch((e: Error) => ({ stdout: '', stderr: e.message }));
+    // [v157] Use containerFetch instead of exec, because exec is unreliable during startup.
+    // We assume the wrapper is running on port 3000 (MOLTBOT_PORT).
+    const response = await sandbox.containerFetch(c.req.raw, MOLTBOT_PORT);
 
-    return c.text(
-      'STDOUT:\n' + (logResult?.stdout || '(empty)') +
-      '\n\nSTDERR:\n' + (logResult?.stderr || '(empty)') +
-      '\n\n--- PROCESS CHECK ---\n' + (psResult?.stdout || psResult?.stderr || '(failed)')
-    );
+    // We need to construct a new request to the specific path /wrapper-logs
+    // But sandbox.containerFetch might just proxy the current request.
+    // Let's try to fetch explicitly by constructing a URL relative to the sandbox/proxy logic if possible.
+    // Actually, sandbox.containerFetch takes a Request object. We can simulate one.
+
+    const logRequest = new Request('http://sandbox/wrapper-logs', {
+      method: 'GET'
+    });
+
+    const logResponse = await sandbox.containerFetch(logRequest, MOLTBOT_PORT);
+    const text = await logResponse.text();
+
+    return c.text(text);
   } catch (e: any) {
-    return c.text('Error inside emergency-log: ' + e.message, 500);
+    return c.text('Error fetching logs via HTTP: ' + e.message, 500);
   }
 });
 
