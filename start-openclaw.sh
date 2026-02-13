@@ -3,7 +3,7 @@
 # 2. OpenClaw starts in background on port 3001
 # 3. Wrapper proxies 3000 -> 3001 only when 3001 is ready
 
-cat <<EOF > /root/wrapper.js
+cat <<'EOF' > /root/wrapper.js
 const http = require('http');
 const { spawn, execSync } = require('child_process');
 const fs = require('fs');
