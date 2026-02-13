@@ -1,35 +1,118 @@
-# v149: Absolute Minimalist Survival Server
-# We strip away ALL complexity (wrappers, monitors, failovers).
-# We just want port 3000 to say "OK". If this works, the infrastructure is fine.
+# v154: Proxy Wrapper Strategy
+# 1. Node.js server starts IMMEDIATELY on port 3000 (Satisfies Worker connection)
+# 2. OpenClaw starts in background on port 3001
+# 3. Wrapper proxies 3000 -> 3001 only when 3001 is ready
 
-# 1. Create the simplest possible server
-cat <<EOF > /root/survival_server.js
+cat <<EOF > /root/wrapper.js
 const http = require('http');
-const port = 3000;
+const { spawn } = require('child_process');
 
-console.log('Starting Survival Server v149 on port ' + port);
+const PROXY_PORT = 3000;
+const OPENCLAW_PORT = 3001;
+let openclawProcess = null;
+let isOpenClawReady = false;
 
-const server = http.createServer((req, res) => {
-    console.log('Request: ' + req.url);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({
-        status: 'survival-mode-v149',
-        ok: true,
-        message: 'Infrastructure is responding. OpenClaw is currently disabled for diagnostics.',
-        time: new Date().toISOString()
-    }));
+console.log('[WRAPPER] Starting v154 Wrapper on port ' + PROXY_PORT);
+
+// 1. Start Proxy Server immediately
+const proxyServer = http.createServer((req, res) => {
+    if (!isOpenClawReady) {
+        // Still starting
+        if (req.url === '/') {
+             res.writeHead(200, { 'Content-Type': 'text/html' });
+             res.end('<h1>OpenClaw is Starting...</h1><p>Please reload in a few seconds.</p><script>setTimeout(() => location.reload(), 3000);</script>');
+             return;
+        }
+        res.writeHead(503, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 'starting', message: 'OpenClaw is booting up...' }));
+        return;
+    }
+
+    // Proxy logic (Simplified)
+    const options = {
+        hostname: '127.0.0.1',
+        port: OPENCLAW_PORT,
+        path: req.url,
+        method: req.method,
+        headers: req.headers,
+    };
+
+    const proxyReq = http.request(options, (proxyRes) => {
+        res.writeHead(proxyRes.statusCode, proxyRes.headers);
+        proxyRes.pipe(res, { end: true });
+    });
+
+    proxyReq.on('error', (e) => {
+        console.error('[PROXY] Request failed:', e.message);
+        res.writeHead(502, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'OpenClaw proxy failed', details: e.message }));
+    });
+
+    req.pipe(proxyReq, { end: true });
 });
 
-server.listen(port, '0.0.0.0', () => {
-    console.log('Survival Server listening on ' + port);
+proxyServer.listen(PROXY_PORT, '0.0.0.0', () => {
+    console.log('[WRAPPER] Proxy listening on ' + PROXY_PORT);
+    startOpenClaw();
 });
 
-// Prevent exit on error
-process.on('uncaughtException', (err) => {
-    console.log('Uncaught Exception:', err);
-});
+// 2. Start OpenClaw
+function startOpenClaw() {
+    console.log('[WRAPPER] Generating config...');
+    // Run configure.js first
+    const configProc = spawn('node', ['/root/clawd/configure.js']);
+    configProc.on('close', (code) => {
+        if (code !== 0) {
+            console.error('[WRAPPER] Config generation failed with code', code);
+            return;
+        }
+        console.log('[WRAPPER] Config generated. Launching openclaw...');
+        
+        // Launch OpenClaw
+        openclawProcess = spawn('openclaw', ['--config', '/root/.openclaw/openclaw.json'], {
+            stdio: 'inherit' // Pipe logs to stdout/stderr directly
+        });
+
+        openclawProcess.on('error', (err) => {
+             console.error('[WRAPPER] OpenClaw spawn error:', err);
+        });
+
+        openclawProcess.on('close', (code) => {
+             console.error('[WRAPPER] OpenClaw exited with code', code);
+             isOpenClawReady = false;
+             // Simple restart logic could go here
+        });
+
+        // Check for port 3001 availability
+        checkPort3001();
+    });
+}
+
+function checkPort3001() {
+    const net = require('net');
+    const interval = setInterval(() => {
+        const socket = new net.Socket();
+        socket.setTimeout(1000);
+        socket.on('connect', () => {
+            console.log('[WRAPPER] OpenClaw port 3001 is OPEN!');
+            isOpenClawReady = true;
+            socket.destroy();
+            clearInterval(interval);
+        });
+        socket.on('error', () => {
+             socket.destroy();
+        });
+        socket.on('timeout', () => {
+             socket.destroy();
+        });
+        socket.connect(OPENCLAW_PORT, '127.0.0.1');
+    }, 1000);
+}
+
+// Prevent exit
+process.on('uncaughtException', (err) => console.error('[WRAPPER] Uncaught:', err));
 EOF
 
-# 2. Run it. Do not background it. Do not monitor it. Just run it.
-echo "[STARTUP] Executing Survival Server..."
-exec node /root/survival_server.js
+echo "[STARTUP] Executing Wrapper v154..."
+exec node /root/wrapper.js
+
