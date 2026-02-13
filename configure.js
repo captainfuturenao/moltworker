@@ -28,18 +28,20 @@ const config = {
     agents: {
         defaults: {
             model: {
-                primary: "google/gemini-1.5-flash-latest"
+                model: {
+                    // v159: Updated to gemini-2.0-flash-exp per user feedback
+                    primary: "google/gemini-2.0-flash-exp"
+                }
             }
-        }
-    },
+        },
 
-    // Channels
-    channels: {}
-};
+        // Channels
+        channels: {}
+    };
 
-// 1. Developer Mode
-if (process.env.OPENCLAW_DEV_MODE === 'true' && config.gateway) {
-    config.gateway.controlUi = { allowInsecureAuth: true };
+    // 1. Developer Mode
+    if(process.env.OPENCLAW_DEV_MODE === 'true' && config.gateway) {
+        config.gateway.controlUi = { allowInsecureAuth: true };
 }
 
 // 2. Telegram
