@@ -10,13 +10,13 @@
     "enabled": true
   },
   // Static assets for admin UI (built by vite)
-  "assets": {
-    "directory": "./dist/client",
-    "not_found_handling": "single-page-application",
-    "html_handling": "auto-trailing-slash",
-    "binding": "ASSETS",
-    "run_worker_first": true,
-  },
+  // "assets": {
+  //   "directory": "./dist/client",
+  //   "not_found_handling": "single-page-application",
+  //   "html_handling": "auto-trailing-slash",
+  //   "binding": "ASSETS",
+  //   "run_worker_first": true,
+  // },
   // Allow importing HTML files as text modules and PNG files as binary
   "rules": [
     {
