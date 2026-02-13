@@ -11,7 +11,7 @@ cat <<'EOF' > /root/clawd/configure.js
 import fs from 'node:fs';
 const path = process.env.OPENCLAW_CONFIG_PATH || '/root/.openclaw/openclaw.json';
 
-console.log('[CONFIGURE] Generating updated configuration (v164 - Manual Injection)...');
+console.log('[CONFIGURE] Generating updated configuration (v165 - Manual Injection)...');
 
 const config = {
     // Gateway Settings
@@ -29,9 +29,10 @@ const config = {
                 // [v162] Added missing required fields based on error logs
                 baseUrl: "https://generativelanguage.googleapis.com/v1beta",
                 // [v164] Fix schema: models must be objects, not strings. Using { name: ... }
+                // [v165] Fix schema again: models must have 'id'. Attempting { id: ..., name: ... }
                 models: [
-                    { name: "gemini-2.0-flash-exp" },
-                    { name: "gemini-1.5-flash" }
+                    { id: "gemini-2.0-flash-exp", name: "gemini-2.0-flash-exp" },
+                    { id: "gemini-1.5-flash", name: "gemini-1.5-flash" }
                 ]
             }
         }
@@ -84,6 +85,9 @@ try {
 }
 EOF
 
+# v165: Memory limit to prevent OOM in Sandbox (adjust as needed)
+export NODE_OPTIONS="--max-old-space-size=512"
+
 cat <<'EOF' > /root/wrapper.js
 const http = require('http');
 const { spawn, execSync } = require('child_process');
@@ -94,7 +98,7 @@ const OPENCLAW_PORT = 3001;
 let openclawProcess = null;
 let isOpenClawReady = false;
 
-console.log('[WRAPPER] Starting v164 Wrapper on port ' + PROXY_PORT);
+console.log('[WRAPPER] Starting v165 Wrapper on port ' + PROXY_PORT);
 
 // 1. Start Proxy Server immediately
 const proxyServer = http.createServer((req, res) => {
@@ -107,7 +111,7 @@ const proxyServer = http.createServer((req, res) => {
             try { psOutput = execSync('ps aux').toString(); } catch (e) { psOutput = 'ps failed: ' + e.message; }
             
             res.end(
-                '--- WRAPPER LOGS (v164) ---\n' +
+                '--- WRAPPER LOGS (v165) ---\n' +
                 'Status: ' + (isOpenClawReady ? 'READY' : 'STARTING') + '\n\n' +
                 '--- STDOUT/STDERR (openclaw.log) ---\n' + logContent + '\n\n' +
                 '--- PROCESS LIST ---\n' + psOutput
