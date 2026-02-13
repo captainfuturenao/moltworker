@@ -20,11 +20,12 @@ const proxyServer = http.createServer((req, res) => {
         // Still starting
         if (req.url === '/') {
              res.writeHead(200, { 'Content-Type': 'text/html' });
-             res.end('<h1>OpenClaw is Starting...</h1><p>Please reload in a few seconds.</p><script>setTimeout(() => location.reload(), 3000);</script>');
+             res.end('<h1>OpenClaw is Starting... (v155)</h1><p>Please reload in a few seconds.</p><script>setTimeout(() => location.reload(), 3000);</script>');
              return;
         }
-        res.writeHead(503, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ status: 'starting', message: 'OpenClaw is booting up...' }));
+        // [v155] Return 200 even if starting, because Cloudflare Sandbox library throws error on 503
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ status: 'starting', message: 'OpenClaw is booting up (v155 log-fix)...' }));
         return;
     }
 
