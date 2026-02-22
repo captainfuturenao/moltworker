@@ -12,6 +12,8 @@ export function buildEnvVars(env: MoltbotEnv): Record<string, string> {
   // Cloudflare AI Gateway configuration (new native provider)
   if (env.CLOUDFLARE_AI_GATEWAY_API_KEY) {
     envVars.CLOUDFLARE_AI_GATEWAY_API_KEY = env.CLOUDFLARE_AI_GATEWAY_API_KEY;
+  } else if (env.GOOGLE_API_KEY) {
+    envVars.CLOUDFLARE_AI_GATEWAY_API_KEY = env.GOOGLE_API_KEY;
   }
   if (env.CF_AI_GATEWAY_ACCOUNT_ID) {
     envVars.CF_AI_GATEWAY_ACCOUNT_ID = env.CF_AI_GATEWAY_ACCOUNT_ID;

@@ -31,7 +31,7 @@ const config = {
                 // [v164] Fix schema: models must be objects, not strings. Using { name: ... }
                 // [v165] Fix schema again: models must have 'id'. Attempting { id: ..., name: ... }
                 models: [
-                    { id: "gemini-2.0-flash-exp", name: "gemini-2.0-flash-exp" },
+                    { id: "gemini-2.5-flash", name: "gemini-2.5-flash" },
                     { id: "gemini-1.5-flash", name: "gemini-1.5-flash" }
                 ]
             }
@@ -42,8 +42,8 @@ const config = {
     agents: {
         defaults: {
             model: {
-                // v159: Updated to gemini-2.0-flash-exp per user feedback
-                primary: "google/gemini-2.0-flash-exp"
+                // v159: Updated to gemini-2.5-flash per user feedback
+                primary: "google/gemini-2.5-flash"
             }
         }
     },
