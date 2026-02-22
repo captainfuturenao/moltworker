@@ -1,5 +1,5 @@
 # Base image
-FROM node:20-slim
+FROM node:22-slim
 
 # Force rebuild trigger v144
 ENV REBUILD_DATE=2026-02-13
