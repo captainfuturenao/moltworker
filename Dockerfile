@@ -4,19 +4,19 @@ FROM node:22-slim
 # Force rebuild trigger v144
 ENV REBUILD_DATE=2026-02-13
 
-# Install minimal system dependencies
-RUN apt-get update && apt-get install -y \
+# Install dependencies, OpenClaw, and cleanup build tools in a single layer to save space
+RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
     curl \
     git \
     python3 \
     make \
     g++ \
+    && npm install -g openclaw@latest \
+    && npm cache clean --force \
+    && apt-get remove -y python3 make g++ \
+    && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
-
-# Install OpenClaw globally
-RUN npm install -g openclaw@latest && \
-    npm cache clean --force
 
 # Set working directory
 WORKDIR /root/clawd
