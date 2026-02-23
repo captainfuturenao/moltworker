@@ -9,6 +9,9 @@ RUN apt-get update && apt-get install -y \
     ca-certificates \
     curl \
     git \
+    python3 \
+    make \
+    g++ \
     && rm -rf /var/lib/apt/lists/*
 
 # Install OpenClaw globally
