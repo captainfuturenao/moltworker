@@ -33,12 +33,10 @@ export async function findExistingMoltbotProcess(sandbox: Sandbox): Promise<Proc
  * @returns The running gateway process
  */
 export async function ensureMoltbotGateway(sandbox: Sandbox, env: MoltbotEnv): Promise<Process> {
-  // Mount R2 storage for persistent data
-  await mountR2Storage(sandbox, env);
-
   // 1. CRITICAL: Start the container first.
   // We use start() because it handles ports and is idempotent in its own way.
-  // By doing this before findExistingMoltbotProcess, we avoid "The container is not running" errors.
+  // By doing this before anything else, we avoid "The container is not running" errors
+  // from subsequent sandbox calls (like mountR2Storage probing).
   try {
     console.log('[SANDBOX] Ensuring container is started via sandbox.start()...');
     await sandbox.start();
@@ -49,6 +47,9 @@ export async function ensureMoltbotGateway(sandbox: Sandbox, env: MoltbotEnv): P
       console.warn('[SANDBOX] Optional start() warning:', err.message);
     }
   }
+
+  // Mount R2 storage for persistent data
+  await mountR2Storage(sandbox, env);
 
   // 2. Now check for the process
   let existingProcess = await findExistingMoltbotProcess(sandbox);
