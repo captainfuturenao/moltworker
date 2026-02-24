@@ -2,7 +2,6 @@
  * Moltbot + Cloudflare Sandbox
  *
  * This Worker runs Moltbot personal AI assistant in a Cloudflare Sandbox container.
- * [restart-trigger] Applying new token secret
  * It proxies all requests to the Moltbot Gateway's web UI and WebSocket endpoint.
  *
  * Features:
@@ -27,7 +26,7 @@ import { getSandbox, Sandbox, type SandboxOptions } from '@cloudflare/sandbox';
 import type { AppEnv, MoltbotEnv } from './types';
 import { MOLTBOT_PORT } from './config';
 import { createAccessMiddleware } from './auth';
-import { ensureMoltbotGateway, findExistingMoltbotProcess, syncToR2 } from './gateway';
+import { ensureMoltbotGateway, findExistingMoltbotProcess } from './gateway';
 import { publicRoutes, api, adminUi, debug, cdp } from './routes';
 import { redactSensitiveParams } from './utils/logging';
 import loadingPageHtml from './assets/loading.html';
@@ -48,7 +47,7 @@ function transformErrorMessage(message: string, host: string): string {
   return message;
 }
 
-export { Sandbox as MoltbotSandbox, Sandbox } from '@cloudflare/sandbox';
+export { Sandbox };
 
 /**
  * Validate required environment variables.
@@ -82,11 +81,10 @@ function validateRequiredEnv(env: MoltbotEnv): string[] {
   const hasLegacyGateway = !!(env.AI_GATEWAY_API_KEY && env.AI_GATEWAY_BASE_URL);
   const hasAnthropicKey = !!env.ANTHROPIC_API_KEY;
   const hasOpenAIKey = !!env.OPENAI_API_KEY;
-  const hasGoogleKey = !!env.GOOGLE_API_KEY || !!env.GEMINI_API_KEY;
 
-  if (!hasCloudflareGateway && !hasLegacyGateway && !hasAnthropicKey && !hasOpenAIKey && !hasGoogleKey) {
+  if (!hasCloudflareGateway && !hasLegacyGateway && !hasAnthropicKey && !hasOpenAIKey) {
     missing.push(
-      'GOOGLE_API_KEY, ANTHROPIC_API_KEY, OPENAI_API_KEY, or CLOUDFLARE_AI_GATEWAY_API_KEY configuration',
+      'ANTHROPIC_API_KEY, OPENAI_API_KEY, or CLOUDFLARE_AI_GATEWAY_API_KEY + CF_AI_GATEWAY_ACCOUNT_ID + CF_AI_GATEWAY_GATEWAY_ID',
     );
   }
 
@@ -134,83 +132,13 @@ app.use('*', async (c, next) => {
   await next();
 });
 
-// Middleware: Initialize sandbox for all requests (Moved up)
 // Middleware: Initialize sandbox for all requests
 app.use('*', async (c, next) => {
-  // [DEBUG v152] Skip Sandbox Init ONLY for worker-health check
-  if (c.req.path === '/api/worker-health') {
-    return next();
-  }
-
   const options = buildSandboxOptions(c.env);
-  if (!c.env.Sandbox) {
-    console.error('[CONFIG] Sandbox DO binding missing!');
-    return c.text('Configuration error: Sandbox binding missing', 500);
-  }
-  const sandbox = getSandbox(c.env.Sandbox, 'moltbot-v128', options);
+  const sandbox = getSandbox(c.env.Sandbox, 'moltbot', options);
   c.set('sandbox', sandbox);
   await next();
 });
-
-// [DEBUG v151] Absolute High Priority Health Check
-app.get('/api/worker-health', (c) => c.json({
-  status: 'worker-alive-v151',
-  ok: true,
-  msg: 'Worker is reachable. Sandbox ignored.'
-}));
-
-// [DEBUG v152] Root Health Check - REMOVED to allow proxying to Sandbox
-// app.get('/', (c) => c.text('Moltbot Worker is Coming Online (v151)'));
-
-// DEBUG: Inspect container environment variables
-app.get('/debug/env', async (c) => {
-  const sandbox = c.get('sandbox');
-
-  try {
-    const result = await sandbox.exec('env');
-    // Redact sensitive keys
-    const redacted = result.stdout.split('\n').map(line => {
-      if (line.includes('KEY=') || line.includes('TOKEN=')) {
-        return line.split('=')[0] + '=********';
-      }
-      return line;
-    }).join('\n');
-    return c.text('STDOUT:\n' + redacted + '\n\nSTDERR:\n' + result.stderr);
-  } catch (e: any) {
-    return c.text('Error: ' + e.message + '\n' + e.stack, 500);
-  }
-});
-
-// (Redundant route removed, now handled by publicRoutes correctly)
-
-// DEBUG: Inspect container process logs
-app.get('/debug/logs', async (c) => {
-  const sandbox = c.get('sandbox');
-  const process = await findExistingMoltbotProcess(sandbox);
-  if (!process) return c.text('No process found');
-
-  try {
-    const logs = await process.getLogs();
-    return c.text(`STDOUT:\n${logs.stdout}\n\nSTDERR:\n${logs.stderr}`);
-  } catch (e: any) {
-    return c.text('Error: ' + e.message, 500);
-  }
-});
-
-// DEBUG: Inspect container filesystem
-app.get('/debug/fs', async (c) => {
-  const sandbox = c.get('sandbox');
-
-  try {
-    const result = await sandbox.exec('ls -R /root');
-    return c.text('STDOUT:\n' + result.stdout + '\n\nSTDERR:\n' + result.stderr);
-  } catch (e: any) {
-    return c.text('Error: ' + e.message + '\n' + e.stack, 500);
-  }
-});
-
-
-
 
 // =============================================================================
 // PUBLIC ROUTES: No Cloudflare Access authentication required
@@ -218,8 +146,6 @@ app.get('/debug/fs', async (c) => {
 
 // Mount public routes first (before auth middleware)
 // Includes: /sandbox-health, /logo.png, /logo-small.png, /api/status, /_admin/assets/*
-// Mount public routes first (before auth middleware)
-// Includes: /sandbox-health, /logo.png, /logo-small.png, /_admin/assets/*
 app.route('/', publicRoutes);
 
 // Mount CDP routes (uses shared secret auth via query param, not CF Access)
@@ -234,7 +160,7 @@ app.use('*', async (c, next) => {
   const url = new URL(c.req.url);
 
   // Skip validation for debug routes (they have their own enable check)
-  if (url.pathname.startsWith('/debug') || url.pathname === '/api/debug-google-key') {
+  if (url.pathname.startsWith('/debug')) {
     return next();
   }
 
@@ -269,9 +195,16 @@ app.use('*', async (c, next) => {
   return next();
 });
 
-// [DEBUG v151] Disable ALL Authentication
+// Middleware: Cloudflare Access authentication for protected routes
 app.use('*', async (c, next) => {
-  return next();
+  // Determine response type based on Accept header
+  const acceptsHtml = c.req.header('Accept')?.includes('text/html');
+  const middleware = createAccessMiddleware({
+    type: acceptsHtml ? 'html' : 'json',
+    redirectOnMissing: acceptsHtml,
+  });
+
+  return middleware(c, next);
 });
 
 // Mount API routes (protected by Cloudflare Access)
@@ -300,30 +233,55 @@ app.all('*', async (c) => {
 
   console.log('[PROXY] Handling request:', url.pathname);
 
-  // v153: Define these variables as they are used later, even if checks are bypassed
-  const isWebSocketRequest = request.headers.get('Upgrade')?.toLowerCase() === 'websocket';
-  // const acceptsHtml = request.headers.get('Accept')?.includes('text/html'); // Unused for now
-
-  // [DEBUG v153] FORCE BYPASS STARTUP CHECKS
-  // We assume v149 survival server is already running inside the container.
-  // We skip findProcess and ensureGateway to avoid infinite loops waiting for "openclaw" process name.
-
-  /*
   // Check if gateway is already running
   const existingProcess = await findExistingMoltbotProcess(sandbox);
-  // ... (snip) ...
+  const isGatewayReady = existingProcess !== null && existingProcess.status === 'running';
+
+  // For browser requests (non-WebSocket, non-API), show loading page if gateway isn't ready
+  const isWebSocketRequest = request.headers.get('Upgrade')?.toLowerCase() === 'websocket';
+  const acceptsHtml = request.headers.get('Accept')?.includes('text/html');
+
+  if (!isGatewayReady && !isWebSocketRequest && acceptsHtml) {
+    console.log('[PROXY] Gateway not ready, serving loading page');
+
+    // Start the gateway in the background (don't await)
+    c.executionCtx.waitUntil(
+      ensureMoltbotGateway(sandbox, c.env).catch((err: Error) => {
+        console.error('[PROXY] Background gateway start failed:', err);
+      }),
+    );
+
+    // Return the loading page immediately
+    return c.html(loadingPageHtml);
+  }
+
   // Ensure moltbot is running (this will wait for startup)
   try {
     await ensureMoltbotGateway(sandbox, c.env);
   } catch (error) {
-     // ...
+    console.error('[PROXY] Failed to start Moltbot:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+
+    let hint = 'Check worker logs with: wrangler tail';
+    if (!c.env.ANTHROPIC_API_KEY) {
+      hint = 'ANTHROPIC_API_KEY is not set. Run: wrangler secret put ANTHROPIC_API_KEY';
+    } else if (errorMessage.includes('heap out of memory') || errorMessage.includes('OOM')) {
+      hint = 'Gateway ran out of memory. Try again or check for memory leaks.';
+    }
+
+    return c.json(
+      {
+        error: 'Moltbot gateway failed to start',
+        details: errorMessage,
+        hint,
+      },
+      503,
+    );
   }
-  */
-  console.log('[PROXY v153] Bypassing startup checks. Forwarding to port ' + MOLTBOT_PORT);
 
   // Proxy to Moltbot with WebSocket message interception
   if (isWebSocketRequest) {
-    const debugLogs = true; // Force debug logs globally to catch the error
+    const debugLogs = c.env.DEBUG_ROUTES === 'true';
     const redactedSearch = redactSensitiveParams(url);
 
     console.log('[WS] Proxying WebSocket connection to Moltbot');
@@ -486,36 +444,6 @@ app.all('*', async (c) => {
   });
 });
 
-/**
- * Scheduled handler for cron triggers.
- * Syncs moltbot config/state from container to R2 for persistence.
- */
-async function scheduled(
-  _event: ScheduledEvent,
-  env: MoltbotEnv,
-  _ctx: ExecutionContext,
-): Promise<void> {
-  // const options = buildSandboxOptions(env);
-  // const sandbox = getSandbox(env.Sandbox, 'moltbot', options);
-
-  // const gatewayProcess = await findExistingMoltbotProcess(sandbox);
-  // if (!gatewayProcess) {
-  //   console.log('[cron] Gateway not running yet, skipping sync');
-  //   return;
-  // }
-
-  // console.log('[cron] Starting backup sync to R2...');
-  // const result = await syncToR2(sandbox, env);
-
-  // if (result.success) {
-  //   console.log('[cron] Backup sync completed successfully at', result.lastSync);
-  // } else {
-  //   console.error('[cron] Backup sync failed:', result.error, result.details || '');
-  // }
-  console.log('[cron] Sync temporarily disabled for stability.');
-}
-
 export default {
   fetch: app.fetch,
-  scheduled,
 };

@@ -43,7 +43,7 @@ publicRoutes.get('/api/status', async (c) => {
     // Process exists, check if it's actually responding
     // Try to reach the gateway with a short timeout
     try {
-      await process.waitForPort(MOLTBOT_PORT, { mode: 'tcp', timeout: 5000 });
+      await process.waitForPort(18789, { mode: 'tcp', timeout: 5000 });
       return c.json({ ok: true, status: 'running', processId: process.id });
     } catch {
       return c.json({ ok: false, status: 'not_responding', processId: process.id });
@@ -65,79 +65,6 @@ publicRoutes.get('/_admin/assets/*', async (c) => {
   const assetPath = url.pathname.replace('/_admin/assets/', '/assets/');
   const assetUrl = new URL(assetPath, url.origin);
   return c.env.ASSETS.fetch(new Request(assetUrl.toString(), c.req.raw));
-});
-
-// Temporary diagnostic endpoint for API Key
-publicRoutes.get('/api/debug-google-key', async (c) => {
-  const key = c.env.GOOGLE_API_KEY;
-  if (!key) return c.json({ error: 'No GOOGLE_API_KEY configured' }, 500);
-
-  try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`;
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        contents: [{ parts: [{ text: 'Hello' }] }]
-      })
-    });
-
-    const data = await response.json();
-    return c.json({
-      status: response.status,
-      ok: response.ok,
-      data: data
-    });
-  } catch (e: any) {
-    return c.json({ error: e.message, stack: e.stack }, 500);
-  }
-});
-
-// GET /api/debug-logs - Public diagnostic for all container logs
-publicRoutes.get('/api/debug-logs', async (c) => {
-  const sandbox = c.get('sandbox');
-  try {
-    const processes = await sandbox.listProcesses();
-    const results = [];
-    for (const p of processes) {
-      const logs = await p.getLogs();
-      results.push({
-        id: p.id,
-        command: p.command,
-        status: p.status,
-        logs
-      });
-    }
-    return c.json({ ok: true, processLogs: results });
-  } catch (err: any) {
-    return c.json({ ok: false, error: err.message });
-  }
-});
-
-// GET /api/emergency-log - Unauthenticated access to openclaw.log (Log-over-HTTP v157)
-publicRoutes.get('/api/emergency-log', async (c) => {
-  const sandbox = c.get('sandbox');
-  try {
-    // [v157] Use containerFetch instead of exec, because exec is unreliable during startup.
-    // We assume the wrapper is running on port 3000 (MOLTBOT_PORT).
-    const response = await sandbox.containerFetch(c.req.raw, MOLTBOT_PORT);
-
-    // We need to construct a new request to the specific path /wrapper-logs
-    // But sandbox.containerFetch might just proxy the current request.
-    // Let's try to fetch explicitly by constructing a URL relative to the sandbox/proxy logic if possible.
-    // Actually, sandbox.containerFetch takes a Request object. We can simulate one.
-
-    const logRequest = new Request('http://sandbox/wrapper-logs', {
-      method: 'GET'
-    });
-
-    const logResponse = await sandbox.containerFetch(logRequest, MOLTBOT_PORT);
-    const text = await logResponse.text();
-
-    return c.text(text);
-  } catch (e: any) {
-    return c.text('Error fetching logs via HTTP: ' + e.message, 500);
-  }
 });
 
 export { publicRoutes };

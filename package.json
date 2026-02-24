@@ -23,7 +23,6 @@
     "@cloudflare/puppeteer": "^1.0.5",
     "hono": "^4.11.6",
     "jose": "^6.0.0",
-    "openclaw": "^2026.2.6-3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
@@ -41,7 +40,7 @@
     "typescript": "^5.9.3",
     "vite": "^6.0.0",
     "vitest": "^4.0.18",
-    "wrangler": "^4.50.0"
+    "wrangler": "^4.68.0"
   },
   "author": "",
   "license": "Apache-2.0",

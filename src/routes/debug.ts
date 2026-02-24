@@ -1,6 +1,6 @@
 import { Hono } from 'hono';
 import type { AppEnv } from '../types';
-import { findExistingMoltbotProcess } from '../gateway';
+import { findExistingMoltbotProcess, waitForProcess } from '../gateway';
 
 /**
  * Debug routes for inspecting container state
@@ -132,22 +132,14 @@ debug.get('/cli', async (c) => {
 
   try {
     const proc = await sandbox.startProcess(cmd);
-
-    // Wait longer for command to complete
-    let attempts = 0;
-    while (attempts < 30) {
-      // eslint-disable-next-line no-await-in-loop -- intentional sequential polling
-      await new Promise((r) => setTimeout(r, 500));
-      if (proc.status !== 'running') break;
-      attempts++;
-    }
+    await waitForProcess(proc, 120000);
 
     const logs = await proc.getLogs();
+    const status = proc.getStatus ? await proc.getStatus() : proc.status;
     return c.json({
       command: cmd,
-      status: proc.status,
+      status,
       exitCode: proc.exitCode,
-      attempts,
       stdout: logs.stdout || '',
       stderr: logs.stderr || '',
     });
@@ -362,35 +354,30 @@ debug.get('/env', async (c) => {
   });
 });
 
-// GET /debug/fs/cat - Read a file from the container
-debug.get('/fs/cat', async (c) => {
+// GET /debug/container-config - Read the moltbot config from inside the container
+debug.get('/container-config', async (c) => {
   const sandbox = c.get('sandbox');
-  const path = c.req.query('path');
-
-  if (!path) {
-    return c.json({ error: 'path query parameter is required' }, 400);
-  }
 
   try {
-    const proc = await sandbox.startProcess(`cat ${path}`);
-
-    let attempts = 0;
-    while (attempts < 20) {
-      // eslint-disable-next-line no-await-in-loop
-      await new Promise((r) => setTimeout(r, 500));
-      if (proc.status !== 'running') break;
-      attempts++;
-    }
+    const proc = await sandbox.startProcess('cat /root/.openclaw/openclaw.json');
+    await waitForProcess(proc, 5000);
 
     const logs = await proc.getLogs();
     const stdout = logs.stdout || '';
     const stderr = logs.stderr || '';
 
+    let config = null;
+    try {
+      config = JSON.parse(stdout);
+    } catch {
+      // Not valid JSON
+    }
+
     return c.json({
       status: proc.status,
       exitCode: proc.exitCode,
-      path,
-      content: stdout,
+      config,
+      raw: config ? undefined : stdout,
       stderr,
     });
   } catch (error) {
